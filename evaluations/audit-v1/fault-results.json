@@ -1,0 +1,16 @@
+{
+  "errors": [
+    "TypeError: 'int' object is not iterable",
+    "TypeError: 'int' object is not iterable"
+  ],
+  "deliveries": 2,
+  "state": {
+    "turn": 0,
+    "history": [],
+    "first_question": null,
+    "last_topic": null,
+    "last_intent": null,
+    "user_name": null,
+    "user_preferences": {}
+  }
+}
