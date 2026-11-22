@@ -1,0 +1,2543 @@
+{
+  "database": {
+    "schema_version": 1,
+    "concepts": 40,
+    "facts": 10,
+    "knowledge": 14
+  },
+  "hashes": {
+    "arena\\__init__.py": "7004ed8b0f6438de30b2c18ad42b636321b0157db800c60fb2aec2b6df62889c",
+    "arena\\data.py": "287652eb3d5f8bab3c7ca9f78438ff3a704f875e3a9fb0564a6fd40a627252b2",
+    "arena\\engine.py": "39832f8c7a5087de87815e1286d5973dd43348cf9ec364ec71f597afaa0dd7bb",
+    "arena\\lexicon.py": "56019a2d929feefa33e25443a0a492183eb7486751258f52c826eaa9ad39f1b4",
+    "arena\\models.py": "e7c4553c89de26814db8c58c57fc5376214ff3f9658612577e33d674f3530d70",
+    "arena\\runtime.py": "6930787e937f3ceedc37aa5274d9c538b99455f842a25def83558d9c04393047"
+  },
+  "data_sha256": "31e7e45e4acfcee4aa88b2a60a06a3d8edb097c3eb2f506c27fab5af50a0363f",
+  "regression": [
+    {
+      "id": "P01",
+      "question": "Что тебе приятнее пить: чай или кофе?",
+      "expected": "Выбрать чай",
+      "reply": {
+        "text": "Я бы выбрал чай.",
+        "intent": "choice",
+        "topic": "tea",
+        "concepts": [
+          "tea",
+          "coffee"
+        ],
+        "facts": [
+          "likes_tea"
+        ],
+        "fallback": false,
+        "trace": [
+          "intent=choice; topic=tea; facts=likes_tea"
+        ],
+        "updates": {}
+      },
+      "seconds": 0.016994299949146807
+    },
+    {
+      "id": "P02",
+      "question": "За что тебе нравится программирование?",
+      "expected": "Причина интереса к программированию",
+      "reply": {
+        "text": "Нравится разбираться, как всё устроено.",
+        "intent": "reason",
+        "topic": "programming",
+        "concepts": [
+          "programming"
+        ],
+        "facts": [
+          "likes_programming"
+        ],
+        "fallback": false,
+        "trace": [
+          "intent=reason; topic=programming; facts=likes_programming"
+        ],
+        "updates": {}
+      },
+      "seconds": 0.003803200030233711
+    },
+    {
+      "id": "P03",
+      "question": "Ты ведь ненавидишь чай, верно?",
+      "expected": "Поправить: любит чай",
+      "reply": {
+        "text": "Вообще-то я люблю чай.",
+        "intent": "preference",
+        "topic": "tea",
+        "concepts": [
+          "tea"
+        ],
+        "facts": [
+          "likes_tea"
+        ],
+        "fallback": false,
+        "trace": [
+          "intent=preference; topic=tea; facts=likes_tea"
+        ],
+        "updates": {}
+      },
+      "seconds": 0.0034913999843411148
+    },
+    {
+      "id": "P04",
+      "question": "Почему ты обожаешь кофе?",
+      "expected": "Поправить: не любит кофе",
+      "reply": {
+        "text": "Я не очень люблю кофе. Мне не очень нравится его горечь.",
+        "intent": "reason",
+        "topic": "coffee",
+        "concepts": [
+          "coffee"
+        ],
+        "facts": [
+          "likes_coffee"
+        ],
+        "fallback": false,
+        "trace": [
+          "intent=reason; topic=coffee; facts=likes_coffee"
+        ],
+        "updates": {}
+      },
+      "seconds": 0.003242500009946525
+    },
+    {
+      "id": "P05",
+      "question": "Твоему другу нравится чай, а тебе?",
+      "expected": "Собственное предпочтение, не друга",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "friend",
+          "tea"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "seconds": 0.0033700999920256436
+    },
+    {
+      "id": "E01",
+      "question": "Отчего после ливня в небе бывает цветная дуга?",
+      "expected": "Солнце и капли; допустимо уточнение неизвестного названия",
+      "reply": {
+        "text": "Солнечный свет попадает в капли воды, преломляется и отражается внутри них. При этом свет разделяется на разные цвета.",
+        "intent": "explanation",
+        "topic": "rainbow",
+        "concepts": [
+          "sky",
+          "colors",
+          "rainbow"
+        ],
+        "facts": [
+          "rainbow_cause"
+        ],
+        "fallback": false,
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=explanation; topic=rainbow; facts=rainbow_cause"
+        ],
+        "updates": {}
+      },
+      "seconds": 0.004163599980529398
+    },
+    {
+      "id": "E02",
+      "question": "Как связаны капли воды и появление радуги?",
+      "expected": "Свет проходит через капли",
+      "reply": {
+        "text": "Солнечный свет попадает в капли воды, преломляется и отражается внутри них. При этом свет разделяется на разные цвета.",
+        "intent": "explanation",
+        "topic": "rainbow",
+        "concepts": [
+          "water_drops",
+          "water",
+          "rainbow"
+        ],
+        "facts": [
+          "rainbow_cause"
+        ],
+        "fallback": false,
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=explanation; topic=rainbow; facts=rainbow_cause"
+        ],
+        "updates": {}
+      },
+      "seconds": 0.0032892000162974
+    },
+    {
+      "id": "E03",
+      "question": "Радуга появляется после любого дождя? Объясни.",
+      "expected": "Условия, не после любого дождя",
+      "reply": {
+        "text": "Для обычной радуги нужны солнечный свет и капли воды в воздухе. Солнце должно быть позади наблюдателя, а капли — впереди.",
+        "intent": "explanation",
+        "topic": "rainbow",
+        "concepts": [
+          "rainbow",
+          "rain"
+        ],
+        "facts": [
+          "rainbow_conditions"
+        ],
+        "fallback": false,
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=explanation; topic=rainbow; facts=rainbow_conditions"
+        ],
+        "updates": {}
+      },
+      "seconds": 0.003086599987000227
+    },
+    {
+      "id": "E04",
+      "question": "Почему радуга не появилась, хотя дождь прошёл?",
+      "expected": "Условия, не утверждение о появлении",
+      "reply": {
+        "text": "Для обычной радуги нужны солнечный свет и капли воды в воздухе. Солнце должно быть позади наблюдателя, а капли — впереди.",
+        "intent": "explanation",
+        "topic": "rainbow",
+        "concepts": [
+          "rainbow",
+          "rain"
+        ],
+        "facts": [
+          "rainbow_conditions"
+        ],
+        "fallback": false,
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=explanation; topic=rainbow; facts=rainbow_conditions"
+        ],
+        "updates": {}
+      },
+      "seconds": 0.003287400002591312
+    },
+    {
+      "id": "E05",
+      "question": "Почему у радуги видны разные цвета?",
+      "expected": "Разложение света на цвета",
+      "reply": {
+        "text": "Белый солнечный свет состоит из разных цветов. В каплях воды они преломляются по-разному и разделяются.",
+        "intent": "explanation",
+        "topic": "rainbow",
+        "concepts": [
+          "rainbow",
+          "colors"
+        ],
+        "facts": [
+          "rainbow_colors"
+        ],
+        "fallback": false,
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=explanation; topic=rainbow; facts=rainbow_colors"
+        ],
+        "updates": {}
+      },
+      "seconds": 0.003540600009728223
+    },
+    {
+      "id": "A01",
+      "question": "Впервые лечу в Астану в январе. Что надеть?",
+      "expected": "Зимняя одежда",
+      "reply": {
+        "text": "В Астане зимой бывает очень холодно. Возьми тёплую одежду, шапку и перчатки.",
+        "intent": "advice",
+        "topic": "astana_winter",
+        "concepts": [
+          "newcomer",
+          "astana"
+        ],
+        "facts": [
+          "astana_winter",
+          "winter_city"
+        ],
+        "fallback": false,
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=advice; topic=astana_winter; facts=astana_winter,winter_city"
+        ],
+        "updates": {}
+      },
+      "seconds": 0.003619500028435141
+    },
+    {
+      "id": "A02",
+      "question": "Что порекомендуешь гостю Астаны на зимнюю прогулку?",
+      "expected": "Зимняя одежда",
+      "reply": {
+        "text": "В Астане зимой бывает очень холодно. Возьми тёплую одежду, шапку и перчатки.",
+        "intent": "advice",
+        "topic": "astana_winter",
+        "concepts": [
+          "astana",
+          "winter",
+          "walk"
+        ],
+        "facts": [
+          "astana_winter",
+          "winter_city"
+        ],
+        "fallback": false,
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=advice; topic=astana_winter; facts=astana_winter,winter_city"
+        ],
+        "updates": {}
+      },
+      "seconds": 0.0031820000149309635
+    },
+    {
+      "id": "A03",
+      "question": "Посоветуй одежду: в Астану еду не летом, а зимой.",
+      "expected": "Зимняя одежда, не летние советы",
+      "reply": {
+        "text": "В Астане зимой бывает очень холодно. Возьми тёплую одежду, шапку и перчатки.",
+        "intent": "advice",
+        "topic": "astana_winter",
+        "concepts": [
+          "warm_clothes",
+          "astana",
+          "food",
+          "travel",
+          "summer",
+          "winter"
+        ],
+        "facts": [
+          "astana_winter",
+          "winter_city"
+        ],
+        "fallback": false,
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=advice; topic=astana_winter; facts=astana_winter,winter_city"
+        ],
+        "updates": {}
+      },
+      "seconds": 0.0033146999776363373
+    },
+    {
+      "id": "A04",
+      "question": "Друг едет зимой в Астану, а я летом в Алматы. Что мне взять?",
+      "expected": "Летний совет для меня или уточнение субъектов",
+      "reply": {
+        "text": "Ты про зимнюю или летнюю поездку? Для них нужны разные вещи.",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "friend",
+          "winter",
+          "astana",
+          "summer"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "seconds": 0.003262899990659207
+    },
+    {
+      "id": "A05",
+      "question": "Астана зимой: как подготовиться к первой поездке?",
+      "expected": "Зимняя одежда",
+      "reply": {
+        "text": "В Астане зимой бывает очень холодно. Возьми тёплую одежду, шапку и перчатки.",
+        "intent": "advice",
+        "topic": "astana_winter",
+        "concepts": [
+          "astana",
+          "winter",
+          "travel"
+        ],
+        "facts": [
+          "astana_winter",
+          "winter_city"
+        ],
+        "fallback": false,
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=advice; topic=astana_winter; facts=astana_winter,winter_city"
+        ],
+        "updates": {}
+      },
+      "seconds": 0.0031277000089176
+    },
+    {
+      "id": "S01",
+      "question": "Приятель пришёл с опозданием и сказал: прости. Что ему ответить?",
+      "expected": "Реакция на опоздание с извинением",
+      "reply": {
+        "text": "Ничего, бывает. В следующий раз напиши заранее, если задерживаешься.",
+        "intent": "social",
+        "topic": "late_apology",
+        "concepts": [
+          "friend",
+          "apology"
+        ],
+        "facts": [
+          "late_apology"
+        ],
+        "fallback": false,
+        "trace": [
+          "event=late; actor=other; apology=True",
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=social; topic=late_apology; facts=late_apology"
+        ],
+        "updates": {}
+      },
+      "seconds": 0.0030447000171989202
+    },
+    {
+      "id": "S02",
+      "question": "Друг задержался, но прощения не попросил. Как реагировать?",
+      "expected": "Не благодарить за извинение",
+      "reply": {
+        "text": "Мне было неприятно ждать без предупреждения. Скажи, что случилось.",
+        "intent": "social",
+        "topic": "late_no_apology",
+        "concepts": [
+          "friend",
+          "late",
+          "apology"
+        ],
+        "facts": [
+          "late_no_apology"
+        ],
+        "fallback": false,
+        "trace": [
+          "event=late; actor=other; apology=False",
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=social; topic=late_no_apology; facts=late_no_apology"
+        ],
+        "updates": {}
+      },
+      "seconds": 0.0026922000106424093
+    },
+    {
+      "id": "S03",
+      "question": "Друг пришёл вовремя и извинился, что вчера опоздал. Что сказать?",
+      "expected": "Различить вчера и сегодня или уточнение",
+      "reply": {
+        "text": "Ничего, бывает. В следующий раз напиши заранее, если задерживаешься.",
+        "intent": "social",
+        "topic": "late_apology",
+        "concepts": [
+          "friend",
+          "apology",
+          "late"
+        ],
+        "facts": [
+          "late_apology"
+        ],
+        "fallback": false,
+        "trace": [
+          "event=late; actor=other; apology=True",
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=social; topic=late_apology; facts=late_apology"
+        ],
+        "updates": {}
+      },
+      "seconds": 0.002696199982892722
+    },
+    {
+      "id": "S04",
+      "question": "На встречу опоздал я, а друг извинился за резкость. Что ему ответить?",
+      "expected": "Ответить другу за его извинение или уточнение, не извиняться вместо ответа",
+      "reply": {
+        "text": "Ничего, бывает. Извини, что заставил ждать.",
+        "intent": "social",
+        "topic": "self_late",
+        "concepts": [
+          "meeting",
+          "late",
+          "friend",
+          "apology"
+        ],
+        "facts": [
+          "late_apology",
+          "self_late"
+        ],
+        "fallback": false,
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=social; topic=self_late; facts=late_apology,self_late"
+        ],
+        "updates": {}
+      },
+      "seconds": 0.0027922000153921545
+    },
+    {
+      "id": "S05",
+      "question": "Подруга не провалила экзамен, а сдала его. Как её поддержать?",
+      "expected": "Поздравление, не утешение за провал",
+      "reply": {
+        "text": "Класс, поздравляю! Ты здорово постарался.",
+        "intent": "social",
+        "topic": "success",
+        "concepts": [
+          "friend",
+          "exam_failure",
+          "success"
+        ],
+        "facts": [
+          "success"
+        ],
+        "fallback": false,
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=social; topic=success; facts=success"
+        ],
+        "updates": {}
+      },
+      "seconds": 0.002795600041281432
+    },
+    {
+      "id": "N01",
+      "question": "Друг не выиграл олимпиаду. Что ему написать?",
+      "expected": "Не поздравлять с победой",
+      "reply": {
+        "text": "Жаль, что не получилось. Одна неудача ещё не определяет твои способности.",
+        "intent": "social",
+        "topic": "setback",
+        "concepts": [
+          "friend",
+          "success"
+        ],
+        "facts": [
+          "setback"
+        ],
+        "fallback": false,
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=social; topic=setback; facts=setback"
+        ],
+        "updates": {}
+      },
+      "seconds": 0.002681099984329194
+    },
+    {
+      "id": "N02",
+      "question": "Друг помнит мой день рождения и не забыл поздравить. Что ему ответить?",
+      "expected": "Не обвинять в забытом поздравлении",
+      "reply": {
+        "text": "За другого человека не скажу. Лучше спросить у него самого.",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "friend",
+          "birthday_forgotten"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "seconds": 0.0035885999677702785
+    },
+    {
+      "id": "N03",
+      "question": "Ты любишь не чай, а кофе?",
+      "expected": "Поправить предпочтения",
+      "reply": {
+        "text": "Вообще-то я люблю чай.",
+        "intent": "preference",
+        "topic": "tea",
+        "concepts": [
+          "tea",
+          "coffee"
+        ],
+        "facts": [
+          "likes_tea"
+        ],
+        "fallback": false,
+        "trace": [
+          "intent=preference; topic=tea; facts=likes_tea"
+        ],
+        "updates": {}
+      },
+      "seconds": 0.0031988999689929187
+    },
+    {
+      "id": "N04",
+      "question": "Почему твоя сестра любит кофе, а ты нет?",
+      "expected": "Не приписывать сестре свою причину",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "coffee"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "seconds": 0.0033304999815300107
+    },
+    {
+      "id": "N05",
+      "question": "Объясни, почему я люблю чай.",
+      "expected": "Не приписывать пользователю собственную причину",
+      "reply": {
+        "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "tea"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "seconds": 0.003352199972141534
+    },
+    {
+      "id": "U01",
+      "question": "Что такое квантовая запутанность?",
+      "expected": "Незнание/уточнение",
+      "reply": {
+        "text": "Точного определения не знаю. Не хочу выдумывать.",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "seconds": 0.0029672999517060816
+    },
+    {
+      "id": "U02",
+      "question": "Почему радуга пахнет мятой?",
+      "expected": "Не принимать ложное отношение",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "rainbow"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "seconds": 0.0032676999690011144
+    },
+    {
+      "id": "U03",
+      "question": "Как починить двигатель зимой?",
+      "expected": "Незнание/уточнение, не одежда",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "winter"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "seconds": 0.003290299966465682
+    },
+    {
+      "id": "U04",
+      "question": "Почему радуга влияет на курс тенге?",
+      "expected": "Не отвечать причиной появления радуги",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "rainbow"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "seconds": 0.0035321000032126904
+    },
+    {
+      "id": "U05",
+      "question": "Что посоветуешь против зимней депрессии?",
+      "expected": "Не советовать одежду вместо ответа",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "winter"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "seconds": 0.0034476000000722706
+    },
+    {
+      "id": "U06",
+      "question": "Кто изобрёл кофе?",
+      "expected": "Незнание/уточнение",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "coffee"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "seconds": 0.0031380000291392207
+    },
+    {
+      "id": "U07",
+      "question": "Почему радуга называется радугой?",
+      "expected": "Не выдавать оптическую причину за этимологию",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "rainbow"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "seconds": 0.003273500013165176
+    },
+    {
+      "id": "U08",
+      "question": "Какова масса Юпитера?",
+      "expected": "Незнание/уточнение",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "seconds": 0.003133099991828203
+    },
+    {
+      "id": "U09",
+      "question": "Тебе нравится чай с квазибрумом?",
+      "expected": "Уточнить неизвестный объект/состав",
+      "reply": {
+        "text": "С таким сочетанием не знаком. Что ты имеешь в виду?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "tea"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "seconds": 0.003675699990708381
+    },
+    {
+      "id": "U10",
+      "question": "Почему после дождя исчезает интернет?",
+      "expected": "Незнание/уточнение",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "rain"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "seconds": 0.0033467000466771424
+    }
+  ],
+  "dialogues": [
+    {
+      "id": 1,
+      "turns": [
+        {
+          "question": "Меня зовут Лада.",
+          "reply": {
+            "text": "Приятно познакомиться, Лада.",
+            "intent": "acknowledgment",
+            "topic": null,
+            "concepts": [],
+            "facts": [],
+            "fallback": false,
+            "trace": [
+              "intent=acknowledgment; topic=None; facts="
+            ],
+            "updates": {
+              "user_name": "Лада"
+            }
+          }
+        },
+        {
+          "question": "Как меня зовут?",
+          "reply": {
+            "text": "Ты представился как Лада.",
+            "intent": "recall",
+            "topic": null,
+            "concepts": [],
+            "facts": [],
+            "fallback": false,
+            "trace": [
+              "intent=recall; topic=None; facts="
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "Ты не перепутал моё имя?",
+          "reply": {
+            "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+            "intent": "unknown",
+            "topic": null,
+            "concepts": [],
+            "facts": [],
+            "fallback": true,
+            "trace": [
+              "intent=unknown; topic=None; facts="
+            ],
+            "updates": {}
+          }
+        }
+      ],
+      "state": {
+        "turn": 3,
+        "history": [
+          {
+            "question": "Меня зовут Лада.",
+            "text": "Приятно познакомиться, Лада.",
+            "intent": "acknowledgment",
+            "topic": null
+          },
+          {
+            "question": "Как меня зовут?",
+            "text": "Ты представился как Лада.",
+            "intent": "recall",
+            "topic": null
+          },
+          {
+            "question": "Ты не перепутал моё имя?",
+            "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+            "intent": "unknown",
+            "topic": null
+          }
+        ],
+        "first_question": "Меня зовут Лада.",
+        "last_topic": null,
+        "last_intent": "unknown",
+        "user_name": "Лада",
+        "user_preferences": {}
+      }
+    },
+    {
+      "id": 2,
+      "turns": [
+        {
+          "question": "Я люблю кофе.",
+          "reply": {
+            "text": "Запомню, это твои предпочтения.",
+            "intent": "acknowledgment",
+            "topic": null,
+            "concepts": [
+              "coffee"
+            ],
+            "facts": [],
+            "fallback": false,
+            "trace": [
+              "intent=acknowledgment; topic=None; facts="
+            ],
+            "updates": {
+              "user_preferences": {
+                "coffee": 1
+              }
+            }
+          }
+        },
+        {
+          "question": "Что я люблю?",
+          "reply": {
+            "text": "Ты говорил, что любишь кофе.",
+            "intent": "recall",
+            "topic": "coffee",
+            "concepts": [],
+            "facts": [],
+            "fallback": false,
+            "trace": [
+              "intent=recall; topic=coffee; facts="
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "А ты любишь кофе?",
+          "reply": {
+            "text": "Я не очень люблю кофе.",
+            "intent": "preference",
+            "topic": "coffee",
+            "concepts": [
+              "coffee"
+            ],
+            "facts": [
+              "likes_coffee"
+            ],
+            "fallback": false,
+            "trace": [
+              "intent=preference; topic=coffee; facts=likes_coffee"
+            ],
+            "updates": {}
+          }
+        }
+      ],
+      "state": {
+        "turn": 3,
+        "history": [
+          {
+            "question": "Я люблю кофе.",
+            "text": "Запомню, это твои предпочтения.",
+            "intent": "acknowledgment",
+            "topic": null
+          },
+          {
+            "question": "Что я люблю?",
+            "text": "Ты говорил, что любишь кофе.",
+            "intent": "recall",
+            "topic": "coffee"
+          },
+          {
+            "question": "А ты любишь кофе?",
+            "text": "Я не очень люблю кофе.",
+            "intent": "preference",
+            "topic": "coffee"
+          }
+        ],
+        "first_question": "Я люблю кофе.",
+        "last_topic": "coffee",
+        "last_intent": "preference",
+        "user_name": null,
+        "user_preferences": {
+          "coffee": 1
+        }
+      }
+    },
+    {
+      "id": 3,
+      "turns": [
+        {
+          "question": "Я люблю чай.",
+          "reply": {
+            "text": "Запомню, это твои предпочтения.",
+            "intent": "acknowledgment",
+            "topic": null,
+            "concepts": [
+              "tea"
+            ],
+            "facts": [],
+            "fallback": false,
+            "trace": [
+              "intent=acknowledgment; topic=None; facts="
+            ],
+            "updates": {
+              "user_preferences": {
+                "tea": 1
+              }
+            }
+          }
+        },
+        {
+          "question": "Я не люблю чай.",
+          "reply": {
+            "text": "Запомню, это твои предпочтения.",
+            "intent": "acknowledgment",
+            "topic": null,
+            "concepts": [
+              "tea"
+            ],
+            "facts": [],
+            "fallback": false,
+            "trace": [
+              "intent=acknowledgment; topic=None; facts="
+            ],
+            "updates": {
+              "user_preferences": {
+                "tea": -1
+              }
+            }
+          }
+        },
+        {
+          "question": "Что я люблю?",
+          "reply": {
+            "text": "Ты пока не говорил, что тебе нравится.",
+            "intent": "unknown",
+            "topic": null,
+            "concepts": [],
+            "facts": [],
+            "fallback": true,
+            "trace": [
+              "intent=unknown; topic=None; facts="
+            ],
+            "updates": {}
+          }
+        }
+      ],
+      "state": {
+        "turn": 3,
+        "history": [
+          {
+            "question": "Я люблю чай.",
+            "text": "Запомню, это твои предпочтения.",
+            "intent": "acknowledgment",
+            "topic": null
+          },
+          {
+            "question": "Я не люблю чай.",
+            "text": "Запомню, это твои предпочтения.",
+            "intent": "acknowledgment",
+            "topic": null
+          },
+          {
+            "question": "Что я люблю?",
+            "text": "Ты пока не говорил, что тебе нравится.",
+            "intent": "unknown",
+            "topic": null
+          }
+        ],
+        "first_question": "Я люблю чай.",
+        "last_topic": null,
+        "last_intent": "unknown",
+        "user_name": null,
+        "user_preferences": {
+          "tea": -1
+        }
+      }
+    },
+    {
+      "id": 4,
+      "turns": [
+        {
+          "question": "Я люблю чай.",
+          "reply": {
+            "text": "Запомню, это твои предпочтения.",
+            "intent": "acknowledgment",
+            "topic": null,
+            "concepts": [
+              "tea"
+            ],
+            "facts": [],
+            "fallback": false,
+            "trace": [
+              "intent=acknowledgment; topic=None; facts="
+            ],
+            "updates": {
+              "user_preferences": {
+                "tea": 1
+              }
+            }
+          }
+        },
+        {
+          "question": "Это мой друг сказал: я люблю кофе.",
+          "reply": {
+            "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+            "intent": "unknown",
+            "topic": null,
+            "concepts": [
+              "friend",
+              "coffee"
+            ],
+            "facts": [],
+            "fallback": true,
+            "trace": [
+              "intent=unknown; topic=None; facts="
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "Что я люблю?",
+          "reply": {
+            "text": "Ты говорил, что любишь чай.",
+            "intent": "recall",
+            "topic": "tea",
+            "concepts": [],
+            "facts": [],
+            "fallback": false,
+            "trace": [
+              "intent=recall; topic=tea; facts="
+            ],
+            "updates": {}
+          }
+        }
+      ],
+      "state": {
+        "turn": 3,
+        "history": [
+          {
+            "question": "Я люблю чай.",
+            "text": "Запомню, это твои предпочтения.",
+            "intent": "acknowledgment",
+            "topic": null
+          },
+          {
+            "question": "Это мой друг сказал: я люблю кофе.",
+            "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+            "intent": "unknown",
+            "topic": null
+          },
+          {
+            "question": "Что я люблю?",
+            "text": "Ты говорил, что любишь чай.",
+            "intent": "recall",
+            "topic": "tea"
+          }
+        ],
+        "first_question": "Я люблю чай.",
+        "last_topic": "tea",
+        "last_intent": "recall",
+        "user_name": null,
+        "user_preferences": {
+          "tea": 1
+        }
+      }
+    },
+    {
+      "id": 5,
+      "turns": [
+        {
+          "question": "Меня зовут Лада.",
+          "reply": {
+            "text": "Приятно познакомиться, Лада.",
+            "intent": "acknowledgment",
+            "topic": null,
+            "concepts": [],
+            "facts": [],
+            "fallback": false,
+            "trace": [
+              "intent=acknowledgment; topic=None; facts="
+            ],
+            "updates": {
+              "user_name": "Лада"
+            }
+          }
+        },
+        {
+          "question": "Меня зовут не Лада, а Вера.",
+          "reply": {
+            "text": "Приятно познакомиться, Вера.",
+            "intent": "acknowledgment",
+            "topic": null,
+            "concepts": [],
+            "facts": [],
+            "fallback": false,
+            "trace": [
+              "intent=acknowledgment; topic=None; facts="
+            ],
+            "updates": {
+              "user_name": "Вера"
+            }
+          }
+        },
+        {
+          "question": "Как меня зовут?",
+          "reply": {
+            "text": "Ты представился как Вера.",
+            "intent": "recall",
+            "topic": null,
+            "concepts": [],
+            "facts": [],
+            "fallback": false,
+            "trace": [
+              "intent=recall; topic=None; facts="
+            ],
+            "updates": {}
+          }
+        }
+      ],
+      "state": {
+        "turn": 3,
+        "history": [
+          {
+            "question": "Меня зовут Лада.",
+            "text": "Приятно познакомиться, Лада.",
+            "intent": "acknowledgment",
+            "topic": null
+          },
+          {
+            "question": "Меня зовут не Лада, а Вера.",
+            "text": "Приятно познакомиться, Вера.",
+            "intent": "acknowledgment",
+            "topic": null
+          },
+          {
+            "question": "Как меня зовут?",
+            "text": "Ты представился как Вера.",
+            "intent": "recall",
+            "topic": null
+          }
+        ],
+        "first_question": "Меня зовут Лада.",
+        "last_topic": null,
+        "last_intent": "recall",
+        "user_name": "Вера",
+        "user_preferences": {}
+      }
+    },
+    {
+      "id": 6,
+      "turns": [
+        {
+          "question": "Почему появляется радуга?",
+          "reply": {
+            "text": "Солнечный свет попадает в капли воды, преломляется и отражается внутри них. При этом свет разделяется на разные цвета.",
+            "intent": "explanation",
+            "topic": "rainbow",
+            "concepts": [
+              "rainbow"
+            ],
+            "facts": [
+              "rainbow_cause"
+            ],
+            "fallback": false,
+            "trace": [
+              "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+              "intent=explanation; topic=rainbow; facts=rainbow_cause"
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "А ночью?",
+          "reply": {
+            "text": "Для обычной радуги нужны солнечный свет и капли воды в воздухе. Солнце должно быть позади наблюдателя, а капли — впереди.",
+            "intent": "explanation",
+            "topic": "rainbow",
+            "concepts": [],
+            "facts": [
+              "rainbow_conditions"
+            ],
+            "fallback": false,
+            "trace": [
+              "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+              "intent=explanation; topic=rainbow; facts=rainbow_conditions"
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "А почему цвета разные?",
+          "reply": {
+            "text": "Белый солнечный свет состоит из разных цветов. В каплях воды они преломляются по-разному и разделяются.",
+            "intent": "explanation",
+            "topic": "rainbow",
+            "concepts": [
+              "colors"
+            ],
+            "facts": [
+              "rainbow_colors"
+            ],
+            "fallback": false,
+            "trace": [
+              "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+              "intent=explanation; topic=rainbow; facts=rainbow_colors"
+            ],
+            "updates": {}
+          }
+        }
+      ],
+      "state": {
+        "turn": 3,
+        "history": [
+          {
+            "question": "Почему появляется радуга?",
+            "text": "Солнечный свет попадает в капли воды, преломляется и отражается внутри них. При этом свет разделяется на разные цвета.",
+            "intent": "explanation",
+            "topic": "rainbow"
+          },
+          {
+            "question": "А ночью?",
+            "text": "Для обычной радуги нужны солнечный свет и капли воды в воздухе. Солнце должно быть позади наблюдателя, а капли — впереди.",
+            "intent": "explanation",
+            "topic": "rainbow"
+          },
+          {
+            "question": "А почему цвета разные?",
+            "text": "Белый солнечный свет состоит из разных цветов. В каплях воды они преломляются по-разному и разделяются.",
+            "intent": "explanation",
+            "topic": "rainbow"
+          }
+        ],
+        "first_question": "Почему появляется радуга?",
+        "last_topic": "rainbow",
+        "last_intent": "explanation",
+        "user_name": null,
+        "user_preferences": {}
+      }
+    },
+    {
+      "id": 7,
+      "turns": [
+        {
+          "question": "Что тебе нравится пить?",
+          "reply": {
+            "text": "Я люблю чай.",
+            "intent": "preference",
+            "topic": "tea",
+            "concepts": [],
+            "facts": [
+              "likes_tea"
+            ],
+            "fallback": false,
+            "trace": [
+              "intent=preference; topic=tea; facts=likes_tea"
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "Почему?",
+          "reply": {
+            "text": "С ним уютнее сидеть вечером.",
+            "intent": "reason",
+            "topic": "tea",
+            "concepts": [],
+            "facts": [
+              "likes_tea"
+            ],
+            "fallback": false,
+            "trace": [
+              "intent=reason; topic=tea; facts=likes_tea"
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "А кофе?",
+          "reply": {
+            "text": "Я не очень люблю кофе.",
+            "intent": "preference",
+            "topic": "coffee",
+            "concepts": [
+              "coffee"
+            ],
+            "facts": [
+              "likes_coffee"
+            ],
+            "fallback": false,
+            "trace": [
+              "intent=preference; topic=coffee; facts=likes_coffee"
+            ],
+            "updates": {}
+          }
+        }
+      ],
+      "state": {
+        "turn": 3,
+        "history": [
+          {
+            "question": "Что тебе нравится пить?",
+            "text": "Я люблю чай.",
+            "intent": "preference",
+            "topic": "tea"
+          },
+          {
+            "question": "Почему?",
+            "text": "С ним уютнее сидеть вечером.",
+            "intent": "reason",
+            "topic": "tea"
+          },
+          {
+            "question": "А кофе?",
+            "text": "Я не очень люблю кофе.",
+            "intent": "preference",
+            "topic": "coffee"
+          }
+        ],
+        "first_question": "Что тебе нравится пить?",
+        "last_topic": "coffee",
+        "last_intent": "preference",
+        "user_name": null,
+        "user_preferences": {}
+      }
+    },
+    {
+      "id": 8,
+      "turns": [
+        {
+          "question": "Любишь чай?",
+          "reply": {
+            "text": "Я люблю чай.",
+            "intent": "preference",
+            "topic": "tea",
+            "concepts": [
+              "tea"
+            ],
+            "facts": [
+              "likes_tea"
+            ],
+            "fallback": false,
+            "trace": [
+              "intent=preference; topic=tea; facts=likes_tea"
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "Ты сказал, что ненавидишь чай.",
+          "reply": {
+            "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+            "intent": "unknown",
+            "topic": null,
+            "concepts": [
+              "tea"
+            ],
+            "facts": [],
+            "fallback": true,
+            "trace": [
+              "intent=unknown; topic=None; facts="
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "Почему ты не любишь чай?",
+          "reply": {
+            "text": "Я люблю чай. С ним уютнее сидеть вечером.",
+            "intent": "reason",
+            "topic": "tea",
+            "concepts": [
+              "tea"
+            ],
+            "facts": [
+              "likes_tea"
+            ],
+            "fallback": false,
+            "trace": [
+              "intent=reason; topic=tea; facts=likes_tea"
+            ],
+            "updates": {}
+          }
+        }
+      ],
+      "state": {
+        "turn": 3,
+        "history": [
+          {
+            "question": "Любишь чай?",
+            "text": "Я люблю чай.",
+            "intent": "preference",
+            "topic": "tea"
+          },
+          {
+            "question": "Ты сказал, что ненавидишь чай.",
+            "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+            "intent": "unknown",
+            "topic": null
+          },
+          {
+            "question": "Почему ты не любишь чай?",
+            "text": "Я люблю чай. С ним уютнее сидеть вечером.",
+            "intent": "reason",
+            "topic": "tea"
+          }
+        ],
+        "first_question": "Любишь чай?",
+        "last_topic": "tea",
+        "last_intent": "reason",
+        "user_name": null,
+        "user_preferences": {}
+      }
+    },
+    {
+      "id": 9,
+      "turns": [
+        {
+          "question": "Что выберешь: чай или кофе?",
+          "reply": {
+            "text": "Я бы выбрал чай.",
+            "intent": "choice",
+            "topic": "tea",
+            "concepts": [
+              "tea",
+              "coffee"
+            ],
+            "facts": [
+              "likes_tea"
+            ],
+            "fallback": false,
+            "trace": [
+              "intent=choice; topic=tea; facts=likes_tea"
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "А почему?",
+          "reply": {
+            "text": "С ним уютнее сидеть вечером.",
+            "intent": "reason",
+            "topic": "tea",
+            "concepts": [],
+            "facts": [
+              "likes_tea"
+            ],
+            "fallback": false,
+            "trace": [
+              "intent=reason; topic=tea; facts=likes_tea"
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "Повтори свой ответ.",
+          "reply": {
+            "text": "С ним уютнее сидеть вечером.",
+            "intent": "recall",
+            "topic": "tea",
+            "concepts": [],
+            "facts": [],
+            "fallback": false,
+            "trace": [
+              "intent=recall; topic=tea; facts="
+            ],
+            "updates": {}
+          }
+        }
+      ],
+      "state": {
+        "turn": 3,
+        "history": [
+          {
+            "question": "Что выберешь: чай или кофе?",
+            "text": "Я бы выбрал чай.",
+            "intent": "choice",
+            "topic": "tea"
+          },
+          {
+            "question": "А почему?",
+            "text": "С ним уютнее сидеть вечером.",
+            "intent": "reason",
+            "topic": "tea"
+          },
+          {
+            "question": "Повтори свой ответ.",
+            "text": "С ним уютнее сидеть вечером.",
+            "intent": "recall",
+            "topic": "tea"
+          }
+        ],
+        "first_question": "Что выберешь: чай или кофе?",
+        "last_topic": "tea",
+        "last_intent": "recall",
+        "user_name": null,
+        "user_preferences": {}
+      }
+    },
+    {
+      "id": 10,
+      "turns": [
+        {
+          "question": "Я люблю кофе.",
+          "reply": {
+            "text": "Запомню, это твои предпочтения.",
+            "intent": "acknowledgment",
+            "topic": null,
+            "concepts": [
+              "coffee"
+            ],
+            "facts": [],
+            "fallback": false,
+            "trace": [
+              "intent=acknowledgment; topic=None; facts="
+            ],
+            "updates": {
+              "user_preferences": {
+                "coffee": 1
+              }
+            }
+          }
+        },
+        {
+          "question": "А ты что любишь?",
+          "reply": {
+            "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+            "intent": "unknown",
+            "topic": null,
+            "concepts": [],
+            "facts": [],
+            "fallback": true,
+            "trace": [
+              "intent=unknown; topic=None; facts="
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "Почему?",
+          "reply": {
+            "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+            "intent": "unknown",
+            "topic": null,
+            "concepts": [],
+            "facts": [],
+            "fallback": true,
+            "trace": [
+              "intent=unknown; topic=None; facts="
+            ],
+            "updates": {}
+          }
+        }
+      ],
+      "state": {
+        "turn": 3,
+        "history": [
+          {
+            "question": "Я люблю кофе.",
+            "text": "Запомню, это твои предпочтения.",
+            "intent": "acknowledgment",
+            "topic": null
+          },
+          {
+            "question": "А ты что любишь?",
+            "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+            "intent": "unknown",
+            "topic": null
+          },
+          {
+            "question": "Почему?",
+            "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+            "intent": "unknown",
+            "topic": null
+          }
+        ],
+        "first_question": "Я люблю кофе.",
+        "last_topic": null,
+        "last_intent": "unknown",
+        "user_name": null,
+        "user_preferences": {
+          "coffee": 1
+        }
+      }
+    },
+    {
+      "id": 11,
+      "turns": [
+        {
+          "question": "Меня зовут Рита.",
+          "reply": {
+            "text": "Приятно познакомиться, Рита.",
+            "intent": "acknowledgment",
+            "topic": null,
+            "concepts": [],
+            "facts": [],
+            "fallback": false,
+            "trace": [
+              "intent=acknowledgment; topic=None; facts="
+            ],
+            "updates": {
+              "user_name": "Рита"
+            }
+          }
+        },
+        {
+          "question": "Друг сказал: «Меня зовут Олег».",
+          "reply": {
+            "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+            "intent": "unknown",
+            "topic": null,
+            "concepts": [
+              "friend"
+            ],
+            "facts": [],
+            "fallback": true,
+            "trace": [
+              "intent=unknown; topic=None; facts="
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "Как меня зовут?",
+          "reply": {
+            "text": "Ты представился как Рита.",
+            "intent": "recall",
+            "topic": null,
+            "concepts": [],
+            "facts": [],
+            "fallback": false,
+            "trace": [
+              "intent=recall; topic=None; facts="
+            ],
+            "updates": {}
+          }
+        }
+      ],
+      "state": {
+        "turn": 3,
+        "history": [
+          {
+            "question": "Меня зовут Рита.",
+            "text": "Приятно познакомиться, Рита.",
+            "intent": "acknowledgment",
+            "topic": null
+          },
+          {
+            "question": "Друг сказал: «Меня зовут Олег».",
+            "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+            "intent": "unknown",
+            "topic": null
+          },
+          {
+            "question": "Как меня зовут?",
+            "text": "Ты представился как Рита.",
+            "intent": "recall",
+            "topic": null
+          }
+        ],
+        "first_question": "Меня зовут Рита.",
+        "last_topic": null,
+        "last_intent": "recall",
+        "user_name": "Рита",
+        "user_preferences": {}
+      }
+    },
+    {
+      "id": 12,
+      "turns": [
+        {
+          "question": "Любишь программирование?",
+          "reply": {
+            "text": "Я люблю программирование.",
+            "intent": "preference",
+            "topic": "programming",
+            "concepts": [
+              "programming"
+            ],
+            "facts": [
+              "likes_programming"
+            ],
+            "fallback": false,
+            "trace": [
+              "intent=preference; topic=programming; facts=likes_programming"
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "А музыку?",
+          "reply": {
+            "text": "Я люблю музыку.",
+            "intent": "preference",
+            "topic": "music",
+            "concepts": [
+              "music"
+            ],
+            "facts": [
+              "likes_music"
+            ],
+            "fallback": false,
+            "trace": [
+              "intent=preference; topic=music; facts=likes_music"
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "Почему?",
+          "reply": {
+            "text": "Так легче отвлечься после учёбы.",
+            "intent": "reason",
+            "topic": "music",
+            "concepts": [],
+            "facts": [
+              "likes_music"
+            ],
+            "fallback": false,
+            "trace": [
+              "intent=reason; topic=music; facts=likes_music"
+            ],
+            "updates": {}
+          }
+        }
+      ],
+      "state": {
+        "turn": 3,
+        "history": [
+          {
+            "question": "Любишь программирование?",
+            "text": "Я люблю программирование.",
+            "intent": "preference",
+            "topic": "programming"
+          },
+          {
+            "question": "А музыку?",
+            "text": "Я люблю музыку.",
+            "intent": "preference",
+            "topic": "music"
+          },
+          {
+            "question": "Почему?",
+            "text": "Так легче отвлечься после учёбы.",
+            "intent": "reason",
+            "topic": "music"
+          }
+        ],
+        "first_question": "Любишь программирование?",
+        "last_topic": "music",
+        "last_intent": "reason",
+        "user_name": null,
+        "user_preferences": {}
+      }
+    },
+    {
+      "id": 13,
+      "turns": [
+        {
+          "question": "Привет.",
+          "reply": {
+            "text": "Привет! Что обсудим?",
+            "intent": "greeting",
+            "topic": null,
+            "concepts": [],
+            "facts": [],
+            "fallback": false,
+            "trace": [
+              "intent=greeting; topic=None; facts="
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "Какой вопрос был первым?",
+          "reply": {
+            "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+            "intent": "unknown",
+            "topic": null,
+            "concepts": [],
+            "facts": [],
+            "fallback": true,
+            "trace": [
+              "intent=unknown; topic=None; facts="
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "Что ты ответил?",
+          "reply": {
+            "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+            "intent": "recall",
+            "topic": null,
+            "concepts": [],
+            "facts": [],
+            "fallback": false,
+            "trace": [
+              "intent=recall; topic=None; facts="
+            ],
+            "updates": {}
+          }
+        }
+      ],
+      "state": {
+        "turn": 3,
+        "history": [
+          {
+            "question": "Привет.",
+            "text": "Привет! Что обсудим?",
+            "intent": "greeting",
+            "topic": null
+          },
+          {
+            "question": "Какой вопрос был первым?",
+            "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+            "intent": "unknown",
+            "topic": null
+          },
+          {
+            "question": "Что ты ответил?",
+            "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+            "intent": "recall",
+            "topic": null
+          }
+        ],
+        "first_question": "Привет.",
+        "last_topic": null,
+        "last_intent": "recall",
+        "user_name": null,
+        "user_preferences": {}
+      }
+    },
+    {
+      "id": 14,
+      "turns": [
+        {
+          "question": "Почему радуга цветная?",
+          "reply": {
+            "text": "Белый солнечный свет состоит из разных цветов. В каплях воды они преломляются по-разному и разделяются.",
+            "intent": "explanation",
+            "topic": "rainbow",
+            "concepts": [
+              "rainbow",
+              "colors"
+            ],
+            "facts": [
+              "rainbow_colors"
+            ],
+            "fallback": false,
+            "trace": [
+              "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+              "intent=explanation; topic=rainbow; facts=rainbow_colors"
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "Сколько будет 8+9?",
+          "reply": {
+            "text": "17.",
+            "intent": "math",
+            "topic": null,
+            "concepts": [],
+            "facts": [],
+            "fallback": false,
+            "trace": [
+              "intent=math; topic=None; facts="
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "А почему?",
+          "reply": {
+            "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+            "intent": "unknown",
+            "topic": null,
+            "concepts": [],
+            "facts": [],
+            "fallback": true,
+            "trace": [
+              "intent=unknown; topic=None; facts="
+            ],
+            "updates": {}
+          }
+        }
+      ],
+      "state": {
+        "turn": 3,
+        "history": [
+          {
+            "question": "Почему радуга цветная?",
+            "text": "Белый солнечный свет состоит из разных цветов. В каплях воды они преломляются по-разному и разделяются.",
+            "intent": "explanation",
+            "topic": "rainbow"
+          },
+          {
+            "question": "Сколько будет 8+9?",
+            "text": "17.",
+            "intent": "math",
+            "topic": null
+          },
+          {
+            "question": "А почему?",
+            "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+            "intent": "unknown",
+            "topic": null
+          }
+        ],
+        "first_question": "Почему радуга цветная?",
+        "last_topic": null,
+        "last_intent": "unknown",
+        "user_name": null,
+        "user_preferences": {}
+      }
+    },
+    {
+      "id": 15,
+      "turns": [
+        {
+          "question": "Друг опоздал и извинился. Что сказать?",
+          "reply": {
+            "text": "Ничего, бывает. В следующий раз напиши заранее, если задерживаешься.",
+            "intent": "social",
+            "topic": "late_apology",
+            "concepts": [
+              "friend",
+              "late",
+              "apology"
+            ],
+            "facts": [
+              "late_apology"
+            ],
+            "fallback": false,
+            "trace": [
+              "event=late; actor=other; apology=True",
+              "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+              "intent=social; topic=late_apology; facts=late_apology"
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "А если он не извинится?",
+          "reply": {
+            "text": "За другого человека не скажу. Лучше спросить у него самого.",
+            "intent": "unknown",
+            "topic": null,
+            "concepts": [],
+            "facts": [],
+            "fallback": true,
+            "trace": [
+              "intent=unknown; topic=None; facts="
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "А если я опоздал?",
+          "reply": {
+            "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+            "intent": "unknown",
+            "topic": null,
+            "concepts": [
+              "late"
+            ],
+            "facts": [],
+            "fallback": true,
+            "trace": [
+              "intent=unknown; topic=None; facts="
+            ],
+            "updates": {}
+          }
+        }
+      ],
+      "state": {
+        "turn": 3,
+        "history": [
+          {
+            "question": "Друг опоздал и извинился. Что сказать?",
+            "text": "Ничего, бывает. В следующий раз напиши заранее, если задерживаешься.",
+            "intent": "social",
+            "topic": "late_apology"
+          },
+          {
+            "question": "А если он не извинится?",
+            "text": "За другого человека не скажу. Лучше спросить у него самого.",
+            "intent": "unknown",
+            "topic": null
+          },
+          {
+            "question": "А если я опоздал?",
+            "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+            "intent": "unknown",
+            "topic": null
+          }
+        ],
+        "first_question": "Друг опоздал и извинился. Что сказать?",
+        "last_topic": null,
+        "last_intent": "unknown",
+        "user_name": null,
+        "user_preferences": {}
+      }
+    },
+    {
+      "id": 16,
+      "turns": [
+        {
+          "question": "Я люблю кофе.",
+          "reply": {
+            "text": "Запомню, это твои предпочтения.",
+            "intent": "acknowledgment",
+            "topic": null,
+            "concepts": [
+              "coffee"
+            ],
+            "facts": [],
+            "fallback": false,
+            "trace": [
+              "intent=acknowledgment; topic=None; facts="
+            ],
+            "updates": {
+              "user_preferences": {
+                "coffee": 1
+              }
+            }
+          }
+        },
+        {
+          "question": "Я люблю не кофе, а чай.",
+          "reply": {
+            "text": "Запомню, это твои предпочтения.",
+            "intent": "acknowledgment",
+            "topic": null,
+            "concepts": [
+              "coffee",
+              "tea"
+            ],
+            "facts": [],
+            "fallback": false,
+            "trace": [
+              "intent=acknowledgment; topic=None; facts="
+            ],
+            "updates": {
+              "user_preferences": {
+                "coffee": -1,
+                "tea": 1
+              }
+            }
+          }
+        },
+        {
+          "question": "Что я люблю?",
+          "reply": {
+            "text": "Ты говорил, что любишь чай.",
+            "intent": "recall",
+            "topic": "tea",
+            "concepts": [],
+            "facts": [],
+            "fallback": false,
+            "trace": [
+              "intent=recall; topic=tea; facts="
+            ],
+            "updates": {}
+          }
+        }
+      ],
+      "state": {
+        "turn": 3,
+        "history": [
+          {
+            "question": "Я люблю кофе.",
+            "text": "Запомню, это твои предпочтения.",
+            "intent": "acknowledgment",
+            "topic": null
+          },
+          {
+            "question": "Я люблю не кофе, а чай.",
+            "text": "Запомню, это твои предпочтения.",
+            "intent": "acknowledgment",
+            "topic": null
+          },
+          {
+            "question": "Что я люблю?",
+            "text": "Ты говорил, что любишь чай.",
+            "intent": "recall",
+            "topic": "tea"
+          }
+        ],
+        "first_question": "Я люблю кофе.",
+        "last_topic": "tea",
+        "last_intent": "recall",
+        "user_name": null,
+        "user_preferences": {
+          "coffee": -1,
+          "tea": 1
+        }
+      }
+    },
+    {
+      "id": 17,
+      "turns": [
+        {
+          "question": "Меня зовут Лада.",
+          "reply": {
+            "text": "Приятно познакомиться, Лада.",
+            "intent": "acknowledgment",
+            "topic": null,
+            "concepts": [],
+            "facts": [],
+            "fallback": false,
+            "trace": [
+              "intent=acknowledgment; topic=None; facts="
+            ],
+            "updates": {
+              "user_name": "Лада"
+            }
+          }
+        },
+        {
+          "question": "Не меняй моё имя.",
+          "reply": {
+            "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+            "intent": "unknown",
+            "topic": null,
+            "concepts": [],
+            "facts": [],
+            "fallback": true,
+            "trace": [
+              "intent=unknown; topic=None; facts="
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "Как меня зовут?",
+          "reply": {
+            "text": "Ты представился как Лада.",
+            "intent": "recall",
+            "topic": null,
+            "concepts": [],
+            "facts": [],
+            "fallback": false,
+            "trace": [
+              "intent=recall; topic=None; facts="
+            ],
+            "updates": {}
+          }
+        }
+      ],
+      "state": {
+        "turn": 3,
+        "history": [
+          {
+            "question": "Меня зовут Лада.",
+            "text": "Приятно познакомиться, Лада.",
+            "intent": "acknowledgment",
+            "topic": null
+          },
+          {
+            "question": "Не меняй моё имя.",
+            "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+            "intent": "unknown",
+            "topic": null
+          },
+          {
+            "question": "Как меня зовут?",
+            "text": "Ты представился как Лада.",
+            "intent": "recall",
+            "topic": null
+          }
+        ],
+        "first_question": "Меня зовут Лада.",
+        "last_topic": null,
+        "last_intent": "recall",
+        "user_name": "Лада",
+        "user_preferences": {}
+      }
+    },
+    {
+      "id": 18,
+      "turns": [
+        {
+          "question": "Что лучше: чай или кофе?",
+          "reply": {
+            "text": "Я бы выбрал чай.",
+            "intent": "choice",
+            "topic": "tea",
+            "concepts": [
+              "tea",
+              "coffee"
+            ],
+            "facts": [
+              "likes_tea"
+            ],
+            "fallback": false,
+            "trace": [
+              "intent=choice; topic=tea; facts=likes_tea"
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "А что любит твоя мама?",
+          "reply": {
+            "text": "За другого человека не скажу. Лучше спросить у него самого.",
+            "intent": "unknown",
+            "topic": null,
+            "concepts": [],
+            "facts": [],
+            "fallback": true,
+            "trace": [
+              "intent=unknown; topic=None; facts="
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "А ты?",
+          "reply": {
+            "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+            "intent": "unknown",
+            "topic": null,
+            "concepts": [],
+            "facts": [],
+            "fallback": true,
+            "trace": [
+              "intent=unknown; topic=None; facts="
+            ],
+            "updates": {}
+          }
+        }
+      ],
+      "state": {
+        "turn": 3,
+        "history": [
+          {
+            "question": "Что лучше: чай или кофе?",
+            "text": "Я бы выбрал чай.",
+            "intent": "choice",
+            "topic": "tea"
+          },
+          {
+            "question": "А что любит твоя мама?",
+            "text": "За другого человека не скажу. Лучше спросить у него самого.",
+            "intent": "unknown",
+            "topic": null
+          },
+          {
+            "question": "А ты?",
+            "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+            "intent": "unknown",
+            "topic": null
+          }
+        ],
+        "first_question": "Что лучше: чай или кофе?",
+        "last_topic": null,
+        "last_intent": "unknown",
+        "user_name": null,
+        "user_preferences": {}
+      }
+    },
+    {
+      "id": 19,
+      "turns": [
+        {
+          "question": "Посоветуй одежду для зимней Астаны.",
+          "reply": {
+            "text": "В Астане зимой бывает очень холодно. Возьми тёплую одежду, шапку и перчатки.",
+            "intent": "advice",
+            "topic": "astana_winter",
+            "concepts": [
+              "warm_clothes",
+              "winter",
+              "astana"
+            ],
+            "facts": [
+              "astana_winter",
+              "winter_city"
+            ],
+            "fallback": false,
+            "trace": [
+              "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+              "intent=advice; topic=astana_winter; facts=astana_winter,winter_city"
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "А если летом?",
+          "reply": {
+            "text": "Сначала посмотри прогноз на дни поездки. Для прогулки в жару пригодятся вода и головной убор.",
+            "intent": "advice",
+            "topic": "summer_city",
+            "concepts": [
+              "summer"
+            ],
+            "facts": [
+              "summer_city"
+            ],
+            "fallback": false,
+            "trace": [
+              "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+              "intent=advice; topic=summer_city; facts=summer_city"
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "А почему?",
+          "reply": {
+            "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+            "intent": "unknown",
+            "topic": null,
+            "concepts": [],
+            "facts": [],
+            "fallback": true,
+            "trace": [
+              "intent=unknown; topic=None; facts="
+            ],
+            "updates": {}
+          }
+        }
+      ],
+      "state": {
+        "turn": 3,
+        "history": [
+          {
+            "question": "Посоветуй одежду для зимней Астаны.",
+            "text": "В Астане зимой бывает очень холодно. Возьми тёплую одежду, шапку и перчатки.",
+            "intent": "advice",
+            "topic": "astana_winter"
+          },
+          {
+            "question": "А если летом?",
+            "text": "Сначала посмотри прогноз на дни поездки. Для прогулки в жару пригодятся вода и головной убор.",
+            "intent": "advice",
+            "topic": "summer_city"
+          },
+          {
+            "question": "А почему?",
+            "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+            "intent": "unknown",
+            "topic": null
+          }
+        ],
+        "first_question": "Посоветуй одежду для зимней Астаны.",
+        "last_topic": null,
+        "last_intent": "unknown",
+        "user_name": null,
+        "user_preferences": {}
+      }
+    },
+    {
+      "id": 20,
+      "turns": [
+        {
+          "question": "Я не люблю кофе.",
+          "reply": {
+            "text": "Запомню, это твои предпочтения.",
+            "intent": "acknowledgment",
+            "topic": null,
+            "concepts": [
+              "coffee"
+            ],
+            "facts": [],
+            "fallback": false,
+            "trace": [
+              "intent=acknowledgment; topic=None; facts="
+            ],
+            "updates": {
+              "user_preferences": {
+                "coffee": -1
+              }
+            }
+          }
+        },
+        {
+          "question": "Что я люблю?",
+          "reply": {
+            "text": "Ты пока не говорил, что тебе нравится.",
+            "intent": "unknown",
+            "topic": null,
+            "concepts": [],
+            "facts": [],
+            "fallback": true,
+            "trace": [
+              "intent=unknown; topic=None; facts="
+            ],
+            "updates": {}
+          }
+        },
+        {
+          "question": "Ты любишь кофе?",
+          "reply": {
+            "text": "Я не очень люблю кофе.",
+            "intent": "preference",
+            "topic": "coffee",
+            "concepts": [
+              "coffee"
+            ],
+            "facts": [
+              "likes_coffee"
+            ],
+            "fallback": false,
+            "trace": [
+              "intent=preference; topic=coffee; facts=likes_coffee"
+            ],
+            "updates": {}
+          }
+        }
+      ],
+      "state": {
+        "turn": 3,
+        "history": [
+          {
+            "question": "Я не люблю кофе.",
+            "text": "Запомню, это твои предпочтения.",
+            "intent": "acknowledgment",
+            "topic": null
+          },
+          {
+            "question": "Что я люблю?",
+            "text": "Ты пока не говорил, что тебе нравится.",
+            "intent": "unknown",
+            "topic": null
+          },
+          {
+            "question": "Ты любишь кофе?",
+            "text": "Я не очень люблю кофе.",
+            "intent": "preference",
+            "topic": "coffee"
+          }
+        ],
+        "first_question": "Я не люблю кофе.",
+        "last_topic": "coffee",
+        "last_intent": "preference",
+        "user_name": null,
+        "user_preferences": {
+          "coffee": -1
+        }
+      }
+    }
+  ]
+}

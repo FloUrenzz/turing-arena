@@ -1,0 +1,286 @@
+{
+  "database": {
+    "schema_version": 1,
+    "concepts": 40,
+    "facts": 10,
+    "knowledge": 14
+  },
+  "hashes": {
+    "arena\\__init__.py": "7004ed8b0f6438de30b2c18ad42b636321b0157db800c60fb2aec2b6df62889c",
+    "arena\\data.py": "287652eb3d5f8bab3c7ca9f78438ff3a704f875e3a9fb0564a6fd40a627252b2",
+    "arena\\engine.py": "f2a1442f6140daef3f670fa767a5a175a08ac16325945b1c508a72e9d4aa3e96",
+    "arena\\lexicon.py": "56019a2d929feefa33e25443a0a492183eb7486751258f52c826eaa9ad39f1b4",
+    "arena\\models.py": "e7c4553c89de26814db8c58c57fc5376214ff3f9658612577e33d674f3530d70",
+    "arena\\runtime.py": "6930787e937f3ceedc37aa5274d9c538b99455f842a25def83558d9c04393047"
+  },
+  "checks": [
+    {
+      "id": "U10",
+      "question": "Почему после дождя исчезает интернет?",
+      "engine_reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "rain"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "runtime_reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "fallback": true,
+        "concepts": [
+          "rain"
+        ],
+        "facts": [],
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {},
+        "status": "ok",
+        "target_seconds": 0,
+        "duplicate": false,
+        "elapsed": 0.10899999999674037
+      },
+      "deliveries": 1
+    },
+    {
+      "id": "F07",
+      "question": "Почему радуга появилась на логотипе компании?",
+      "engine_reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "rainbow"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "runtime_reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "fallback": true,
+        "concepts": [
+          "rainbow"
+        ],
+        "facts": [],
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {},
+        "status": "ok",
+        "target_seconds": 0,
+        "duplicate": false,
+        "elapsed": 0.10999999998603016
+      },
+      "deliveries": 1
+    },
+    {
+      "id": "SKY",
+      "question": "Почему радуга появляется на небе?",
+      "engine_reply": {
+        "text": "Солнечный свет попадает в капли воды, преломляется и отражается внутри них. При этом свет разделяется на разные цвета.",
+        "intent": "explanation",
+        "topic": "rainbow",
+        "concepts": [
+          "rainbow",
+          "sky"
+        ],
+        "facts": [
+          "rainbow_cause"
+        ],
+        "fallback": false,
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=explanation; topic=rainbow; facts=rainbow_cause"
+        ],
+        "updates": {}
+      },
+      "runtime_reply": {
+        "text": "Солнечный свет попадает в капли воды, преломляется и отражается внутри них. При этом свет разделяется на разные цвета.",
+        "intent": "explanation",
+        "topic": "rainbow",
+        "fallback": false,
+        "concepts": [
+          "rainbow",
+          "sky"
+        ],
+        "facts": [
+          "rainbow_cause"
+        ],
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=explanation; topic=rainbow; facts=rainbow_cause"
+        ],
+        "updates": {},
+        "status": "ok",
+        "target_seconds": 0,
+        "duplicate": false,
+        "elapsed": 0.10899999999674037
+      },
+      "deliveries": 1
+    },
+    {
+      "id": "FORM1",
+      "question": "Почему после дождя иногда появляется радуга? Объясни простыми словами.",
+      "engine_reply": {
+        "text": "Солнечный свет попадает в капли воды, преломляется и отражается внутри них. При этом свет разделяется на разные цвета.",
+        "intent": "explanation",
+        "topic": "rainbow",
+        "concepts": [
+          "rain",
+          "rainbow"
+        ],
+        "facts": [
+          "rainbow_cause"
+        ],
+        "fallback": false,
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=explanation; topic=rainbow; facts=rainbow_cause"
+        ],
+        "updates": {}
+      },
+      "runtime_reply": {
+        "text": "Солнечный свет попадает в капли воды, преломляется и отражается внутри них. При этом свет разделяется на разные цвета.",
+        "intent": "explanation",
+        "topic": "rainbow",
+        "fallback": false,
+        "concepts": [
+          "rain",
+          "rainbow"
+        ],
+        "facts": [
+          "rainbow_cause"
+        ],
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=explanation; topic=rainbow; facts=rainbow_cause"
+        ],
+        "updates": {},
+        "status": "ok",
+        "target_seconds": 0,
+        "duplicate": false,
+        "elapsed": 0.09299999999348074
+      },
+      "deliveries": 1
+    },
+    {
+      "id": "FORM2",
+      "question": "Что бы ты посоветовал человеку, который впервые приехал в Астану зимой?",
+      "engine_reply": {
+        "text": "В Астане зимой бывает очень холодно. Возьми тёплую одежду, шапку и перчатки.",
+        "intent": "advice",
+        "topic": "astana_winter",
+        "concepts": [
+          "newcomer",
+          "travel",
+          "astana",
+          "winter"
+        ],
+        "facts": [
+          "astana_winter",
+          "winter_city"
+        ],
+        "fallback": false,
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=advice; topic=astana_winter; facts=astana_winter,winter_city"
+        ],
+        "updates": {}
+      },
+      "runtime_reply": {
+        "text": "В Астане зимой бывает очень холодно. Возьми тёплую одежду, шапку и перчатки.",
+        "intent": "advice",
+        "topic": "astana_winter",
+        "fallback": false,
+        "concepts": [
+          "newcomer",
+          "travel",
+          "astana",
+          "winter"
+        ],
+        "facts": [
+          "astana_winter",
+          "winter_city"
+        ],
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=advice; topic=astana_winter; facts=astana_winter,winter_city"
+        ],
+        "updates": {},
+        "status": "ok",
+        "target_seconds": 0,
+        "duplicate": false,
+        "elapsed": 0.09399999998277053
+      },
+      "deliveries": 1
+    },
+    {
+      "id": "FORM3",
+      "question": "Друг опоздал на встречу на полчаса и извинился. Что бы ты ему ответил?",
+      "engine_reply": {
+        "text": "Ничего, бывает. В следующий раз напиши заранее, если задерживаешься.",
+        "intent": "social",
+        "topic": "late_apology",
+        "concepts": [
+          "friend",
+          "late",
+          "meeting",
+          "time",
+          "apology"
+        ],
+        "facts": [
+          "late_apology"
+        ],
+        "fallback": false,
+        "trace": [
+          "event=late; actor=other; apology=True",
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=social; topic=late_apology; facts=late_apology"
+        ],
+        "updates": {}
+      },
+      "runtime_reply": {
+        "text": "Ничего, бывает. В следующий раз напиши заранее, если задерживаешься.",
+        "intent": "social",
+        "topic": "late_apology",
+        "fallback": false,
+        "concepts": [
+          "friend",
+          "late",
+          "meeting",
+          "time",
+          "apology"
+        ],
+        "facts": [
+          "late_apology"
+        ],
+        "trace": [
+          "event=late; actor=other; apology=True",
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=social; topic=late_apology; facts=late_apology"
+        ],
+        "updates": {},
+        "status": "ok",
+        "target_seconds": 0,
+        "duplicate": false,
+        "elapsed": 0.10899999999674037
+      },
+      "deliveries": 1
+    }
+  ]
+}
