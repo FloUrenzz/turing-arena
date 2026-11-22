@@ -1,0 +1,192 @@
+{
+  "checks": [
+    {
+      "name": "bounded_edge_inputs",
+      "passed": true,
+      "details": [
+        {
+          "input_chars": 0,
+          "answer": "Кажется, вопрос не дошёл. Повторишь?",
+          "seconds": 0.0004110000445507467,
+          "passed": true
+        },
+        {
+          "input_chars": 3,
+          "answer": "Кажется, вопрос не дошёл. Повторишь?",
+          "seconds": 7.90000194683671e-06,
+          "passed": true
+        },
+        {
+          "input_chars": 50000,
+          "answer": "Слишком много всего сразу. Можешь спросить покороче?",
+          "seconds": 0.0004228000179864466,
+          "passed": true
+        },
+        {
+          "input_chars": 18,
+          "answer": "Не знаю точного определения. Не хочу выдумывать.",
+          "seconds": 0.0018912999657914042,
+          "passed": true
+        },
+        {
+          "input_chars": 5000,
+          "answer": "Слишком много всего сразу. Можешь спросить покороче?",
+          "seconds": 0.00021979998564347625,
+          "passed": true
+        },
+        {
+          "input_chars": 23,
+          "answer": "Не могу корректно посчитать это выражение.",
+          "seconds": 0.000528500007931143,
+          "passed": true
+        },
+        {
+          "input_chars": 15,
+          "answer": "Не могу корректно посчитать это выражение.",
+          "seconds": 0.0004838000168092549,
+          "passed": true
+        },
+        {
+          "input_chars": 55,
+          "answer": "Сходу не знаю, что ответить. Можешь уточнить вопрос?",
+          "seconds": 0.001249799970537424,
+          "passed": true
+        },
+        {
+          "input_chars": 23,
+          "answer": "Кажется, вопрос не дошёл. Повторишь?",
+          "seconds": 1.0600022505968809e-05,
+          "passed": true
+        },
+        {
+          "input_chars": 36,
+          "answer": "Кажется, вопрос не дошёл. Повторишь?",
+          "seconds": 8.800008799880743e-06,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "database_survived_text_inputs",
+      "passed": true,
+      "details": {
+        "before": 9,
+        "after": 9
+      }
+    },
+    {
+      "name": "alternate_database_changes_behavior",
+      "passed": true,
+      "details": {
+        "name": {
+          "text": "Лера.",
+          "intent": "identity",
+          "concepts": [],
+          "facts": [
+            "name"
+          ],
+          "fallback": false,
+          "_updates": {
+            "likes": {}
+          }
+        },
+        "choice": {
+          "text": "Я бы выбрал кофе.",
+          "intent": "choice",
+          "concepts": [
+            "coffee"
+          ],
+          "facts": [
+            "likes_coffee"
+          ],
+          "fallback": false,
+          "_updates": {
+            "likes": {}
+          }
+        }
+      }
+    },
+    {
+      "name": "user_fact_committed_only_after_delivery",
+      "passed": true,
+      "details": {
+        "before_commit": {
+          "text": "Ты пока не представлялся.",
+          "intent": "recall",
+          "concepts": [],
+          "facts": [],
+          "fallback": false,
+          "_updates": {
+            "likes": {}
+          }
+        },
+        "after_commit": {
+          "text": "Ты представился как Марина.",
+          "intent": "recall",
+          "concepts": [],
+          "facts": [],
+          "fallback": false,
+          "_updates": {
+            "likes": {}
+          }
+        }
+      }
+    },
+    {
+      "name": "scheduled_time_includes_processing",
+      "passed": true,
+      "details": [
+        {
+          "length": 1,
+          "processing": 0.2,
+          "wait": 3.92,
+          "total": 4.12,
+          "passed": true
+        },
+        {
+          "length": 50,
+          "processing": 1,
+          "wait": 9.0,
+          "total": 10.0,
+          "passed": true
+        },
+        {
+          "length": 300,
+          "processing": 2,
+          "wait": 38,
+          "total": 40,
+          "passed": true
+        },
+        {
+          "length": 300,
+          "processing": 12,
+          "wait": 28,
+          "total": 40,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "real_cli_length_dependent_delay",
+      "passed": true,
+      "details": [
+        {
+          "question": "2 + 2",
+          "answer": "4.",
+          "seconds": 3.593,
+          "expected": 3.519,
+          "passed": true
+        },
+        {
+          "question": "Почему ты любишь чай?",
+          "answer": "С ним уютнее сидеть вечером.",
+          "seconds": 6.688,
+          "expected": 6.639,
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "passed": 6,
+  "total": 6
+}

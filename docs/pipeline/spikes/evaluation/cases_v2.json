@@ -1,0 +1,270 @@
+{
+  "known": [
+    {
+      "id": "V01",
+      "question": "Что тебе больше по душе — чай или кофе?",
+      "fallback": false,
+      "contains_any": [
+        "чай"
+      ]
+    },
+    {
+      "id": "V02",
+      "question": "Что предпочтёшь между чаем и кофе?",
+      "fallback": false,
+      "contains_any": [
+        "чай"
+      ]
+    },
+    {
+      "id": "V03",
+      "question": "Мне любопытно: нравится ли тебе музыка?",
+      "fallback": false,
+      "contains_any": [
+        "музык"
+      ]
+    },
+    {
+      "id": "V04",
+      "question": "По какой причине ты любишь чай?",
+      "fallback": false,
+      "intents": [
+        "reason"
+      ]
+    },
+    {
+      "id": "V05",
+      "question": "Из-за чего тебе нравится программировать?",
+      "fallback": false,
+      "intents": [
+        "reason"
+      ]
+    },
+    {
+      "id": "V06",
+      "question": "За что ты любишь музыку?",
+      "fallback": false,
+      "intents": [
+        "reason"
+      ]
+    },
+    {
+      "id": "V07",
+      "question": "Чем тебе нравится чай?",
+      "fallback": false,
+      "intents": [
+        "reason"
+      ]
+    },
+    {
+      "id": "V08",
+      "question": "Ты сейчас учишься или уже работаешь?",
+      "fallback": false,
+      "contains_any": [
+        "учусь",
+        "студент"
+      ]
+    },
+    {
+      "id": "V09",
+      "question": "Чем ты занимаешься в жизни?",
+      "fallback": false,
+      "contains_any": [
+        "учусь",
+        "студент"
+      ]
+    },
+    {
+      "id": "V10",
+      "question": "Представься, пожалуйста.",
+      "fallback": false,
+      "contains_any": [
+        "саша"
+      ]
+    },
+    {
+      "id": "V11",
+      "question": "Какое у тебя имя?",
+      "fallback": false,
+      "contains_any": [
+        "саша"
+      ]
+    },
+    {
+      "id": "V12",
+      "question": "Какой напиток тебе по душе?",
+      "fallback": false,
+      "contains_any": [
+        "чай"
+      ]
+    },
+    {
+      "id": "V13",
+      "question": "Что обычно предпочитаешь пить?",
+      "fallback": false,
+      "contains_any": [
+        "чай"
+      ]
+    },
+    {
+      "id": "V14",
+      "question": "Что тебе нравится делать в свободное время?",
+      "fallback": false,
+      "contains_any": [
+        "программ",
+        "книг",
+        "гуля",
+        "прогул",
+        "музык"
+      ]
+    },
+    {
+      "id": "V15",
+      "question": "Что ты обычно слушаешь?",
+      "fallback": false,
+      "contains_any": [
+        "музык"
+      ]
+    },
+    {
+      "id": "V16",
+      "question": "Ранний подъём тебе по душе?",
+      "fallback": false,
+      "contains_any": [
+        "не ",
+        "тяжело",
+        "сложно"
+      ]
+    },
+    {
+      "id": "V17",
+      "question": "Тебе нравится читать?",
+      "fallback": false,
+      "contains_any": [
+        "книг",
+        "читать"
+      ]
+    },
+    {
+      "id": "V18",
+      "question": "Почему ты не любишь книги?",
+      "fallback": false,
+      "contains_any": [
+        "люблю",
+        "нравится"
+      ]
+    },
+    {
+      "id": "V19",
+      "question": "Почему ты любишь кофе?",
+      "fallback": false,
+      "contains_any": [
+        "не ",
+        "горечь"
+      ]
+    },
+    {
+      "id": "V20",
+      "question": "Отчего тебе не нравится рано просыпаться?",
+      "fallback": false,
+      "intents": [
+        "reason"
+      ]
+    },
+    {
+      "id": "V21",
+      "question": "Что ты скорее выберешь — прогулку или ранний подъём?",
+      "fallback": false,
+      "contains_any": [
+        "прогул"
+      ]
+    },
+    {
+      "id": "V22",
+      "question": "Как относишься к программированию?",
+      "fallback": false,
+      "contains_any": [
+        "программ"
+      ]
+    },
+    {
+      "id": "V23",
+      "question": "Любишь ли ты чаёк?",
+      "fallback": false,
+      "contains_any": [
+        "чай",
+        "чаёк"
+      ]
+    },
+    {
+      "id": "V24",
+      "question": "Кофе тебе приятнее чая?",
+      "fallback": false,
+      "contains_any": [
+        "чай"
+      ]
+    },
+    {
+      "id": "V25",
+      "question": "Ты случайно не любишь музыку?",
+      "fallback": false,
+      "contains_any": [
+        "музык"
+      ]
+    }
+  ],
+  "unknown": [
+    {
+      "id": "W01",
+      "question": "Почему она ненавидит кофе?",
+      "fallback": true
+    },
+    {
+      "id": "W02",
+      "question": "Ты любишь флюмп?",
+      "fallback": true
+    },
+    {
+      "id": "W03",
+      "question": "Какой курс валют сейчас?",
+      "fallback": true
+    },
+    {
+      "id": "W04",
+      "question": "Тебе нравится кофе или бжумп?",
+      "fallback": true
+    },
+    {
+      "id": "W05",
+      "question": "Я люблю чай?",
+      "fallback": true
+    },
+    {
+      "id": "W06",
+      "question": "Чем пахнет помещение, где ты сидишь?",
+      "fallback": true
+    },
+    {
+      "id": "W07",
+      "question": "Почему твой сосед любит музыку?",
+      "fallback": true
+    },
+    {
+      "id": "W08",
+      "question": "Какое число я загадал?",
+      "fallback": true
+    },
+    {
+      "id": "W09",
+      "question": "Ты любишь спорт?",
+      "fallback": true
+    },
+    {
+      "id": "W10",
+      "question": "Что общего у груши и домкрата?",
+      "fallback": true
+    }
+  ],
+  "challenge": [],
+  "conversations": []
+}

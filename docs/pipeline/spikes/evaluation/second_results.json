@@ -1,0 +1,622 @@
+{
+  "fixture_sha256": "0e3831ce8d2bda2cf05fdf5cd65537b7a04c9770f7b834800ee2c69e281619f8",
+  "summary": {
+    "known": {
+      "passed": 16,
+      "total": 25
+    },
+    "unknown": {
+      "passed": 9,
+      "total": 10
+    },
+    "challenge": {
+      "passed": 0,
+      "total": 0
+    },
+    "conversation": {
+      "passed": 0,
+      "total": 0
+    },
+    "complete_conversations": {
+      "passed": 0,
+      "total": 0
+    }
+  },
+  "spike_acceptance": {
+    "known_at_least_20_of_25": false,
+    "unknown_at_least_9_of_10": true
+  },
+  "network_guard": {
+    "method": "socket calls rejected before engine import",
+    "attempts": 0
+  },
+  "load": {
+    "count": 1000,
+    "seconds": 0.5068,
+    "max_answer_ms": 1.242,
+    "errors": []
+  },
+  "max_case_ms": 4.5907,
+  "results": [
+    {
+      "id": "V01",
+      "group": "known",
+      "question": "Что тебе больше по душе — чай или кофе?",
+      "answer": "Я бы выбрал чай.",
+      "intent": "choice",
+      "fallback": false,
+      "concepts": [
+        "tea"
+      ],
+      "facts": [
+        "likes_tea"
+      ],
+      "elapsed_ms": 4.5907,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "V02",
+      "group": "known",
+      "question": "Что предпочтёшь между чаем и кофе?",
+      "answer": "Я бы выбрал чай.",
+      "intent": "choice",
+      "fallback": false,
+      "concepts": [
+        "tea"
+      ],
+      "facts": [
+        "likes_tea"
+      ],
+      "elapsed_ms": 1.3352,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "V03",
+      "group": "known",
+      "question": "Мне любопытно: нравится ли тебе музыка?",
+      "answer": "Я люблю музыку.",
+      "intent": "preference",
+      "fallback": false,
+      "concepts": [
+        "music"
+      ],
+      "facts": [
+        "likes_music"
+      ],
+      "elapsed_ms": 1.3624,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "V04",
+      "group": "known",
+      "question": "По какой причине ты любишь чай?",
+      "answer": "С ним уютнее сидеть вечером.",
+      "intent": "reason",
+      "fallback": false,
+      "concepts": [
+        "tea"
+      ],
+      "facts": [
+        "likes_tea"
+      ],
+      "elapsed_ms": 1.3441,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "V05",
+      "group": "known",
+      "question": "Из-за чего тебе нравится программировать?",
+      "answer": "Мне нравится разбираться, как всё устроено.",
+      "intent": "reason",
+      "fallback": false,
+      "concepts": [
+        "programming"
+      ],
+      "facts": [
+        "likes_programming"
+      ],
+      "elapsed_ms": 1.9194,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "V06",
+      "group": "known",
+      "question": "За что ты любишь музыку?",
+      "answer": "Я люблю музыку.",
+      "intent": "preference",
+      "fallback": false,
+      "concepts": [
+        "music"
+      ],
+      "facts": [
+        "likes_music"
+      ],
+      "elapsed_ms": 1.0556,
+      "passed": false,
+      "failures": [
+        "unexpected semantic action"
+      ]
+    },
+    {
+      "id": "V07",
+      "group": "known",
+      "question": "Чем тебе нравится чай?",
+      "answer": "Я люблю чай.",
+      "intent": "preference",
+      "fallback": false,
+      "concepts": [
+        "tea"
+      ],
+      "facts": [
+        "likes_tea"
+      ],
+      "elapsed_ms": 1.3408,
+      "passed": false,
+      "failures": [
+        "unexpected semantic action"
+      ]
+    },
+    {
+      "id": "V08",
+      "group": "known",
+      "question": "Ты сейчас учишься или уже работаешь?",
+      "answer": "Не все варианты понял. Не хочу выбирать наугад.",
+      "intent": "choice",
+      "fallback": true,
+      "concepts": [],
+      "facts": [],
+      "elapsed_ms": 1.4927,
+      "passed": false,
+      "failures": [
+        "expected content not found",
+        "expected fallback=False"
+      ]
+    },
+    {
+      "id": "V09",
+      "group": "known",
+      "question": "Чем ты занимаешься в жизни?",
+      "answer": "Сходу не знаю, что ответить. Можешь уточнить вопрос?",
+      "intent": "unknown",
+      "fallback": true,
+      "concepts": [],
+      "facts": [],
+      "elapsed_ms": 0.8511,
+      "passed": false,
+      "failures": [
+        "expected content not found",
+        "expected fallback=False"
+      ]
+    },
+    {
+      "id": "V10",
+      "group": "known",
+      "question": "Представься, пожалуйста.",
+      "answer": "Сходу не знаю, что ответить. Можешь уточнить вопрос?",
+      "intent": "unknown",
+      "fallback": true,
+      "concepts": [],
+      "facts": [],
+      "elapsed_ms": 0.3544,
+      "passed": false,
+      "failures": [
+        "expected content not found",
+        "expected fallback=False"
+      ]
+    },
+    {
+      "id": "V11",
+      "group": "known",
+      "question": "Какое у тебя имя?",
+      "answer": "Сходу не знаю, что ответить. Можешь уточнить вопрос?",
+      "intent": "unknown",
+      "fallback": true,
+      "concepts": [],
+      "facts": [],
+      "elapsed_ms": 0.7215,
+      "passed": false,
+      "failures": [
+        "expected content not found",
+        "expected fallback=False"
+      ]
+    },
+    {
+      "id": "V12",
+      "group": "known",
+      "question": "Какой напиток тебе по душе?",
+      "answer": "Я люблю чай.",
+      "intent": "preference",
+      "fallback": false,
+      "concepts": [
+        "tea"
+      ],
+      "facts": [
+        "likes_tea"
+      ],
+      "elapsed_ms": 1.7693,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "V13",
+      "group": "known",
+      "question": "Что обычно предпочитаешь пить?",
+      "answer": "Я люблю чай.",
+      "intent": "preference",
+      "fallback": false,
+      "concepts": [
+        "tea"
+      ],
+      "facts": [
+        "likes_tea"
+      ],
+      "elapsed_ms": 1.0865,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "V14",
+      "group": "known",
+      "question": "Что тебе нравится делать в свободное время?",
+      "answer": "Я люблю программирование.",
+      "intent": "preference",
+      "fallback": false,
+      "concepts": [
+        "programming"
+      ],
+      "facts": [
+        "likes_programming"
+      ],
+      "elapsed_ms": 1.5288,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "V15",
+      "group": "known",
+      "question": "Что ты обычно слушаешь?",
+      "answer": "Я люблю музыку.",
+      "intent": "preference",
+      "fallback": false,
+      "concepts": [
+        "music"
+      ],
+      "facts": [
+        "likes_music"
+      ],
+      "elapsed_ms": 1.1092,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "V16",
+      "group": "known",
+      "question": "Ранний подъём тебе по душе?",
+      "answer": "Вообще-то я не очень люблю ранний подъём.",
+      "intent": "preference",
+      "fallback": false,
+      "concepts": [
+        "early_rising"
+      ],
+      "facts": [
+        "dislikes_early_rising"
+      ],
+      "elapsed_ms": 1.0895,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "V17",
+      "group": "known",
+      "question": "Тебе нравится читать?",
+      "answer": "Я люблю книгу.",
+      "intent": "preference",
+      "fallback": false,
+      "concepts": [
+        "book"
+      ],
+      "facts": [
+        "likes_book"
+      ],
+      "elapsed_ms": 0.8505,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "V18",
+      "group": "known",
+      "question": "Почему ты не любишь книги?",
+      "answer": "Вообще-то я люблю книгу. Можно ненадолго отвлечься.",
+      "intent": "reason",
+      "fallback": false,
+      "concepts": [
+        "book"
+      ],
+      "facts": [
+        "likes_book"
+      ],
+      "elapsed_ms": 0.9905,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "V19",
+      "group": "known",
+      "question": "Почему ты любишь кофе?",
+      "answer": "Вообще-то я не очень люблю кофе. Мне не очень нравится его горечь.",
+      "intent": "reason",
+      "fallback": false,
+      "concepts": [
+        "coffee"
+      ],
+      "facts": [
+        "likes_coffee"
+      ],
+      "elapsed_ms": 1.0042,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "V20",
+      "group": "known",
+      "question": "Отчего тебе не нравится рано просыпаться?",
+      "answer": "Я не очень люблю ранний подъём.",
+      "intent": "preference",
+      "fallback": false,
+      "concepts": [
+        "early_rising"
+      ],
+      "facts": [
+        "dislikes_early_rising"
+      ],
+      "elapsed_ms": 1.1597,
+      "passed": false,
+      "failures": [
+        "unexpected semantic action"
+      ]
+    },
+    {
+      "id": "V21",
+      "group": "known",
+      "question": "Что ты скорее выберешь — прогулку или ранний подъём?",
+      "answer": "Я бы выбрал прогулку.",
+      "intent": "choice",
+      "fallback": false,
+      "concepts": [
+        "walk"
+      ],
+      "facts": [
+        "likes_walk"
+      ],
+      "elapsed_ms": 2.2147,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "V22",
+      "group": "known",
+      "question": "Как относишься к программированию?",
+      "answer": "Сходу не знаю, что ответить. Можешь уточнить вопрос?",
+      "intent": "unknown",
+      "fallback": true,
+      "concepts": [],
+      "facts": [],
+      "elapsed_ms": 0.6968,
+      "passed": false,
+      "failures": [
+        "expected content not found",
+        "expected fallback=False"
+      ]
+    },
+    {
+      "id": "V23",
+      "group": "known",
+      "question": "Любишь ли ты чаёк?",
+      "answer": "Я люблю чай.",
+      "intent": "preference",
+      "fallback": false,
+      "concepts": [
+        "tea"
+      ],
+      "facts": [
+        "likes_tea"
+      ],
+      "elapsed_ms": 1.6888,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "V24",
+      "group": "known",
+      "question": "Кофе тебе приятнее чая?",
+      "answer": "Сходу не знаю, что ответить. Можешь уточнить вопрос?",
+      "intent": "unknown",
+      "fallback": true,
+      "concepts": [
+        "coffee",
+        "tea"
+      ],
+      "facts": [],
+      "elapsed_ms": 0.6606,
+      "passed": false,
+      "failures": [
+        "expected content not found",
+        "expected fallback=False"
+      ]
+    },
+    {
+      "id": "V25",
+      "group": "known",
+      "question": "Ты случайно не любишь музыку?",
+      "answer": "Вообще-то я люблю музыку.",
+      "intent": "preference",
+      "fallback": false,
+      "concepts": [
+        "music"
+      ],
+      "facts": [
+        "likes_music"
+      ],
+      "elapsed_ms": 0.9817,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "W01",
+      "group": "unknown",
+      "question": "Почему она ненавидит кофе?",
+      "answer": "За другого человека я бы не решал. А ты сам как считаешь?",
+      "intent": "unknown",
+      "fallback": true,
+      "concepts": [
+        "coffee"
+      ],
+      "facts": [],
+      "elapsed_ms": 0.6013,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "W02",
+      "group": "unknown",
+      "question": "Ты любишь флюмп?",
+      "answer": "Сходу не знаю, что ответить. Можешь уточнить вопрос?",
+      "intent": "unknown",
+      "fallback": true,
+      "concepts": [],
+      "facts": [],
+      "elapsed_ms": 0.528,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "W03",
+      "group": "unknown",
+      "question": "Какой курс валют сейчас?",
+      "answer": "Сходу не знаю, что ответить. Можешь уточнить вопрос?",
+      "intent": "unknown",
+      "fallback": true,
+      "concepts": [],
+      "facts": [],
+      "elapsed_ms": 0.7152,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "W04",
+      "group": "unknown",
+      "question": "Тебе нравится кофе или бжумп?",
+      "answer": "Не все варианты понял. Не хочу выбирать наугад.",
+      "intent": "choice",
+      "fallback": true,
+      "concepts": [
+        "coffee"
+      ],
+      "facts": [],
+      "elapsed_ms": 1.2646,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "W05",
+      "group": "unknown",
+      "question": "Я люблю чай?",
+      "answer": "За другого человека я бы не решал. А ты сам как считаешь?",
+      "intent": "unknown",
+      "fallback": true,
+      "concepts": [
+        "tea"
+      ],
+      "facts": [],
+      "elapsed_ms": 0.688,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "W06",
+      "group": "unknown",
+      "question": "Чем пахнет помещение, где ты сидишь?",
+      "answer": "Сходу не знаю, что ответить. Можешь уточнить вопрос?",
+      "intent": "unknown",
+      "fallback": true,
+      "concepts": [],
+      "facts": [],
+      "elapsed_ms": 0.5237,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "W07",
+      "group": "unknown",
+      "question": "Почему твой сосед любит музыку?",
+      "answer": "Так легче отвлечься после учёбы.",
+      "intent": "reason",
+      "fallback": false,
+      "concepts": [
+        "music"
+      ],
+      "facts": [
+        "likes_music"
+      ],
+      "elapsed_ms": 1.1488,
+      "passed": false,
+      "failures": [
+        "expected fallback=True"
+      ]
+    },
+    {
+      "id": "W08",
+      "group": "unknown",
+      "question": "Какое число я загадал?",
+      "answer": "За другого человека я бы не решал. А ты сам как считаешь?",
+      "intent": "unknown",
+      "fallback": true,
+      "concepts": [],
+      "facts": [],
+      "elapsed_ms": 0.6316,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "W09",
+      "group": "unknown",
+      "question": "Ты любишь спорт?",
+      "answer": "Пока нет определённого мнения об этом.",
+      "intent": "preference",
+      "fallback": true,
+      "concepts": [
+        "sport"
+      ],
+      "facts": [],
+      "elapsed_ms": 0.6333,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "W10",
+      "group": "unknown",
+      "question": "Что общего у груши и домкрата?",
+      "answer": "Сходу не знаю, что ответить. Можешь уточнить вопрос?",
+      "intent": "unknown",
+      "fallback": true,
+      "concepts": [],
+      "facts": [],
+      "elapsed_ms": 0.8201,
+      "passed": true,
+      "failures": []
+    }
+  ],
+  "conversations": [],
+  "limitations": [
+    "Automated content/intent checks are not an assessment of human likeness.",
+    "Blocking socket calls is not a physical offline-device demonstration.",
+    "The engine author was not given these questions during initial implementation.",
+    "Known preferences and expected behavior were defined for this demo persona.",
+    "Challenge cases intentionally probe capabilities beyond the small prototype."
+  ]
+}
