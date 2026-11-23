@@ -25,6 +25,20 @@ def key(text):
     return " ".join(tokens(text))
 
 
+def speech_act(text):
+    direct = r"^(?:а\s+|ну\s+)?(?:как\b|какой\b|какая\b|какие\b|какое\b|кто\b|что\b|чем\b|че\b|почему\b|зачем\b|где\b|куда\b|когда\b|сколько\b)"
+    return "question" if "?" in text or re.search(direct, normalize(text).strip()) else "statement"
+
+
+def literal_signature(text):
+    """Keep quote boundaries and literal punctuation, not just sentence tokens."""
+    matches = list(re.finditer(r'«([^»]*)»|"([^"]*)"', text))
+    remainder = re.sub(r'«[^»]*»|"[^"]*"', "", text)
+    if re.search(r'[«»"]', remainder):
+        return None
+    return tuple(" ".join(normalize(match[1] if match[1] is not None else match[2]).split()) for match in matches)
+
+
 def signature(text):
     words = set(re.findall(r"[а-яa-z0-9]+", normalize(text)))
     # Do not transfer an answer across negation, people, quantities or time.
@@ -38,12 +52,12 @@ def signature(text):
         ("where", {"куда", "где", "откуда"}), ("when", {"когда"}),
         ("quantity", {"сколько"}), ("definition", {"такое"}),
     ) if words & group), None)
-    return people, addressee, numbers, time, negative, question
+    return people, addressee, numbers, time, negative, question, speech_act(text)
 
 
 def context_fits(context, history, turns=None):
     if turns is not None:
-        expected = [("question" if turn["role"] == "user" else "text", key(turn["text"])) for turn in turns]
+        expected = [("question" if turn["role"] == "user" else "text", (key(turn["text"]), speech_act(turn["text"]), literal_signature(turn["text"]))) for turn in turns]
         if not expected:
             return True
     elif not context:
@@ -64,9 +78,9 @@ def context_fits(context, history, turns=None):
                 role = "question"
             if role is None:
                 return False
-            expected.append((role, key(chunk[1])))
+            expected.append((role, (key(chunk[1]), speech_act(chunk[1]), literal_signature(chunk[1]))))
             end = chunk.end()
-    observed = [(role, key(turn.get(role, ""))) for turn in history[-2:]
+    observed = [(role, (key(turn.get(role, "")), speech_act(turn.get(role, "")), literal_signature(turn.get(role, "")))) for turn in history[-2:]
                 for role in ("question", "text")]
     if not history or len(expected) > len(observed):
         return False
@@ -121,11 +135,14 @@ class Corpus:
             row["ordered"] = [word for word in tokens(row["prompt"]) if word not in STOP]
             row["key"] = key(row["prompt"])
             row["signature"] = signature(row["prompt"])
+            row["literals"] = literal_signature(row["prompt"])
 
     def match(self, question, history=()):
         if len(question) > 4000 or "\n" in question:
             return None
-        quoted = bool(re.search(r"[«»\"]", question))
+        literals = literal_signature(question)
+        if literals is None:
+            return None
         query = key(question)
         words = set(tokens(question)) - STOP
         ordered = [word for word in tokens(question) if word not in STOP]
@@ -134,7 +151,7 @@ class Corpus:
         for row in self.rows:
             if not context_fits(row["context"], history, row["context_turns"]) or query_signature != row["signature"]:
                 continue
-            if quoted and (not re.search(r"[«»\"]", row["prompt"]) or query != row["key"]):
+            if literals != row["literals"] or literals and query != row["key"]:
                 continue
             # A small corpus does not establish that an unseen qualifier is harmless.
             # Preserve content words AND their order, including causal/event order.

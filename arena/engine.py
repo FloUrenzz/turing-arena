@@ -202,7 +202,7 @@ def _generate_rules(question, state, db_path, seed=None):
     if re.search(r"что (?:ты )?(?:ответил|сказал)|повтори (?:свой )?ответ", focus):
         return out(history[-1]["text"], "recall", history[-1].get("topic")) if history else out("Я ещё ничего не отвечал.", "recall")
 
-    advice = bool(re.search(r"посовет|совет|рекоменд|что (?:мне |ему |ей |бы ты )?(?:делать|взять)|что брать|как одет|как подготов|что надеть|как быть", full))
+    advice = bool(re.search(r"посовет|совет|рекоменд|что (?:мне |ему |ей |бы ты )?(?:делать|взять)\b|что брать\b|как одет|как подготов|что надеть|как быть", full))
     if followup and state.get("last_intent") == "advice" and any(
         cid in ("winter", "summer", "cold") for cid in concepts
     ):
@@ -253,7 +253,7 @@ def _generate_rules(question, state, db_path, seed=None):
             if not negated_at(full, month.start()):
                 winter = True
     travel_context = any(cid in ("astana", "travel", "newcomer") for cid in concepts) or bool(
-        re.search(r"одежд|одет|надет|что взять|что брать|поезд|приех|ехать|еду|город", full)
+        re.search(r"одежд|одет|надет|что взять\b|что брать\b|поезд|приех|ехать|еду|город", full)
     ) or followup and state.get("last_intent") == "advice"
     if advice and travel_context:
         if winter and summer:
@@ -319,6 +319,7 @@ def _generate_rules(question, state, db_path, seed=None):
             return out("Запомню, это твои предпочтения.", "acknowledgment")
         return unknown("Ты пока не рассказывал об этом, поэтому угадывать не буду.")
     preference = bool(re.search(r"любишь|обожаешь|нравится|нравятся|предпоч|отношение|относишься|по душе|ненавидишь|приятнее|любим|слушаешь|заниматься", personal))
+    current_activity = bool(re.search(r"(?:сейчас|в данный момент).*(?:слушаешь|делаешь)|(?:слушаешь|делаешь).*(?:сейчас|в данный момент)", personal))
     reason = bool(re.search(r"почему|зачем|отчего|из-за чего|по какой причине|за что|чем.*нравится", personal))
     choice = bool(re.search(r"\bили\b|выбер|выбира|между|приятнее", personal))
     if choice and len(personal_concepts) < 2 and len(concepts) >= 2 and "или" not in personal:
@@ -340,7 +341,7 @@ def _generate_rules(question, state, db_path, seed=None):
             category = candidate
             break
     asks_persona = preference or choice or bool(re.search(r"\bты\b|тебе|твой|твое", personal))
-    if not personal_concepts and category and asks_persona:
+    if not personal_concepts and category and asks_persona and not current_activity:
         fact = lexicon.preferred(category)
         if fact:
             personal_concepts = [fact["object"]]
@@ -373,7 +374,7 @@ def _generate_rules(question, state, db_path, seed=None):
         phrasing = rng.choice(["Я бы выбрал " + lexicon.noun(best["object"]),
                                "Скорее " + lexicon.noun(best["object"], "lemma")])
         return out(phrasing + ".", "choice", best["object"], [best["id"]])
-    if preference and len(personal_concepts) == 1:
+    if preference and len(personal_concepts) == 1 and not current_activity:
         cid = personal_concepts[0]
         fact = lexicon.fact("likes", cid)
         if fact is None:
