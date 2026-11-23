@@ -2,10 +2,19 @@
   "upstream_commit": "323433936fa5b30483c000eebc4807471b5736e6",
   "upstream_author": "m1tello",
   "rows": 350,
-  "approved": 150,
-  "pending": 200,
-  "retrieval_topic_eligible": 115,
-  "eligible_without_context": 110,
+  "source_approved": 150,
+  "source_pending": 200,
+  "effective_active": 296,
+  "effective_inactive": 54,
+  "review_accepted": 233,
+  "review_rewritten": 63,
+  "review_held": 54,
+  "new_200_active": 176,
+  "new_200_inactive": 24,
+  "retrieval_candidates_including_context_starters": 324,
+  "review_file": "data/corpus_review.json",
+  "review_sha256": "08e19197d53925fe1db48c14695eae8988eb27442283dfbd011240f7046290cc",
+  "reviewer": "Codex AI-assisted review authorized by the user, not teammate approval",
   "sources": [
     {
       "filename": "Turing-Arena-ещё-200-реплик.xlsx",
@@ -18,5 +27,5 @@
       "sheet": "Реплики"
     }
   ],
-  "origin_note": "Origins are workbook labels, not independently verified authorship. No pretrained model or runtime network. Static memory/math/instruction/persona/game examples remain stored but cannot override the rule engine."
+  "origin_note": "Original workbook status/answer/context retained separately in SQLite; review decisions control this version activity. No runtime network or pretrained models."
 }
