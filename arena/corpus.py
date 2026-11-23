@@ -90,6 +90,7 @@ class Corpus:
         self.idf = {word: 1 + math.log((len(documents) + 1) / (count + 1)) for word, count in frequencies.items()}
         for row, document in zip(self.rows, documents):
             row["words"] = document
+            row["ordered"] = [word for word in tokens(row["prompt"]) if word not in STOP]
             row["key"] = key(row["prompt"])
             row["signature"] = signature(row["prompt"])
 
@@ -98,10 +99,16 @@ class Corpus:
             return None
         query = key(question)
         words = set(tokens(question)) - STOP
+        ordered = [word for word in tokens(question) if word not in STOP]
         query_signature = signature(question)
         matches = []
         for row in self.rows:
             if not context_fits(row["context"], history) or query_signature != row["signature"]:
+                continue
+            # A small corpus does not establish that an unseen qualifier is harmless.
+            # Preserve content words AND their order, including causal/event order.
+            # Controlled aliases, inflections and omitted fillers still generalize.
+            if ordered != row["ordered"]:
                 continue
             exact = query == row["key"]
             if exact:
