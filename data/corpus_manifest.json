@@ -1,0 +1,22 @@
+{
+  "upstream_commit": "323433936fa5b30483c000eebc4807471b5736e6",
+  "upstream_author": "m1tello",
+  "rows": 350,
+  "approved": 150,
+  "pending": 200,
+  "retrieval_topic_eligible": 115,
+  "eligible_without_context": 110,
+  "sources": [
+    {
+      "filename": "Turing-Arena-ещё-200-реплик.xlsx",
+      "sha256": "d5faf0bac65db0f5e48e5b1f03d7a91c476770fea66c5a1d22a8fcd1c65a2356",
+      "sheet": "Новые реплики"
+    },
+    {
+      "filename": "Turing-Arena-утверждено.xlsx",
+      "sha256": "ebdcc57e6b3cce4e755b1bd8dff57d0a0f65f18036748064453fe99087343b2a",
+      "sheet": "Реплики"
+    }
+  ],
+  "origin_note": "Origins are workbook labels, not independently verified authorship. No pretrained model or runtime network. Static memory/math/instruction/persona/game examples remain stored but cannot override the rule engine."
+}
