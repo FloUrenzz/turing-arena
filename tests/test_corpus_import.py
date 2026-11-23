@@ -41,6 +41,21 @@ def row(identifier=1, status="Подтверждаю", answer="Привет", ed
     return [str(identifier), "Разговор", "", "Привет, как ты?", answer, status, edit, ""]
 
 
+def review_document(source, decisions):
+    return {"schema_version": 1, "reviewer": "AI-assisted test review",
+            "authorization": "Пользователь разрешил проверить и подключить",
+            "sources": {source.name: hashlib.sha256(source.read_bytes()).hexdigest()},
+            "decisions": decisions}
+
+
+def decision(identifier=1, choice="accept", **extra):
+    return {"example_id": str(identifier), "decision": choice, "reason": "Проверено в тесте", **extra}
+
+
+def save_review(path, data):
+    path.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+
+
 class CorpusImportTests(unittest.TestCase):
     def test_statuses_final_text_provenance_and_no_overwrite(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -132,6 +147,128 @@ class CorpusImportTests(unittest.TestCase):
                 self.assertEqual(c.execute("SELECT COUNT(*) FROM corpus_replies WHERE CAST(example_id AS INT)>150 AND approved=1").fetchone()[0], 0)
                 self.assertEqual(c.execute("SELECT answer FROM corpus_replies WHERE example_id='106'").fetchone()[0], "а чо случилось?")
             self.assertEqual(checksums, {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in sources})
+
+    def test_review_activates_pending_rewrites_and_preserves_originals(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source, output, review = (Path(directory) / name for name in ("source.xlsx", "corpus.sqlite3", "review.json"))
+            records = [row(1, "Проверить", answer="Старый ответ"), row(2, "Подтверждаю", answer="Исходный ответ"),
+                       row(3, "Проверить", answer="Не подключать")]
+            records[1][2] = "Исходный контекст"
+            workbook(source, records)
+            source_bytes = source.read_bytes()
+            turns = [{"role": "bot", "text": "Моя реплика"}, {"role": "user", "text": "Слова человека"}]
+            save_review(review, review_document(source, [decision(3, "hold"), decision(1),
+                        decision(2, "rewrite", answer="Новый ответ", context_turns=turns)]))
+            counts = build_corpus([source], output, review_path=review)
+            self.assertEqual(counts, {"rows": 3, "approved": 2, "pending": 1, "sources": 1,
+                                      "review_accepted": 1, "review_rewritten": 1, "review_held": 1})
+            with closing(sqlite3.connect(output)) as c:
+                self.assertEqual(c.execute("SELECT example_id,answer,status,approved FROM corpus_replies ORDER BY example_id").fetchall(),
+                                 [("1", "Старый ответ", "Проверить", 1), ("2", "Новый ответ", "Подтверждаю", 1),
+                                  ("3", "Не подключать", "Проверить", 0)])
+                original, context, stored_turns = c.execute("SELECT original_answer,original_context,context_turns_json FROM corpus_reviews JOIN corpus_replies ON reply_id=corpus_replies.id WHERE example_id='2'").fetchone()
+                self.assertEqual((original, context), ("Исходный ответ", "Исходный контекст"))
+                self.assertEqual(json.loads(stored_turns), turns)
+                self.assertEqual(c.execute("SELECT COUNT(*) FROM corpus_reviews").fetchone()[0], 3)
+                self.assertEqual(c.execute("SELECT context_turns_json FROM corpus_reviews JOIN corpus_replies ON reply_id=corpus_replies.id WHERE example_id='1'").fetchone()[0], "null")
+                metadata = dict(c.execute("SELECT key,value FROM corpus_metadata"))
+                self.assertEqual((metadata["review_schema"], metadata["source_approved"], metadata["source_pending"]), ("1", "1", "2"))
+                self.assertEqual(metadata["review_sha256"], hashlib.sha256(review.read_bytes()).hexdigest())
+                self.assertEqual(metadata["reviewer"], "AI-assisted test review")
+                self.assertIn("review overlay", metadata["approval_policy"])
+                self.assertIn("accept/rewrite active", metadata["approval_policy"])
+                self.assertIn("Проверить/Убрать: inactive", metadata["source_approval_policy"])
+            self.assertEqual(source.read_bytes(), source_bytes)
+            output_bytes = output.read_bytes()
+            with self.assertRaisesRegex(ValueError, "существует"):
+                build_corpus([source], output, review_path=review)
+            self.assertEqual(output.read_bytes(), output_bytes)
+
+    def test_review_validates_effective_active_answer(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source, output, review = (Path(directory) / name for name in ("source.xlsx", "corpus.sqlite3", "review.json"))
+            workbook(source, [row(answer="я" * 301)])
+            save_review(review, review_document(source, [decision(1, "rewrite", answer="Исправленный ответ")]))
+            self.assertEqual(build_corpus([source], output, review_path=review)["approved"], 1)
+
+    def test_review_rejects_missing_unknown_duplicate_ids_and_invalid_metadata(self):
+        def altered(kind, source):
+            data = review_document(source, [decision()])
+            if kind == "missing":
+                data["decisions"] = []
+            elif kind == "unknown":
+                data["decisions"] = [decision(2)]
+            elif kind == "duplicate":
+                data["decisions"] *= 2
+            elif kind == "sha":
+                data["sources"][source.name] = "0" * 64
+            elif kind == "extra_source":
+                data["sources"]["extra.xlsx"] = "0" * 64
+            elif kind == "missing_source":
+                data["sources"] = {}
+            elif kind == "root_key":
+                data["extra"] = 1
+            elif kind == "schema_bool":
+                data["schema_version"] = True
+            elif kind == "reviewer_label":
+                data["reviewer"] = "Team confirmed"
+            elif kind == "authorization_type":
+                data["authorization"] = False
+            elif kind == "id_type":
+                data["decisions"][0]["example_id"] = 1
+            elif kind == "decisions_type":
+                data["decisions"] = {}
+            return data
+        for kind in ("missing", "unknown", "duplicate", "sha", "extra_source", "missing_source", "root_key",
+                     "schema_bool", "reviewer_label", "authorization_type", "id_type", "decisions_type"):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as directory:
+                source, output, review = (Path(directory) / name for name in ("source.xlsx", "corpus.sqlite3", "review.json"))
+                workbook(source, [row()])
+                save_review(review, altered(kind, source))
+                with self.assertRaises(ValueError):
+                    build_corpus([source], output, review_path=review)
+                self.assertFalse(output.exists())
+
+    def test_review_strict_decision_answer_and_context_types(self):
+        invalid = [decision(choice="unknown"), decision(reason=""), decision(extra="unexpected"),
+                   decision(answer="Не разрешено"), decision(context_turns=[]),
+                   decision(choice="hold", answer="Не разрешено"),
+                   decision(choice="rewrite"), decision(choice="rewrite", answer=5),
+                   decision(choice="rewrite", answer="я" * 301),
+                   decision(choice="rewrite", answer="я" + "😀" * 150),
+                   decision(choice="rewrite", answer="hello"),
+                   decision(choice="rewrite", answer="Привет\x00"),
+                   decision(choice="rewrite", answer="Привет", context_turns=[]),
+                   decision(choice="rewrite", answer="Привет", context_turns={}),
+                   decision(choice="rewrite", answer="Привет", context_turns=[{"role": "other", "text": "Привет"}]),
+                   decision(choice="rewrite", answer="Привет", context_turns=[{"role": "user", "text": "я" * 4001}]),
+                   decision(choice="rewrite", answer="Привет", context_turns=[{"role": "user", "text": 1}]),
+                   decision(choice="rewrite", answer="Привет", context_turns=[{"role": "user", "text": ""}]),
+                   decision(choice="rewrite", answer="Привет", context_turns=[{"role": "bot", "text": "Hello"}]),
+                   decision(choice="rewrite", answer="Привет", context_turns=[{"role": "bot", "text": "я" * 301}]),
+                   decision(choice="rewrite", answer="Привет", context_turns=[{"role": "user", "text": "Привет", "extra": 0}])]
+        for item in invalid:
+            with self.subTest(item=item), tempfile.TemporaryDirectory() as directory:
+                source, output, review = (Path(directory) / name for name in ("source.xlsx", "corpus.sqlite3", "review.json"))
+                workbook(source, [row()])
+                save_review(review, review_document(source, [item]))
+                with self.assertRaises(ValueError):
+                    build_corpus([source], output, review_path=review)
+                self.assertFalse(output.exists())
+
+    def test_review_cli_and_duplicate_json_keys(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source, output, review = (Path(directory) / name for name in ("source.xlsx", "corpus.sqlite3", "review.json"))
+            workbook(source, [row(status="Проверить")])
+            save_review(review, review_document(source, [decision()]))
+            command = [sys.executable, "-X", "utf8", str(ROOT / "scripts/import_corpus.py"), str(source),
+                       "--output", str(output), "--review", str(review)]
+            result = subprocess.run(command, cwd=ROOT, text=True, encoding="utf-8", capture_output=True, timeout=10)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(json.loads(result.stdout)["review_accepted"], 1)
+            review.write_text('{"schema_version":1,"schema_version":1}', encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "повтор JSON"):
+                build_corpus([source], Path(directory) / "other.sqlite3", review_path=review)
 
 
 if __name__ == "__main__":

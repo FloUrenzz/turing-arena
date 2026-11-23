@@ -31,6 +31,16 @@ def malformed_worker(*args):
 
 
 class RuntimeChecks(unittest.TestCase):
+    def test_default_runtime_delivers_without_scheduling_sleep(self):
+        runtime = Runtime("unused", worker=good_worker)
+        with patch("arena.runtime.time.sleep") as sleeper:
+            reply = runtime.respond("привет")
+        self.assertEqual(reply["status"], "ok")
+        self.assertEqual(reply["target_seconds"], 0)
+        self.assertFalse(runtime.timed)
+        self.assertEqual(runtime.state["turn"], 1)
+        sleeper.assert_not_called()
+
     def test_malformed_updates_deliver_reserve_once(self):
         runtime = Runtime("unused", timed=False, worker=malformed_worker)
         received = []
@@ -105,6 +115,9 @@ class RuntimeChecks(unittest.TestCase):
         self.assertEqual(reply["status"], "timeout")
         self.assertTrue(1 <= len(reply["text"]) <= 300)
         runtime.worker = good_worker
+        # Recovery uses the normal budget; 0.4 s is only the forced-hang probe
+        # and can be shorter than Windows spawn startup on a loaded laptop.
+        runtime.worker_timeout = 2.0
         self.assertEqual(runtime.respond("следующий")["status"], "ok")
 
     def test_errors_and_invalid_text_have_reserve(self):
@@ -116,14 +129,14 @@ class RuntimeChecks(unittest.TestCase):
             self.assertEqual(runtime.state["user_name"], None)
 
     def test_deadline_overrides_artificial_wait(self):
-        runtime = Runtime("unused", worker=hang_worker)
+        runtime = Runtime("unused", timed=True, worker=hang_worker)
         start = time.monotonic()
         reply = runtime.respond("вопрос", deadline=start + 1)
         self.assertLess(time.monotonic() - start, 0.2)
         self.assertEqual(reply["target_seconds"], 0)
 
     def test_schedule_subtracts_processing_time(self):
-        runtime = Runtime("unused", worker=good_worker)
+        runtime = Runtime("unused", timed=True, worker=good_worker)
         entry = {"question": "q", "reply": dict(good_worker("", {}, "", 0),
                  status="ok", target_seconds=20, duplicate=False), "start": 100, "delivered": False}
         runtime._requests["q"] = entry
