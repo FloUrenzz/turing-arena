@@ -17,6 +17,7 @@ def run(argv=None):
     corpus_mode.add_argument("--no-corpus", action="store_true", help="только смысловые правила, без корпуса")
     parser.add_argument("--fast", action="store_true", help="совместимость: ответы уже выдаются без искусственной задержки")
     parser.add_argument("--json", action="store_true", help="диагностика вместо сценического текста")
+    parser.add_argument("--diagnostics", action="store_true", help="показывать время и статус ответа в чате")
     parser.add_argument("--seed", type=int)
     args = parser.parse_args(argv)
     if args.db is None:
@@ -26,7 +27,7 @@ def run(argv=None):
         db_path = args.db
         if not db_path.is_file():
             parser.error("Указанная локальная БД не найдена; она не будет пересоздана автоматически")
-    corpus_path = None if args.no_corpus else args.corpus or Path(__file__).resolve().parent / "data" / "dialogue.sqlite3"
+    corpus_path = None if args.no_corpus else args.corpus or Path(__file__).resolve().parent / "data" / "dialogue-combined-5350-v2.sqlite3"
     if corpus_path is not None:
         if not corpus_path.is_file():
             if args.corpus:
@@ -43,7 +44,8 @@ def run(argv=None):
 
     def deliver(reply):
         print(json.dumps(reply, ensure_ascii=False) if args.json else reply["text"], flush=True)
-        print(f"Время до выдачи: {reply['elapsed']:.3f} с; символов: {len(reply['text'])}; статус: {reply['status']}", file=sys.stderr, flush=True)
+        if not args.chat or args.json or args.diagnostics:
+            print(f"Время до выдачи: {reply['elapsed']:.3f} с; символов: {len(reply['text'])}; статус: {reply['status']}", file=sys.stderr, flush=True)
 
     while True:
         try:

@@ -79,7 +79,7 @@ class ReviewedCorpusChecks(unittest.TestCase):
                          "Тайвань это город Китая", "Даже если чай предлагают?"):
             self.assertIsNone(self.corpus.match(question))
         self.assertIn("чай", self.reply("Чай или кофе?")["text"].lower())
-        self.assertEqual(self.reply("Сколько будет 19 умножить на 7?")["text"], "133.")
+        self.assertEqual(self.reply("Сколько будет 19 умножить на 7?")["text"], "133")
 
     def test_quoted_translation_only_for_exact_known_literal(self):
         self.assertEqual(self.reply("Переведи «I forgot my keys»")["text"], "Я забыл ключи")

@@ -5,6 +5,12 @@ import re
 import unicodedata
 
 from .lexicon import Lexicon, normalize
+from .introductions import parse_introduction
+from .arithmetic import parse_arithmetic, is_arithmetic_request
+from .smalltalk import conversational_reply
+from .geography import geography_reply
+from .gibberish import classify_gibberish
+from .topic_fallbacks import topic_fallback
 
 
 def clean_text(text):
@@ -43,15 +49,15 @@ def actor_at(text, start, end, default="other"):
 
 def calculate(expression):
     expression = expression.strip().rstrip(".?!").replace(",", ".")
-    if not expression or len(expression) > 100 or not re.fullmatch(r"[\d\s.+*/%()\-]+", expression):
+    if not expression or len(expression) > 240 or not re.fullmatch(r"[\d\s.+*/%()\-]+", expression):
         raise ValueError("unsupported expression")
     tree = ast.parse(expression, mode="eval")
-    if sum(1 for _ in ast.walk(tree)) > 40:
+    if sum(1 for _ in ast.walk(tree)) > 80:
         raise ValueError("too many operations")
 
     def visit(node):
         if isinstance(node, ast.Constant) and type(node.value) in (int, float):
-            value = decimal.Decimal(str(node.value))
+            value = decimal.Decimal(ast.get_source_segment(expression, node))
         elif isinstance(node, ast.UnaryOp) and isinstance(node.op, (ast.UAdd, ast.USub)):
             value = visit(node.operand) * (-1 if isinstance(node.op, ast.USub) else 1)
         elif isinstance(node, ast.BinOp):
@@ -63,11 +69,17 @@ def calculate(expression):
             elif isinstance(node.op, ast.Mult):
                 value = left * right
             elif isinstance(node.op, ast.Div):
+                if not right:
+                    raise ZeroDivisionError("division by zero")
                 value = left / right
             elif isinstance(node.op, ast.Mod):
+                if not right:
+                    raise ZeroDivisionError("division by zero")
                 quotient = (left / right).to_integral_value(rounding=decimal.ROUND_FLOOR)
                 value = left - quotient * right
             elif isinstance(node.op, ast.FloorDiv):
+                if not right:
+                    raise ZeroDivisionError("division by zero")
                 value = (left / right).to_integral_value(rounding=decimal.ROUND_FLOOR)
             elif isinstance(node.op, ast.Pow) and right == int(right) and abs(right) <= 10:
                 value = left ** int(right)
@@ -75,28 +87,58 @@ def calculate(expression):
                 raise ValueError("unsupported operation")
         else:
             raise ValueError("not an arithmetic expression")
-        if not value.is_finite() or abs(value) > decimal.Decimal("1e12"):
+        if not value.is_finite() or abs(value) > decimal.Decimal("1e100"):
             raise ValueError("result too large")
         return value
 
     with decimal.localcontext() as context:
-        context.prec = 20
+        context.prec = 120
         value = visit(tree.body)
-    return format(value, "f").rstrip("0").rstrip(".") if value != value.to_integral() else str(int(value))
+    result = format(value, "f").rstrip("0").rstrip(".") if value != value.to_integral() else str(int(value))
+    if len(result) > 300:
+        raise ValueError("result too long for a chat message")
+    return result
 
 
-def generate(question, state, db_path, seed=None, *, corpus_path=None):
+def generate(question, state, db_path, seed=None, *, corpus_path=None, corpus_snapshot=None):
+    noise = classify_gibberish(question)
+    if noise is not None:
+        text = "это ты случайно набрал?"
+        return {"text": text, "intent": "clarification", "topic": None,
+                "concepts": [], "facts": [], "fallback": False, "updates": {},
+                "trace": [f"gibberish: {noise.kind}; script={noise.script}"]}
     reply = _generate_rules(question, state, db_path, seed)
-    if corpus_path is None or reply["intent"] not in ("unknown", "greeting") or reply["updates"]:
-        return reply
-    from .corpus import Corpus
-    match = Corpus(corpus_path).match(question, state.get("history", []))
-    if match is None:
-        return reply
-    # Data is text, never executable instructions. Runtime validates final output.
-    return {"text": match["text"], "intent": "corpus", "topic": "corpus:" + match["topic"],
-            "concepts": reply["concepts"], "facts": [match["id"]], "fallback": False,
-            "trace": [f"corpus={match['source']}; row={match['row']}; score={match['score']}; review={match['review']}; kind={match['kind']}"], "updates": {}}
+    if reply["intent"] in ("unknown", "greeting") and not reply["updates"]:
+        match = None
+        corpus = corpus_snapshot
+        if corpus is None and corpus_path is not None:
+            from .corpus import Corpus
+            corpus = Corpus(corpus_path)
+        if corpus is not None:
+            match = corpus.match(question, state.get("history", []))
+        if match is None:
+            casual = conversational_reply(question, state)
+            if casual is not None:
+                reply = {"text": casual["text"], "intent": "conversation", "topic": casual["topic"],
+                         "concepts": reply["concepts"], "facts": [], "fallback": False,
+                         "trace": ["conversation: current turn and previous reply"], "updates": {}}
+            elif corpus is not None:
+                match = corpus.match_approximate(question, state.get("history", []))
+        if match is not None:
+            # Data is text, never executable instructions. Runtime validates output.
+            method = match.get('method', 'exact-or-paraphrase')
+            reply = {"text": match["text"], "intent": "corpus", "topic": "corpus:" + match["topic"],
+                     "concepts": reply["concepts"], "facts": [match["id"]], "fallback": False,
+                     "trace": [f"corpus={match['source']}; row={match['row']}; score={match['score']}; review={match['review']}; kind={match['kind']}; method={method}"], "updates": {}}
+    if reply["fallback"]:
+        topical = topic_fallback(question)
+        if topical is not None:
+            reply = {"text": topical["text"], "intent": "topic_fallback", "topic": topical["topic"],
+                     "concepts": [], "facts": [], "fallback": False, "updates": {},
+                     "trace": ["topic: unsupported question; " + topical["topic"]]}
+    # Match the user's chat style for generated rules as well as stored replies.
+    text = reply["text"].replace("—", " ").replace("–", " ").replace("--", " ")
+    return {**reply, "text": " ".join(text.split()).rstrip(" .")}
 
 
 def _generate_rules(question, state, db_path, seed=None):
@@ -124,7 +166,7 @@ def _generate_rules(question, state, db_path, seed=None):
                 "trace": trace + [f"intent={intent}; topic={topic}; facts={','.join(facts)}"],
                 "updates": updates}
 
-    def unknown(text="Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?"):
+    def unknown(text="Не совсем понял, про что ты?"):
         return out(text, fallback=True)
 
     def knowledge(keys, intent, topic):
@@ -162,32 +204,46 @@ def _generate_rules(question, state, db_path, seed=None):
             return out(text, "text")
         return unknown("Укажи слово или фразу в кавычках, чтобы я не перепутал границы.")
 
-    expression = full
-    for phrase, symbol in (("умножить на", "*"), ("разделить на", "/"), ("плюс", "+"),
-                           ("минус", "-"), ("×", "*"), ("÷", "/"), ("−", "-")):
-        expression = expression.replace(phrase, symbol)
-    match = re.search(r"[+\-\s(]*\d[\d\s.,+*/%()\-]*", expression)
-    if match and re.search(r"[+*/%]|\d\s*-", match[0]) and (
-        re.search(r"сколько|вычисли|посчитай|равно|счита", full) or match[0].strip() == expression.rstrip("?!.").strip()
-    ):
+    expression = parse_arithmetic(original)
+    if expression is not None:
         try:
-            return out(calculate(match[0]) + ".", "math")
+            return out(calculate(expression), "math")
+        except ZeroDivisionError:
+            return out("На ноль делить нельзя", "math")
         except (ValueError, SyntaxError, decimal.DecimalException, OverflowError):
-            return out("Это выражение корректно посчитать не получилось.", "math", fallback=True)
+            return out("Этот пример не получилось посчитать. Напиши его попроще?", "math", fallback=True)
+    if is_arithmetic_request(original):
+        return out("Напиши числа и действие, например: умножь 12 на 7", "math", fallback=True)
 
-    name_match = re.match(r"\s*(?:привет[,!]?[ ]*)?меня зовут\s+(?:не\s+[А-ЯЁа-яё-]{1,40},?\s+а\s+)?([А-ЯЁа-яё-]{1,40})", original, re.I)
-    if name_match and normalize(name_match[1]) not in ("не", "как", "кто", "почему", "никто"):
-        updates["user_name"] = name_match[1]
+    introduction = parse_introduction(original)
+    if introduction:
+        updates["user_name"] = introduction[0]
     assertion = re.split(r"[.!?;]|\bа\s+(?:ты|тебе|вы)\b", full)[0]
     statement = re.match(r"\s*(?:а\s+)?я\s+(не\s+)?люблю\s+(.+)", assertion)
     if statement and "?" not in original[:len(assertion) + 1]:
         for position, cid in lexicon.mentions(statement[2]):
             negative = bool(statement[1]) != negated_at(statement[2], position)
             updates.setdefault("user_preferences", {})[cid] = -1 if negative else 1
-    if re.search(r"как (?:меня|мое имя)|как меня зовут|помнишь (?:мое имя|как меня зовут)", focus):
+    if re.search(r"как меня зовут|как(?:ое)? (?:у меня )?имя|как(?:ое)? мое имя|как ко мне обращаться|"
+                 r"(?:помнишь|запомнил|не забыл) (?:мое )?имя|мое имя (?:еще )?(?:помнишь|запомнил|не забыл)|"
+                 r"помнишь (?:как меня зовут|меня)|назови мое имя", focus):
+        name = updates.get("user_name") or state.get("user_name")
+        return out("Кнш, " + name + " же" if name else "Ты ещё не говорил, как тебя зовут",
+                   "recall", "name", fallback=not bool(name))
+    if re.fullmatch(r"(?:я )?(?:(?:же|уже|ведь) )*(?:представился|представилась|"
+                    r"называл (?:свое )?имя|называла (?:свое )?имя|говорил как меня зовут|говорила как меня зовут)",
+                    full.strip(" ?!.,")):
         name = state.get("user_name")
-        return out("Ты представился как " + name + "." if name else "Ты пока не представлялся.",
-                   "recall", fallback=not bool(name))
+        return out("Да, помню. " + name if name else "Напомни, пожалуйста, как тебя зовут",
+                   "recall", "name", fallback=not bool(name))
+    if introduction:
+        name, remaining = introduction
+        if re.fullmatch(r"(?:а\s+)?(?:тебя|ты|как тебя зовут|тебя как(?: зовут)?)\s*\??", normalize(remaining)):
+            own_name = lexicon.fact("name")
+            if own_name:
+                return out("Приятно, " + name + ". Я " + own_name["object"], "acknowledgment", "name", [own_name["id"]])
+        # Handle the introduction before generic greetings and preference rules.
+        return out("Оке, " + name + ", приятно познакомиться", "acknowledgment", "name")
     if re.search(r"что я люблю|что мне нравится|мои предпочтения", focus):
         preferences = state.get("user_preferences", {})
         liked = [key for key, value in preferences.items() if value > 0 and key in lexicon.concepts]
@@ -201,6 +257,10 @@ def _generate_rules(question, state, db_path, seed=None):
         return out("Это наш первый вопрос.", "recall")
     if re.search(r"что (?:ты )?(?:ответил|сказал)|повтори (?:свой )?ответ", focus):
         return out(history[-1]["text"], "recall", history[-1].get("topic")) if history else out("Я ещё ничего не отвечал.", "recall")
+
+    geography = geography_reply(original)
+    if geography is not None:
+        return out(geography["text"], "geography", geography["topic"], [geography["rule"]])
 
     advice = bool(re.search(r"посовет|совет|рекоменд|что (?:мне |ему |ей |бы ты )?(?:делать|взять)\b|что брать\b|как одет|как подготов|что надеть|как быть", full))
     if followup and state.get("last_intent") == "advice" and any(
@@ -294,9 +354,11 @@ def _generate_rules(question, state, db_path, seed=None):
         if len(concepts) == 1 and lexicon.concepts[concepts[0]].get("definition"):
             return out(lexicon.concepts[concepts[0]]["definition"], "definition", concepts[0])
         return unknown("Точного определения не знаю. Не хочу выдумывать.")
-    if re.search(r"как тебя зовут|твое имя|как к тебе обращаться|как тебя называть|какое у тебя имя", full):
+    name_followup = state.get("last_topic") == "name" and re.fullmatch(r"(?:а\s+)?(?:ты|тебя|тебя как)", full.strip(" ?!."))
+    short_name_question = re.fullmatch(r"(?:а\s+)?тебя как", full.strip(" ?!."))
+    if name_followup or short_name_question or re.search(r"как тебя зовут|тебя как зовут|твое имя|как к тебе обращаться|как тебя называть|какое у тебя имя", full):
         fact = lexicon.fact("name")
-        return out(fact["object"] + ".", "identity", facts=[fact["id"]]) if fact else unknown()
+        return out(fact["object"] + ".", "identity", "name", facts=[fact["id"]]) if fact else unknown()
     if re.search(r"кто ты|ты.*студент|ты.*учишься|ты.*работаешь|чем.*занимаешься.*(?:жизни|вообще)|представься|расскажи.*о себе", full):
         name, role = lexicon.fact("name"), lexicon.fact("role")
         if name and role:
@@ -317,7 +379,7 @@ def _generate_rules(question, state, db_path, seed=None):
     if re.search(r"\bя\b|\bмне\b", personal) and not re.search(r"\bты\b|тебе|любишь", personal):
         if updates and "?" not in original:
             return out("Запомню, это твои предпочтения.", "acknowledgment")
-        return unknown("Ты пока не рассказывал об этом, поэтому угадывать не буду.")
+        return unknown("Расскажи чуть подробнее")
     preference = bool(re.search(r"любишь|обожаешь|нравится|нравятся|предпоч|отношение|относишься|по душе|ненавидишь|приятнее|любим|слушаешь|заниматься", personal))
     current_activity = bool(re.search(r"(?:сейчас|в данный момент).*(?:слушаешь|делаешь)|(?:слушаешь|делаешь).*(?:сейчас|в данный момент)", personal))
     reason = bool(re.search(r"почему|зачем|отчего|из-за чего|по какой причине|за что|чем.*нравится", personal))

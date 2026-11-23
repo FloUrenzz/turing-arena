@@ -109,9 +109,9 @@ class EngineChecks(unittest.TestCase):
         for text in ("2**100000000", "__import__('os')", "1/0"):
             with self.assertRaises(Exception):
                 calculate(text)
-        self.assertEqual(self.reply("Переверни слово «самолёт».")["text"], "тёломас.")
-        self.assertEqual(self.reply("Сколько будет 13 умножить на 7?")["text"], "91.")
-        self.assertEqual(self.reply("Назови последнюю букву слова «арбуз».")["text"], "з.")
+        self.assertEqual(self.reply("Переверни слово «самолёт».")["text"], "тёломас")
+        self.assertEqual(self.reply("Сколько будет 13 умножить на 7?")["text"], "91")
+        self.assertEqual(self.reply("Назови последнюю букву слова «арбуз».")["text"], "з")
 
     def test_engine_works_with_socket_calls_forbidden(self):
         with patch.object(socket.socket, "connect", side_effect=AssertionError("network forbidden")), \
@@ -130,7 +130,7 @@ class EngineChecks(unittest.TestCase):
             target.commit()
             source.close()
             target.close()
-            self.assertEqual(generate("Как тебя зовут?", self.state, destination)["text"], "Лера.")
+            self.assertEqual(generate("Как тебя зовут?", self.state, destination)["text"], "Лера")
             self.assertIn("coffee", generate("Чай или кофе?", self.state, destination)["concepts"])
             self.assertIn("likes_coffee", generate("Чай или кофе?", self.state, destination)["facts"])
 

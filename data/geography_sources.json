@@ -1,0 +1,14 @@
+{
+  "verified_on": "2026-11-23",
+  "sources": {
+    "kazakhstan_capital": ["https://gov.kz/article/19305?lang=ru"],
+    "almaty_past": ["https://www.gov.kz/org/zhetysu-social-employment/press/news/details/805611?lang=ru"],
+    "taiwan_island": ["https://english.moe.gov.tw/fp-117-21022-B8B67-1.html"],
+    "taiwan_status": [
+      "https://en.mofa.gov.tw/News_Content.aspx?n=1330&s=117005",
+      "https://english.www.gov.cn/archive/whitepaper/202208/10/content_WS62f34f46c6d02e533532f0ac.html"
+    ]
+  },
+  "existing_reviewed_examples": {"turkey_capital": "22", "baikal_lake": "23", "antarctica_south": "25"},
+  "note": "Sources support the general Taiwan status and island branches; the bot does not classify Taiwan as a city. A separate user-requested game response returns Да for the narrowly recognized independent-country question. That short response is a configured dialogue rule, not a quotation or conclusion attributed to these sources."
+}

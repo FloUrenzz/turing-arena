@@ -35,7 +35,7 @@ class CliChecks(unittest.TestCase):
         args = ("--ask", "Сколько будет 19 умножить на 7?", "--no-corpus")
         default = self.invoke(*args)
         legacy = self.invoke(*args, "--fast")
-        self.assertEqual(default.stdout, "133.\n")
+        self.assertEqual(default.stdout, "133\n")
         self.assertEqual(legacy.stdout, default.stdout)
         self.assertNotIn("Исследовательский режим", default.stderr + legacy.stderr)
         self.assertIn("Время до выдачи:", default.stderr)
@@ -47,9 +47,17 @@ class CliChecks(unittest.TestCase):
         ))
         replies = [json.loads(line) for line in result.stdout.splitlines()]
         self.assertEqual(len(replies), 2)
-        self.assertEqual(replies[0]["text"], "133.")
+        self.assertEqual(replies[0]["text"], "133")
         self.assertTrue(all(reply["target_seconds"] == 0 and reply["status"] == "ok" for reply in replies))
         self.assertTrue(all(reply["elapsed"] < 3 for reply in replies))
+
+    def test_plain_chat_hides_diagnostics_for_recording(self):
+        result = self.invoke("--chat", "--no-corpus", input=(
+            "Что делаешь?\nда тоже ничего особенного\nумножь двадцать три на шесть\n"))
+        self.assertEqual(result.stdout.splitlines(), [
+            "Да ничё особенного. А ты?", "Понял. Как день прошёл?", "138"])
+        self.assertNotIn("Время до выдачи", result.stderr)
+        self.assertNotIn("статус:", result.stderr)
 
 
 if __name__ == "__main__":

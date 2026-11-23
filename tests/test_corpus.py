@@ -80,7 +80,7 @@ class CorpusChecks(unittest.TestCase):
         self.assertIsNone(self.corpus.match("Тайвань это город Китая"))
         self.assertIn("чай", self.reply("Ты чай или кофе больше любишь?")["text"].lower())
         self.assertNotEqual(self.reply("Сколько будет 17 умножить на 6?")["intent"], "corpus")
-        self.assertEqual(self.reply("Сколько будет 19 умножить на 7?")["text"], "133.")
+        self.assertEqual(self.reply("Сколько будет 19 умножить на 7?")["text"], "133")
 
     def test_audit_rejects_changed_qualifiers_and_event_order(self):
         for question in ("Почему летом на улице телефон быстрее садится?",

@@ -1,0 +1,23 @@
+{
+  "checked_on": "2026-11-23",
+  "python": "3.11.9",
+  "unit_tests_passed": 164,
+  "corpus_rebuild_logically_matches": true,
+  "corpus_counts": {
+    "source_rows": 5350,
+    "active": 5296
+  },
+  "workbook_rows": [
+    10336,
+    54
+  ],
+  "workbook_formulas": 0,
+  "sha256": {
+    "datasets/source-extra/Turing-Arena-ещё-5000-реплик.xlsx": "d93e28a0ff436993de2f8ddb15f6e8f9a1b7499714b3c9622c14162a70300546",
+    "exports/Turing-Arena-v3-все-строки.xlsx": "a07b75ddf7bbb4c82e311d1da72b4521075a1d92185e7ce6f087c53fcac3c138",
+    "exports/Turing-Arena-v3-варианты.json": "847ab27a523a00f8f8a846bf37e354e605c8f045eff5e831d6d95ae9909bea68",
+    "data/dialogue-combined-5350-v2.sqlite3": "fb7ca1089c9689744e7493f0d11cd817b87be3685a78fd495853aee16b4d5547",
+    "data/corpus_review_combined_5350_v2.json": "b9b7f984f0877d21255565ecdddff5d94a19943d4b6054bafdffea63790afec9"
+  },
+  "note": "English dialogue mode removed at user request. Measurements describe this local Windows run, not a guarantee for all input."
+}

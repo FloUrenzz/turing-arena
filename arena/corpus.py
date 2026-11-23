@@ -7,6 +7,7 @@ import re
 import sqlite3
 
 from .lexicon import normalize, stem
+from .paraphrases import phrase_features, equivalent
 
 
 BLOCKED_TOPICS = {"Память", "Контекст", "Счёт", "Инструкция", "Предпочтения", "Игра"}
@@ -56,8 +57,17 @@ def signature(text):
 
 
 def context_fits(context, history, turns=None):
+    def turn_value(text):
+        return key(text), speech_act(text), literal_signature(text), text
+
+    def same_turn(expected, observed):
+        if expected[0] != observed[0]:
+            return False
+        left, right = expected[1], observed[1]
+        return left[:3] == right[:3] or (left[2] == right[2] == () and equivalent(left[3], right[3]))
+
     if turns is not None:
-        expected = [("question" if turn["role"] == "user" else "text", (key(turn["text"]), speech_act(turn["text"]), literal_signature(turn["text"]))) for turn in turns]
+        expected = [("question" if turn["role"] == "user" else "text", turn_value(turn["text"])) for turn in turns]
         if not expected:
             return True
     elif not context:
@@ -78,16 +88,16 @@ def context_fits(context, history, turns=None):
                 role = "question"
             if role is None:
                 return False
-            expected.append((role, (key(chunk[1]), speech_act(chunk[1]), literal_signature(chunk[1]))))
+            expected.append((role, turn_value(chunk[1])))
             end = chunk.end()
-    observed = [(role, (key(turn.get(role, "")), speech_act(turn.get(role, "")), literal_signature(turn.get(role, "")))) for turn in history[-2:]
+    observed = [(role, turn_value(turn.get(role, ""))) for turn in history[-2:]
                 for role in ("question", "text")]
     if not history or len(expected) > len(observed):
         return False
     # Require the context to reach the most recent turn, with matching speaker.
     for start in range(len(observed) - len(expected) + 1):
         window = observed[start:start + len(expected)]
-        if window == expected and start + len(expected) >= len(observed) - 1:
+        if all(same_turn(left, right) for left, right in zip(expected, window)) and start + len(expected) >= len(observed) - 1:
             return True
     return False
 
@@ -127,15 +137,23 @@ class Corpus:
                                    answer=bot["text"], context="", context_turns=turns[:index], kind="context")
                     starters.append(starter)
         self.rows.extend(starters)
-        documents = [set(tokens(row["prompt"])) - STOP for row in self.rows]
+        tokenized = [tokens(row["prompt"]) for row in self.rows]
+        documents = [set(words) - STOP for words in tokenized]
         frequencies = Counter(word for document in documents for word in document)
         self.idf = {word: 1 + math.log((len(documents) + 1) / (count + 1)) for word, count in frequencies.items()}
-        for row, document in zip(self.rows, documents):
+        self.paraphrase_index = {}
+        self.ordered_index = {}
+        self._approximate_index = None
+        for row, document, row_tokens in zip(self.rows, documents, tokenized):
             row["words"] = document
-            row["ordered"] = [word for word in tokens(row["prompt"]) if word not in STOP]
-            row["key"] = key(row["prompt"])
+            row["ordered"] = [word for word in row_tokens if word not in STOP]
+            self.ordered_index.setdefault(tuple(row["ordered"]), []).append(row)
+            row["key"] = ' '.join(row_tokens)
             row["signature"] = signature(row["prompt"])
             row["literals"] = literal_signature(row["prompt"])
+            features = phrase_features(row["prompt"])
+            if features is not None:
+                self.paraphrase_index.setdefault(features, []).append(row)
 
     def match(self, question, history=()):
         if len(question) > 4000 or "\n" in question:
@@ -148,7 +166,7 @@ class Corpus:
         ordered = [word for word in tokens(question) if word not in STOP]
         query_signature = signature(question)
         matches = []
-        for row in self.rows:
+        for row in self.ordered_index.get(tuple(ordered), ()):
             if not context_fits(row["context"], history, row["context_turns"]) or query_signature != row["signature"]:
                 continue
             if literals != row["literals"] or literals and query != row["key"]:
@@ -178,10 +196,35 @@ class Corpus:
             matches.append((score, row))
         matches.sort(key=lambda item: (-item[0], item[1]["id"]))
         if not matches:
-            return None
+            features = phrase_features(question)
+            candidates = self.paraphrase_index.get(features, ()) if features is not None else ()
+            matches = [(1.0, row) for row in candidates
+                       if context_fits(row["context"], history, row["context_turns"])]
+            matches.sort(key=lambda item: item[1]["id"])
+            if not matches:
+                return None
         score, row = matches[0]
         if any(score - other_score < .08 and row["answer"] != other["answer"] for other_score, other in matches[1:]):
             return None
         return {"text": row["answer"], "id": row["id"], "topic": row["topic"],
                 "source": row["filename"], "row": row["row_number"], "score": round(score, 4),
                 "review": row["review"], "kind": row["kind"]}
+
+    def prepare_approximate(self):
+        """Build the read-only search snapshot once before starting a chat."""
+        from .retrieval import ApproximateIndex
+        if self._approximate_index is None:
+            self._approximate_index = ApproximateIndex(self.rows)
+        return self._approximate_index
+
+    def match_approximate(self, question, history=()):
+        """Search nearby phrasings only after exact rules and dialogue handling."""
+        matched = self.prepare_approximate().match(question, history,
+            context_check=lambda row, turns: context_fits(row['context'], turns, row['context_turns']))
+        if matched is None:
+            return None
+        row = matched['row']
+        return {'text': row['answer'], 'id': row['id'], 'topic': row['topic'],
+                'source': row['filename'], 'row': row['row_number'], 'score': round(matched['score'], 4),
+                'review': row['review'], 'kind': row['kind'], 'method': 'approximate',
+                'corrections': matched['corrections']}

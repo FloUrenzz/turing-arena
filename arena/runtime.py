@@ -3,6 +3,7 @@ from copy import deepcopy
 import multiprocessing
 import math
 import random
+import sqlite3
 import time
 import unicodedata
 import uuid
@@ -10,11 +11,12 @@ import uuid
 from arena.models import initial_state, apply_reply
 
 
-def _worker_entry(connection, worker, question, state, db_path, seed, corpus_path):
+def _worker_entry(connection, worker, question, state, db_path, seed, corpus_path, corpus_snapshot=None):
     try:
         if worker is None:
             from arena.engine import generate
-            reply = generate(question, state, db_path, seed, corpus_path=corpus_path)
+            reply = generate(question, state, db_path, seed, corpus_path=corpus_path,
+                             corpus_snapshot=corpus_snapshot)
         else:
             reply = worker(question, state, db_path, seed)
         connection.send((True, reply))
@@ -76,6 +78,17 @@ class Runtime:
         self.worker_timeout = max(0.01, min(float(worker_timeout), 2.0))
         self.seed = seed
         self.worker = worker
+        self._corpus_snapshot = None
+        if worker is None and self.corpus_path is not None:
+            try:
+                from arena.corpus import Corpus
+                snapshot = Corpus(self.corpus_path)
+                snapshot.prepare_approximate()
+                self._corpus_snapshot = snapshot
+            except (OSError, sqlite3.Error, ValueError, KeyError, TypeError):
+                # Preserve the previous per-request reserve behavior for an
+                # invalid corpus. Custom workers never load this database.
+                pass
         self.state = initial_state()
         self._rng = random.Random(seed)
         self._requests = OrderedDict()
@@ -90,7 +103,8 @@ class Runtime:
         if budget > 0:
             reader, writer = self._context.Pipe(duplex=False)
             process = self._context.Process(target=_worker_entry,
-                args=(writer, self.worker, question, deepcopy(self.state), self.db_path, self.seed, self.corpus_path), daemon=True)
+                args=(writer, self.worker, question, deepcopy(self.state), self.db_path, self.seed,
+                      self.corpus_path, self._corpus_snapshot if self.worker is None else None), daemon=True)
             try:
                 process.start()
                 writer.close()
