@@ -1,0 +1,2270 @@
+{
+  "date": "2026-11-23",
+  "baseline": "65b8b1913ae750f8af9d0f48341a5c6e937a105a",
+  "initial_sha256": {
+    "arena/corpus.py": "42753b49e1939b15c50903314515f2ac9cad461c84c6cb493d366b934789ab56",
+    "arena/corpus_import.py": "436f7de4401c9c0fc38cf8be59225bc5b75da9a856352e81a09c7fd4c0ecb367",
+    "arena/engine.py": "feac4b6759fd4d200b7b7b707c9860c22e136b8b86b197e7fa9671cc9d87ccd5",
+    "arena/runtime.py": "a1422e40ad5d021572b08e172a0191e8af42cc0ee55caff7c221df4fb2ec808b",
+    "main.py": "c4d14533fa9c73ebb4bf25601eb6de47813458664c4dbd7e35f66245a2bd63c9",
+    "data/corpus_review.json": "08e19197d53925fe1db48c14695eae8988eb27442283dfbd011240f7046290cc",
+    "data/dialogue.sqlite3": "29737d8c30adb6df9e4c551cae52a883f55fac8347e20da48081f017ceee5f6a",
+    "data/corpus_manifest.json": "4461230d77bba42a9a30b33c401e1132036639da02a24bbc498983c83fb8b9db",
+    "tests/test_reviewed_corpus.py": "46f50d880dee35f5f270f5d7855c4c21d12792cb7dfce6e52b9c1472119b8726",
+    "scripts/evaluate_reviewed.py": "8066e26e10dc8389489a790a6e38dc23d1ac24c4425df760fa3f6a9d8788bee2"
+  },
+  "manual_checks": [
+    {
+      "question": "Переведи «I forgot my» keys",
+      "match": {
+        "text": "Я забыл ключи",
+        "id": "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:163",
+        "topic": "Язык",
+        "source": "Turing-Arena-ещё-200-реплик.xlsx",
+        "row": 163,
+        "score": 1.0,
+        "review": "accept",
+        "kind": "reply"
+      },
+      "reply": {
+        "text": "Я забыл ключи",
+        "intent": "corpus",
+        "topic": "corpus:Язык",
+        "concepts": [],
+        "facts": [
+          "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:163"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=163; score=1.0; review=accept; kind=reply"
+        ],
+        "updates": {}
+      }
+    },
+    {
+      "question": "Переведи I forgot «my keys»",
+      "match": {
+        "text": "Я забыл ключи",
+        "id": "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:163",
+        "topic": "Язык",
+        "source": "Turing-Arena-ещё-200-реплик.xlsx",
+        "row": 163,
+        "score": 1.0,
+        "review": "accept",
+        "kind": "reply"
+      },
+      "reply": {
+        "text": "Я забыл ключи",
+        "intent": "corpus",
+        "topic": "corpus:Язык",
+        "concepts": [],
+        "facts": [
+          "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:163"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=163; score=1.0; review=accept; kind=reply"
+        ],
+        "updates": {}
+      }
+    },
+    {
+      "question": "Переведи «I forgot my keys»",
+      "match": {
+        "text": "Я забыл ключи",
+        "id": "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:163",
+        "topic": "Язык",
+        "source": "Turing-Arena-ещё-200-реплик.xlsx",
+        "row": 163,
+        "score": 1.0,
+        "review": "accept",
+        "kind": "reply"
+      },
+      "reply": {
+        "text": "Я забыл ключи",
+        "intent": "corpus",
+        "topic": "corpus:Язык",
+        "concepts": [],
+        "facts": [
+          "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:163"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=163; score=1.0; review=accept; kind=reply"
+        ],
+        "updates": {}
+      }
+    },
+    {
+      "question": "Как по-простому перевести Let's «go»?",
+      "match": {
+        "text": "Погнали",
+        "id": "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:165",
+        "topic": "Язык",
+        "source": "Turing-Arena-ещё-200-реплик.xlsx",
+        "row": 165,
+        "score": 1.0,
+        "review": "accept",
+        "kind": "reply"
+      },
+      "reply": {
+        "text": "Погнали",
+        "intent": "corpus",
+        "topic": "corpus:Язык",
+        "concepts": [],
+        "facts": [
+          "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:165"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=165; score=1.0; review=accept; kind=reply"
+        ],
+        "updates": {}
+      }
+    },
+    {
+      "question": "Какое слово противоположно слову тихо«»?",
+      "match": {
+        "text": "Громко",
+        "id": "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:168",
+        "topic": "Язык",
+        "source": "Turing-Arena-ещё-200-реплик.xlsx",
+        "row": 168,
+        "score": 1.0,
+        "review": "accept",
+        "kind": "reply"
+      },
+      "reply": {
+        "text": "Громко",
+        "intent": "corpus",
+        "topic": "corpus:Язык",
+        "concepts": [],
+        "facts": [
+          "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:168"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=168; score=1.0; review=accept; kind=reply"
+        ],
+        "updates": {}
+      }
+    },
+    {
+      "question": "Надя принесёт настолку? Илья принесёт еду?",
+      "match": {
+        "text": "Оке, всё распределили",
+        "id": "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:196:context:0",
+        "topic": "Память о вещах",
+        "source": "Turing-Arena-ещё-200-реплик.xlsx",
+        "row": 196,
+        "score": 1.0,
+        "review": "rewrite",
+        "kind": "context"
+      },
+      "reply": {
+        "text": "Оке, всё распределили",
+        "intent": "corpus",
+        "topic": "corpus:Память о вещах",
+        "concepts": [
+          "food",
+          "travel"
+        ],
+        "facts": [
+          "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:196:context:0"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=196; score=1.0; review=rewrite; kind=context"
+        ],
+        "updates": {}
+      }
+    },
+    {
+      "question": "Надя принесёт настолку, Илья принесёт еду",
+      "match": {
+        "text": "Оке, всё распределили",
+        "id": "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:196:context:0",
+        "topic": "Память о вещах",
+        "source": "Turing-Arena-ещё-200-реплик.xlsx",
+        "row": 196,
+        "score": 1.0,
+        "review": "rewrite",
+        "kind": "context"
+      },
+      "reply": {
+        "text": "Оке, всё распределили",
+        "intent": "corpus",
+        "topic": "corpus:Память о вещах",
+        "concepts": [
+          "food",
+          "travel"
+        ],
+        "facts": [
+          "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:196:context:0"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=196; score=1.0; review=rewrite; kind=context"
+        ],
+        "updates": {}
+      }
+    },
+    {
+      "dialogue": [
+        "Надя принесёт настолку? Илья принесёт еду?",
+        "Кто игру приносит, напомни?"
+      ],
+      "replies": [
+        {
+          "text": "Оке, всё распределили",
+          "intent": "corpus",
+          "topic": "corpus:Память о вещах",
+          "concepts": [
+            "food",
+            "travel"
+          ],
+          "facts": [
+            "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:196:context:0"
+          ],
+          "fallback": false,
+          "trace": [
+            "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=196; score=1.0; review=rewrite; kind=context"
+          ],
+          "updates": {}
+        },
+        {
+          "text": "Надя",
+          "intent": "corpus",
+          "topic": "corpus:Память о вещах",
+          "concepts": [],
+          "facts": [
+            "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:196"
+          ],
+          "fallback": false,
+          "trace": [
+            "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=196; score=1.01; review=rewrite; kind=reply"
+          ],
+          "updates": {}
+        }
+      ]
+    },
+    {
+      "question": "У меня три задания на завтра, не знаю за что взяться",
+      "reply": {
+        "text": "Сохрани адрес жилья и карту города заранее. Проверь, как добраться от вокзала или аэропорта.",
+        "intent": "advice",
+        "topic": "newcomer_generic",
+        "concepts": [],
+        "facts": [
+          "newcomer_generic"
+        ],
+        "fallback": false,
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=advice; topic=newcomer_generic; facts=newcomer_generic"
+        ],
+        "updates": {}
+      }
+    },
+    {
+      "question": "Я не знаю, за что взяться",
+      "reply": {
+        "text": "Сохрани адрес жилья и карту города заранее. Проверь, как добраться от вокзала или аэропорта.",
+        "intent": "advice",
+        "topic": "newcomer_generic",
+        "concepts": [],
+        "facts": [
+          "newcomer_generic"
+        ],
+        "fallback": false,
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=advice; topic=newcomer_generic; facts=newcomer_generic"
+        ],
+        "updates": {}
+      }
+    },
+    {
+      "question": "Задание трудное, не знаю, за что взяться",
+      "reply": {
+        "text": "Сохрани адрес жилья и карту города заранее. Проверь, как добраться от вокзала или аэропорта.",
+        "intent": "advice",
+        "topic": "newcomer_generic",
+        "concepts": [],
+        "facts": [
+          "newcomer_generic"
+        ],
+        "fallback": false,
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=advice; topic=newcomer_generic; facts=newcomer_generic"
+        ],
+        "updates": {}
+      }
+    },
+    {
+      "question": "Не знаю, что взять на ужин",
+      "reply": {
+        "text": "Сохрани адрес жилья и карту города заранее. Проверь, как добраться от вокзала или аэропорта.",
+        "intent": "advice",
+        "topic": "newcomer_generic",
+        "concepts": [],
+        "facts": [
+          "newcomer_generic"
+        ],
+        "fallback": false,
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=advice; topic=newcomer_generic; facts=newcomer_generic"
+        ],
+        "updates": {}
+      }
+    },
+    {
+      "question": "Что взять за основу проекта?",
+      "reply": {
+        "text": "Сохрани адрес жилья и карту города заранее. Проверь, как добраться от вокзала или аэропорта.",
+        "intent": "advice",
+        "topic": "newcomer_generic",
+        "concepts": [],
+        "facts": [
+          "newcomer_generic"
+        ],
+        "fallback": false,
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=advice; topic=newcomer_generic; facts=newcomer_generic"
+        ],
+        "updates": {}
+      }
+    },
+    {
+      "question": "Надя принесёт настолку. Илья принесёт еду",
+      "reply": {
+        "text": "Оке, всё распределили",
+        "intent": "corpus",
+        "topic": "corpus:Память о вещах",
+        "concepts": [
+          "food",
+          "travel"
+        ],
+        "facts": [
+          "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:196:context:0"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=196; score=1.0; review=rewrite; kind=context"
+        ],
+        "updates": {}
+      }
+    },
+    {
+      "question": "Исправил ошибку в проекте?",
+      "reply": {
+        "text": "Проверил запуск?",
+        "intent": "corpus",
+        "topic": "corpus:Контекст проекта",
+        "concepts": [],
+        "facts": [
+          "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:203:context:0"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=203; score=1.0; review=rewrite; kind=context"
+        ],
+        "updates": {}
+      }
+    },
+    {
+      "question": "Да, теперь всё запускается?",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      }
+    },
+    {
+      "question": "Проиграл первый раунд?",
+      "reply": {
+        "text": "Ещё раунды будут?",
+        "intent": "corpus",
+        "topic": "corpus:Продолжение игры",
+        "concepts": [
+          "newcomer"
+        ],
+        "facts": [
+          "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:182:context:0"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=182; score=1.0; review=rewrite; kind=context"
+        ],
+        "updates": {}
+      }
+    },
+    {
+      "question": "Да, ещё два?",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      }
+    },
+    {
+      "question": "Переведи I forgot «my keys»",
+      "reply": {
+        "text": "Я забыл ключи",
+        "intent": "corpus",
+        "topic": "corpus:Язык",
+        "concepts": [],
+        "facts": [
+          "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:163"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=163; score=1.0; review=accept; kind=reply"
+        ],
+        "updates": {}
+      }
+    },
+    {
+      "question": "Переведи «I forgot my keys?",
+      "reply": {
+        "text": "Я забыл ключи",
+        "intent": "corpus",
+        "topic": "corpus:Язык",
+        "concepts": [],
+        "facts": [
+          "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:163"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=163; score=1.0; review=accept; kind=reply"
+        ],
+        "updates": {}
+      }
+    },
+    {
+      "question": "Переведи I forgot my keys",
+      "reply": {
+        "text": "Я забыл ключи",
+        "intent": "corpus",
+        "topic": "corpus:Язык",
+        "concepts": [],
+        "facts": [
+          "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:163"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=163; score=1.0; review=accept; kind=reply"
+        ],
+        "updates": {}
+      }
+    }
+  ],
+  "provenance_check": {
+    "records": 350,
+    "differences": [],
+    "sources_sha256": {
+      "Turing-Arena-ещё-200-реплик.xlsx": "d5faf0bac65db0f5e48e5b1f03d7a91c476770fea66c5a1d22a8fcd1c65a2356",
+      "Turing-Arena-утверждено.xlsx": "ebdcc57e6b3cce4e755b1bd8dff57d0a0f65f18036748064453fe99087343b2a"
+    }
+  },
+  "fresh_build": {
+    "counts": {
+      "rows": 350,
+      "approved": 296,
+      "pending": 54,
+      "sources": 2,
+      "review_accepted": 233,
+      "review_rewritten": 63,
+      "review_held": 54
+    },
+    "same_bytes_as_runtime": true,
+    "sha256": "29737d8c30adb6df9e4c551cae52a883f55fac8347e20da48081f017ceee5f6a"
+  },
+  "manual_dialogues": [
+    [
+      {
+        "question": "Лена одолжила мне ручку, а я Саше тетрадь",
+        "reply": {
+          "text": "Оке",
+          "intent": "corpus",
+          "topic": "corpus:Участники разговора",
+          "concepts": [],
+          "facts": [
+            "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:193:context:0"
+          ],
+          "fallback": false,
+          "trace": [
+            "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=193; score=1.0; review=rewrite; kind=context"
+          ],
+          "updates": {}
+        }
+      },
+      {
+        "question": "Ей ещё не вернул",
+        "reply": {
+          "text": "Ручку Лене?",
+          "intent": "corpus",
+          "topic": "corpus:Участники разговора",
+          "concepts": [],
+          "facts": [
+            "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:193"
+          ],
+          "fallback": false,
+          "trace": [
+            "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=193; score=1.01; review=rewrite; kind=reply"
+          ],
+          "updates": {}
+        }
+      }
+    ],
+    [
+      {
+        "question": "Жду автобус, пешком идти далеко",
+        "reply": {
+          "text": "Давно стоишь?",
+          "intent": "corpus",
+          "topic": "corpus:Контекст поездки",
+          "concepts": [],
+          "facts": [
+            "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:177:context:0"
+          ],
+          "fallback": false,
+          "trace": [
+            "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=177; score=1.0; review=rewrite; kind=context"
+          ],
+          "updates": {}
+        }
+      },
+      {
+        "question": "О, как раз не подъехал",
+        "reply": {
+          "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+          "intent": "unknown",
+          "topic": null,
+          "concepts": [
+            "newcomer"
+          ],
+          "facts": [],
+          "fallback": true,
+          "trace": [
+            "intent=unknown; topic=None; facts="
+          ],
+          "updates": {}
+        }
+      }
+    ],
+    [
+      {
+        "question": "Жду автобус, пешком идти далеко",
+        "reply": {
+          "text": "Давно стоишь?",
+          "intent": "corpus",
+          "topic": "corpus:Контекст поездки",
+          "concepts": [],
+          "facts": [
+            "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:177:context:0"
+          ],
+          "fallback": false,
+          "trace": [
+            "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=177; score=1.0; review=rewrite; kind=context"
+          ],
+          "updates": {}
+        }
+      },
+      {
+        "question": "Совсем другая тема",
+        "reply": {
+          "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+          "intent": "unknown",
+          "topic": null,
+          "concepts": [],
+          "facts": [],
+          "fallback": true,
+          "trace": [
+            "intent=unknown; topic=None; facts="
+          ],
+          "updates": {}
+        }
+      },
+      {
+        "question": "О, как раз подъехал",
+        "reply": {
+          "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+          "intent": "unknown",
+          "topic": null,
+          "concepts": [
+            "newcomer"
+          ],
+          "facts": [],
+          "fallback": true,
+          "trace": [
+            "intent=unknown; topic=None; facts="
+          ],
+          "updates": {}
+        }
+      }
+    ],
+    [
+      {
+        "question": "Друг думает, что я обиделся, но я просто устал",
+        "reply": {
+          "text": "Ты ему это объяснил?",
+          "intent": "corpus",
+          "topic": "corpus:Учёт отрицания",
+          "concepts": [
+            "friend"
+          ],
+          "facts": [
+            "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:199:context:0"
+          ],
+          "fallback": false,
+          "trace": [
+            "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=199; score=1.0; review=rewrite; kind=context"
+          ],
+          "updates": {}
+        }
+      },
+      {
+        "question": "Пока нет, как лучше написать?",
+        "reply": {
+          "text": "Я не обиделся, просто устал. Всё нормально",
+          "intent": "corpus",
+          "topic": "corpus:Учёт отрицания",
+          "concepts": [],
+          "facts": [
+            "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:199"
+          ],
+          "fallback": false,
+          "trace": [
+            "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=199; score=1.01; review=rewrite; kind=reply"
+          ],
+          "updates": {}
+        }
+      }
+    ],
+    [
+      {
+        "question": "Надя принесёт настолку, Илья принесёт еду",
+        "reply": {
+          "text": "Оке, всё распределили",
+          "intent": "corpus",
+          "topic": "corpus:Память о вещах",
+          "concepts": [
+            "food",
+            "travel"
+          ],
+          "facts": [
+            "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:196:context:0"
+          ],
+          "fallback": false,
+          "trace": [
+            "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=196; score=1.0; review=rewrite; kind=context"
+          ],
+          "updates": {}
+        }
+      },
+      {
+        "question": "Кто игру приносит, напомни?",
+        "reply": {
+          "text": "Надя",
+          "intent": "corpus",
+          "topic": "corpus:Память о вещах",
+          "concepts": [],
+          "facts": [
+            "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:196"
+          ],
+          "fallback": false,
+          "trace": [
+            "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=196; score=1.01; review=rewrite; kind=reply"
+          ],
+          "updates": {}
+        }
+      }
+    ],
+    [
+      {
+        "question": "Надя принесёт настолку, Илья принесёт еду",
+        "reply": {
+          "text": "Оке, всё распределили",
+          "intent": "corpus",
+          "topic": "corpus:Память о вещах",
+          "concepts": [
+            "food",
+            "travel"
+          ],
+          "facts": [
+            "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:196:context:0"
+          ],
+          "fallback": false,
+          "trace": [
+            "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=196; score=1.0; review=rewrite; kind=context"
+          ],
+          "updates": {}
+        }
+      },
+      {
+        "question": "Надя не сможет, настолку принесёт Илья",
+        "reply": {
+          "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+          "intent": "unknown",
+          "topic": null,
+          "concepts": [],
+          "facts": [],
+          "fallback": true,
+          "trace": [
+            "intent=unknown; topic=None; facts="
+          ],
+          "updates": {}
+        }
+      },
+      {
+        "question": "Кто игру приносит, напомни?",
+        "reply": {
+          "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+          "intent": "unknown",
+          "topic": null,
+          "concepts": [],
+          "facts": [],
+          "fallback": true,
+          "trace": [
+            "intent=unknown; topic=None; facts="
+          ],
+          "updates": {}
+        }
+      }
+    ],
+    [
+      {
+        "question": "Как тебя зовут?",
+        "reply": {
+          "text": "Саша.",
+          "intent": "identity",
+          "topic": null,
+          "concepts": [],
+          "facts": [
+            "name"
+          ],
+          "fallback": false,
+          "trace": [
+            "intent=identity; topic=None; facts=name"
+          ],
+          "updates": {}
+        }
+      },
+      {
+        "question": "Чай или кофе?",
+        "reply": {
+          "text": "Я бы выбрал чай.",
+          "intent": "choice",
+          "topic": "tea",
+          "concepts": [
+            "tea",
+            "coffee"
+          ],
+          "facts": [
+            "likes_tea"
+          ],
+          "fallback": false,
+          "trace": [
+            "intent=choice; topic=tea; facts=likes_tea"
+          ],
+          "updates": {}
+        }
+      },
+      {
+        "question": "Любишь дождь?",
+        "reply": {
+          "text": "Я люблю дождь.",
+          "intent": "preference",
+          "topic": "rain",
+          "concepts": [
+            "rain"
+          ],
+          "facts": [
+            "likes_rain"
+          ],
+          "fallback": false,
+          "trace": [
+            "intent=preference; topic=rain; facts=likes_rain"
+          ],
+          "updates": {}
+        }
+      },
+      {
+        "question": "Почему?",
+        "reply": {
+          "text": "Люблю слушать, как дождь стучит по окну.",
+          "intent": "reason",
+          "topic": "rain",
+          "concepts": [],
+          "facts": [
+            "likes_rain"
+          ],
+          "fallback": false,
+          "trace": [
+            "intent=reason; topic=rain; facts=likes_rain"
+          ],
+          "updates": {}
+        }
+      },
+      {
+        "question": "Ты точно любишь кофе?",
+        "reply": {
+          "text": "Я не очень люблю кофе.",
+          "intent": "preference",
+          "topic": "coffee",
+          "concepts": [
+            "coffee"
+          ],
+          "facts": [
+            "likes_coffee"
+          ],
+          "fallback": false,
+          "trace": [
+            "intent=preference; topic=coffee; facts=likes_coffee"
+          ],
+          "updates": {}
+        }
+      }
+    ],
+    [
+      {
+        "question": "Меня зовут Лада.",
+        "reply": {
+          "text": "Приятно познакомиться, Лада.",
+          "intent": "acknowledgment",
+          "topic": null,
+          "concepts": [],
+          "facts": [],
+          "fallback": false,
+          "trace": [
+            "intent=acknowledgment; topic=None; facts="
+          ],
+          "updates": {
+            "user_name": "Лада"
+          }
+        }
+      },
+      {
+        "question": "Нет, меня зовут Вера.",
+        "reply": {
+          "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+          "intent": "unknown",
+          "topic": null,
+          "concepts": [],
+          "facts": [],
+          "fallback": true,
+          "trace": [
+            "intent=unknown; topic=None; facts="
+          ],
+          "updates": {}
+        }
+      },
+      {
+        "question": "Как меня зовут?",
+        "reply": {
+          "text": "Ты представился как Лада.",
+          "intent": "recall",
+          "topic": null,
+          "concepts": [],
+          "facts": [],
+          "fallback": false,
+          "trace": [
+            "intent=recall; topic=None; facts="
+          ],
+          "updates": {}
+        }
+      }
+    ]
+  ],
+  "empty_and_long": [
+    {
+      "input_repr": "''",
+      "input_length": 0,
+      "reply": {
+        "text": "Кажется, вопрос не дошёл. Повторишь?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "ms": 12.544
+    },
+    {
+      "input_repr": "'\\n'",
+      "input_length": 1,
+      "reply": {
+        "text": "Кажется, вопрос не дошёл. Повторишь?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "ms": 12.086
+    },
+    {
+      "input_repr": "'\\t'",
+      "input_length": 1,
+      "reply": {
+        "text": "Кажется, вопрос не дошёл. Повторишь?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "ms": 12.349
+    },
+    {
+      "input_repr": "'\\x1b[31m'",
+      "input_length": 5,
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "ms": 12.971
+    },
+    {
+      "input_repr": "'😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀'",
+      "input_length": 5000,
+      "reply": {
+        "text": "Столько всего сразу не разберу. Можешь задать вопрос покороче?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "ms": 33.161
+    },
+    {
+      "input_repr": "'яяяяяяяяяяяяяяяяяяяяяяяяяяяяяя'",
+      "input_length": 50000,
+      "reply": {
+        "text": "Столько всего сразу не разберу. Можешь задать вопрос покороче?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "ms": 32.04
+    }
+  ],
+  "real_cli_manual": [
+    {
+      "argv": [
+        "--ask",
+        "Переведи I forgot «my keys»",
+        "--json"
+      ],
+      "stdin": null,
+      "exit_code": 0,
+      "wall_seconds": 0.4895,
+      "stdout": "{\"text\": \"Я забыл ключи\", \"intent\": \"corpus\", \"topic\": \"corpus:Язык\", \"fallback\": false, \"concepts\": [], \"facts\": [\"e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:163\"], \"trace\": [\"corpus=Turing-Arena-ещё-200-реплик.xlsx; row=163; score=1.0; review=accept; kind=reply\"], \"updates\": {}, \"status\": \"ok\", \"target_seconds\": 0, \"duplicate\": false, \"elapsed\": 0.28100000001722947}\n",
+      "stderr": "Время до выдачи: 0.281 с; символов: 13; статус: ok\n"
+    },
+    {
+      "argv": [
+        "--ask",
+        "У меня три задания на завтра, не знаю за что взяться",
+        "--json"
+      ],
+      "stdin": null,
+      "exit_code": 0,
+      "wall_seconds": 1.3318,
+      "stdout": "{\"text\": \"Сохрани адрес жилья и карту города заранее. Проверь, как добраться от вокзала или аэропорта.\", \"intent\": \"advice\", \"topic\": \"newcomer_generic\", \"fallback\": false, \"concepts\": [], \"facts\": [\"newcomer_generic\"], \"trace\": [\"Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.\", \"intent=advice; topic=newcomer_generic; facts=newcomer_generic\"], \"updates\": {}, \"status\": \"ok\", \"target_seconds\": 0, \"duplicate\": false, \"elapsed\": 0.23399999999674037}\n",
+      "stderr": "Время до выдачи: 0.234 с; символов: 92; статус: ok\n"
+    },
+    {
+      "argv": [
+        "--chat",
+        "--json"
+      ],
+      "stdin": "Надя принесёт настолку? Илья принесёт еду?\nКто игру приносит, напомни?\n",
+      "exit_code": 0,
+      "wall_seconds": 2.5357,
+      "stdout": "{\"text\": \"Оке, всё распределили\", \"intent\": \"corpus\", \"topic\": \"corpus:Память о вещах\", \"fallback\": false, \"concepts\": [\"food\", \"travel\"], \"facts\": [\"e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:196:context:0\"], \"trace\": [\"corpus=Turing-Arena-ещё-200-реплик.xlsx; row=196; score=1.0; review=rewrite; kind=context\"], \"updates\": {}, \"status\": \"ok\", \"target_seconds\": 0, \"duplicate\": false, \"elapsed\": 0.26500000001396984}\n{\"text\": \"Надя\", \"intent\": \"corpus\", \"topic\": \"corpus:Память о вещах\", \"fallback\": false, \"concepts\": [], \"facts\": [\"e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:196\"], \"trace\": [\"corpus=Turing-Arena-ещё-200-реплик.xlsx; row=196; score=1.01; review=rewrite; kind=reply\"], \"updates\": {}, \"status\": \"ok\", \"target_seconds\": 0, \"duplicate\": false, \"elapsed\": 1.125}\n",
+      "stderr": "Вопрос: Время до выдачи: 0.265 с; символов: 21; статус: ok\nВопрос: Время до выдачи: 1.125 с; символов: 4; статус: ok\nВопрос: "
+    },
+    {
+      "argv": [
+        "--chat",
+        "--json"
+      ],
+      "stdin": "Жду автобус, пешком идти далеко\nО, как раз подъехал\n",
+      "exit_code": 0,
+      "wall_seconds": 1.6022,
+      "stdout": "{\"text\": \"Давно стоишь?\", \"intent\": \"corpus\", \"topic\": \"corpus:Контекст поездки\", \"fallback\": false, \"concepts\": [], \"facts\": [\"e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:177:context:0\"], \"trace\": [\"corpus=Turing-Arena-ещё-200-реплик.xlsx; row=177; score=1.0; review=rewrite; kind=context\"], \"updates\": {}, \"status\": \"ok\", \"target_seconds\": 0, \"duplicate\": false, \"elapsed\": 0.26600000000325963}\n{\"text\": \"О, дождался\", \"intent\": \"corpus\", \"topic\": \"corpus:Контекст поездки\", \"fallback\": false, \"concepts\": [\"newcomer\"], \"facts\": [\"e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:177\"], \"trace\": [\"corpus=Turing-Arena-ещё-200-реплик.xlsx; row=177; score=1.01; review=rewrite; kind=reply\"], \"updates\": {}, \"status\": \"ok\", \"target_seconds\": 0, \"duplicate\": false, \"elapsed\": 1.125}\n",
+      "stderr": "Вопрос: Время до выдачи: 0.266 с; символов: 13; статус: ok\nВопрос: Время до выдачи: 1.125 с; символов: 11; статус: ok\nВопрос: "
+    }
+  ],
+  "additional_families": {
+    "note": "New independent local probes; curated by auditor, not viewer blind trial; assessed by full reply, fact marker alone does not prove quality",
+    "before_sha256": {
+      "arena/engine.py": "feac4b6759fd4d200b7b7b707c9860c22e136b8b86b197e7fa9671cc9d87ccd5",
+      "arena/corpus.py": "42753b49e1939b15c50903314515f2ac9cad461c84c6cb493d366b934789ab56"
+    },
+    "after_sha256": {
+      "arena/engine.py": "feac4b6759fd4d200b7b7b707c9860c22e136b8b86b197e7fa9671cc9d87ccd5",
+      "arena/corpus.py": "42753b49e1939b15c50903314515f2ac9cad461c84c6cb493d366b934789ab56"
+    },
+    "rows": [
+      {
+        "id": "E1",
+        "question": "Почему радуга возникает при сочетании дождя и солнечного света?",
+        "expected_fact": "rainbow_cause",
+        "reply": {
+          "text": "Солнечный свет попадает в капли воды, преломляется и отражается внутри них. При этом свет разделяется на разные цвета.",
+          "intent": "explanation",
+          "topic": "rainbow",
+          "concepts": [
+            "rainbow",
+            "rain",
+            "sunlight"
+          ],
+          "facts": [
+            "rainbow_cause"
+          ],
+          "fallback": false,
+          "trace": [
+            "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+            "intent=explanation; topic=rainbow; facts=rainbow_cause"
+          ],
+          "updates": {}
+        },
+        "fact_matches": true
+      },
+      {
+        "id": "E2",
+        "question": "Объясни появление радуги в небе школьнику.",
+        "expected_fact": "rainbow_cause",
+        "reply": {
+          "text": "Солнечный свет попадает в капли воды, преломляется и отражается внутри них. При этом свет разделяется на разные цвета.",
+          "intent": "explanation",
+          "topic": "rainbow",
+          "concepts": [
+            "rainbow",
+            "sky"
+          ],
+          "facts": [
+            "rainbow_cause"
+          ],
+          "fallback": false,
+          "trace": [
+            "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+            "intent=explanation; topic=rainbow; facts=rainbow_cause"
+          ],
+          "updates": {}
+        },
+        "fact_matches": true
+      },
+      {
+        "id": "E3",
+        "question": "Как солнечные лучи создают радугу в каплях воды?",
+        "expected_fact": "rainbow_cause",
+        "reply": {
+          "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+          "intent": "unknown",
+          "topic": null,
+          "concepts": [
+            "rainbow",
+            "water_drops",
+            "water"
+          ],
+          "facts": [],
+          "fallback": true,
+          "trace": [
+            "intent=unknown; topic=None; facts="
+          ],
+          "updates": {}
+        },
+        "fact_matches": false
+      },
+      {
+        "id": "E4",
+        "question": "Почему радуги может не быть после дождя?",
+        "expected_fact": "rainbow_conditions",
+        "reply": {
+          "text": "Ты спрашиваешь, как появляется радуга, или о чём-то другом?",
+          "intent": "unknown",
+          "topic": null,
+          "concepts": [
+            "rainbow",
+            "rain"
+          ],
+          "facts": [],
+          "fallback": true,
+          "trace": [
+            "intent=unknown; topic=None; facts="
+          ],
+          "updates": {}
+        },
+        "fact_matches": false
+      },
+      {
+        "id": "E5",
+        "question": "Почему у радуги видны разные цвета?",
+        "expected_fact": "rainbow_colors",
+        "reply": {
+          "text": "Белый солнечный свет состоит из разных цветов. В каплях воды они преломляются по-разному и разделяются.",
+          "intent": "explanation",
+          "topic": "rainbow",
+          "concepts": [
+            "rainbow",
+            "colors"
+          ],
+          "facts": [
+            "rainbow_colors"
+          ],
+          "fallback": false,
+          "trace": [
+            "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+            "intent=explanation; topic=rainbow; facts=rainbow_colors"
+          ],
+          "updates": {}
+        },
+        "fact_matches": true
+      },
+      {
+        "id": "A1",
+        "question": "В феврале впервые буду в Астане. Как подготовиться к прогулке?",
+        "expected_fact": "astana_winter",
+        "reply": {
+          "text": "В Астане зимой бывает очень холодно. Возьми тёплую одежду, шапку и перчатки.",
+          "intent": "advice",
+          "topic": "astana_winter",
+          "concepts": [
+            "newcomer",
+            "astana",
+            "walk"
+          ],
+          "facts": [
+            "astana_winter",
+            "winter_city"
+          ],
+          "fallback": false,
+          "trace": [
+            "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+            "intent=advice; topic=astana_winter; facts=astana_winter,winter_city"
+          ],
+          "updates": {}
+        },
+        "fact_matches": true
+      },
+      {
+        "id": "A2",
+        "question": "На зимние каникулы лечу в Астану, подскажи одежду.",
+        "expected_fact": "astana_winter",
+        "reply": {
+          "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+          "intent": "unknown",
+          "topic": null,
+          "concepts": [
+            "astana",
+            "warm_clothes"
+          ],
+          "facts": [],
+          "fallback": true,
+          "trace": [
+            "intent=unknown; topic=None; facts="
+          ],
+          "updates": {}
+        },
+        "fact_matches": false
+      },
+      {
+        "id": "A3",
+        "question": "Мне предстоит первая поездка в холодную Астану. Что брать из одежды?",
+        "expected_fact": "astana_winter",
+        "reply": {
+          "text": "В Астане зимой бывает очень холодно. Возьми тёплую одежду, шапку и перчатки.",
+          "intent": "advice",
+          "topic": "astana_winter",
+          "concepts": [
+            "travel",
+            "cold",
+            "astana"
+          ],
+          "facts": [
+            "astana_winter",
+            "winter_city"
+          ],
+          "fallback": false,
+          "trace": [
+            "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+            "intent=advice; topic=astana_winter; facts=astana_winter,winter_city"
+          ],
+          "updates": {}
+        },
+        "fact_matches": true
+      },
+      {
+        "id": "A4",
+        "question": "Астана в июле: посоветуй вещи для прогулки.",
+        "expected_fact": "summer_city",
+        "reply": {
+          "text": "Сохрани адрес жилья и карту города заранее. Проверь, как добраться от вокзала или аэропорта.",
+          "intent": "advice",
+          "topic": "newcomer_generic",
+          "concepts": [
+            "astana",
+            "walk"
+          ],
+          "facts": [
+            "newcomer_generic"
+          ],
+          "fallback": false,
+          "trace": [
+            "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+            "intent=advice; topic=newcomer_generic; facts=newcomer_generic"
+          ],
+          "updates": {}
+        },
+        "fact_matches": false
+      },
+      {
+        "id": "A5",
+        "question": "Собираюсь в Астану в январе. Какую одежду посоветуешь?",
+        "expected_fact": "astana_winter",
+        "reply": {
+          "text": "В Астане зимой бывает очень холодно. Возьми тёплую одежду, шапку и перчатки.",
+          "intent": "advice",
+          "topic": "astana_winter",
+          "concepts": [
+            "astana",
+            "warm_clothes"
+          ],
+          "facts": [
+            "astana_winter",
+            "winter_city"
+          ],
+          "fallback": false,
+          "trace": [
+            "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+            "intent=advice; topic=astana_winter; facts=astana_winter,winter_city"
+          ],
+          "updates": {}
+        },
+        "fact_matches": true
+      },
+      {
+        "id": "S1",
+        "question": "Мой приятель задержался на 30 минут и попросил прощения. Как ему ответить?",
+        "expected_fact": "late_apology",
+        "reply": {
+          "text": "За другого человека не скажу. Лучше спросить у него самого.",
+          "intent": "unknown",
+          "topic": null,
+          "concepts": [
+            "friend",
+            "late",
+            "time",
+            "apology"
+          ],
+          "facts": [],
+          "fallback": true,
+          "trace": [
+            "intent=unknown; topic=None; facts="
+          ],
+          "updates": {}
+        },
+        "fact_matches": false
+      },
+      {
+        "id": "S2",
+        "question": "Подруга опоздала к назначенному времени, но извинилась. Что написать?",
+        "expected_fact": "late_apology",
+        "reply": {
+          "text": "Ничего, бывает. В следующий раз напиши заранее, если задерживаешься.",
+          "intent": "social",
+          "topic": "late_apology",
+          "concepts": [
+            "friend",
+            "late",
+            "apology"
+          ],
+          "facts": [
+            "late_apology"
+          ],
+          "fallback": false,
+          "trace": [
+            "event=late; actor=other; apology=True",
+            "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+            "intent=social; topic=late_apology; facts=late_apology"
+          ],
+          "updates": {}
+        },
+        "fact_matches": true
+      },
+      {
+        "id": "S3",
+        "question": "Человек опоздал, извинения принёс. Как отреагировать?",
+        "expected_fact": "late_apology",
+        "reply": {
+          "text": "Ничего, бывает. В следующий раз напиши заранее, если задерживаешься.",
+          "intent": "social",
+          "topic": "late_apology",
+          "concepts": [
+            "late",
+            "apology"
+          ],
+          "facts": [
+            "late_apology"
+          ],
+          "fallback": false,
+          "trace": [
+            "event=late; actor=other; apology=True",
+            "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+            "intent=social; topic=late_apology; facts=late_apology"
+          ],
+          "updates": {}
+        },
+        "fact_matches": true
+      },
+      {
+        "id": "S4",
+        "question": "Друг опоздал на час и прощения не попросил. Что ему сказать?",
+        "expected_fact": "late_no_apology",
+        "reply": {
+          "text": "Мне было неприятно ждать без предупреждения. Скажи, что случилось.",
+          "intent": "social",
+          "topic": "late_no_apology",
+          "concepts": [
+            "friend",
+            "late",
+            "time",
+            "apology"
+          ],
+          "facts": [
+            "late_no_apology"
+          ],
+          "fallback": false,
+          "trace": [
+            "event=late; actor=other; apology=False",
+            "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+            "intent=social; topic=late_no_apology; facts=late_no_apology"
+          ],
+          "updates": {}
+        },
+        "fact_matches": true
+      },
+      {
+        "id": "S5",
+        "question": "На встречу опоздал я. Что мне написать человеку, который ждал?",
+        "expected_fact": "self_late",
+        "reply": {
+          "text": "Извини, что заставил ждать. Нужно было предупредить заранее.",
+          "intent": "social",
+          "topic": "self_late",
+          "concepts": [
+            "meeting",
+            "late"
+          ],
+          "facts": [
+            "self_late"
+          ],
+          "fallback": false,
+          "trace": [
+            "event=late; actor=self; apology=False",
+            "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+            "intent=social; topic=self_late; facts=self_late"
+          ],
+          "updates": {}
+        },
+        "fact_matches": true
+      }
+    ]
+  },
+  "scale_10000_rows": {
+    "method": "Temporary SQLite backup expanded from 350 to 10000 records by copying active reviewed records with distinct IDs. Synthetic load, not content quality/new provenance validation",
+    "runs": [
+      {
+        "question": "Не могу найти ключи, хотя точно принёс их домой",
+        "wall_seconds": 1.1942,
+        "exit_code": 0,
+        "stdout": "{\"text\": \"В карманах и сумке смотрел?\", \"intent\": \"corpus\", \"topic\": \"corpus:Дом\", \"fallback\": false, \"concepts\": [], \"facts\": [\"e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:7\"], \"trace\": [\"corpus=Turing-Arena-ещё-200-реплик.xlsx; row=7; score=1.0; review=accept; kind=reply\"], \"updates\": {}, \"status\": \"ok\", \"target_seconds\": 0, \"duplicate\": false, \"elapsed\": 0.625}\n",
+        "stderr": "Время до выдачи: 0.625 с; символов: 27; статус: ok\n"
+      },
+      {
+        "question": "Жду автобус, пешком идти далеко",
+        "wall_seconds": 2.0657,
+        "exit_code": 0,
+        "stdout": "{\"text\": \"Давно стоишь?\", \"intent\": \"corpus\", \"topic\": \"corpus:Контекст поездки\", \"fallback\": false, \"concepts\": [], \"facts\": [\"e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:177:context:0\"], \"trace\": [\"corpus=Turing-Arena-ещё-200-реплик.xlsx; row=177; score=1.0; review=rewrite; kind=context\"], \"updates\": {}, \"status\": \"ok\", \"target_seconds\": 0, \"duplicate\": false, \"elapsed\": 0.5940000000409782}\n",
+        "stderr": "Время до выдачи: 0.594 с; символов: 13; статус: ok\n"
+      },
+      {
+        "question": "У меня совсем другая ситуация",
+        "wall_seconds": 2.0841,
+        "exit_code": 0,
+        "stdout": "{\"text\": \"Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?\", \"intent\": \"unknown\", \"topic\": null, \"fallback\": true, \"concepts\": [], \"facts\": [], \"trace\": [\"intent=unknown; topic=None; facts=\"], \"updates\": {}, \"status\": \"ok\", \"target_seconds\": 0, \"duplicate\": false, \"elapsed\": 0.5939999999827705}\n",
+        "stderr": "Время до выдачи: 0.594 с; символов: 73; статус: ok\n"
+      }
+    ]
+  },
+  "baseline_runs": {
+    "unittest": {
+      "command": "python -X utf8 -m unittest discover -s tests -v",
+      "exit_code": 0,
+      "tests": 68,
+      "seconds": 19.686
+    },
+    "evaluate_reviewed": {
+      "command": "python -X utf8 scripts/evaluate_reviewed.py",
+      "exit_code": 0,
+      "records": 350,
+      "errors": [],
+      "actual_dialogues": 28,
+      "matching_targets": 28,
+      "max_prepare_ms": 31.771,
+      "routes": {
+        "corpus": 292,
+        "choice": 1,
+        "identity": 1,
+        "recall": 2,
+        "unknown": 45,
+        "preference": 3,
+        "advice": 1,
+        "math": 4,
+        "text": 1
+      },
+      "cli_wall_seconds": [
+        0.5415,
+        1.3358,
+        1.3667,
+        1.4005
+      ]
+    },
+    "benchmark": {
+      "command": "python -X utf8 scripts/benchmark.py --count 1000 --corpus data/dialogue.sqlite3",
+      "exit_code": 0,
+      "errors": [],
+      "p50_prepare_ms": 3.168,
+      "p95_prepare_ms": 14.755,
+      "max_prepare_ms": 30.559,
+      "history_size": 32
+    }
+  },
+  "findings": [
+    {
+      "id": "V3-01",
+      "location_at_baseline": "arena/corpus.py:24,137",
+      "status": "closed on tested followup; initial reproduction preserved",
+      "fact": "literal quote boundaries removed; Переведи I forgot «my keys» -> Я забыл ключи"
+    },
+    {
+      "id": "V3-02",
+      "location_at_baseline": "arena/corpus.py:24,36,46,74",
+      "status": "closed on tested followup; initial reproduction preserved",
+      "fact": "Надя принесёт настолку? Илья принесёт еду? -> Оке, всё распределили -> Кто игру приносит, напомни? -> Надя"
+    },
+    {
+      "id": "V3-03",
+      "location_at_baseline": "arena/engine.py:205,256; scripts/evaluate_reviewed.py:54",
+      "status": "closed on tested followup; initial reproduction preserved",
+      "fact": "reviewed active #62 returns travel advice; evaluate_reviewed exit0"
+    },
+    {
+      "id": "V3-04",
+      "location_at_baseline": "arena/engine.py:269,274,283; docs/pipeline/plan.md:124",
+      "status": "unresolved coverage; outside narrow T07",
+      "fact": "independent family examples E3/5 A3/5 S4/5"
+    },
+    {
+      "id": "V3-05",
+      "location_at_baseline": "arena/engine.py:178",
+      "status": "previously known T05; reproduced unchanged",
+      "fact": "Нет, меня зовут Вера. does not correct Лада"
+    }
+  ],
+  "followup": {
+    "sha256": {
+      "arena/corpus.py": "154efd315969b58b8a9d94c49d36e58360940013ce132228f4b661fd24562789",
+      "arena/engine.py": "a3692ca42c53dc787318334431422ebf4590b4dea74033b25c9971ae6fa8b1b9",
+      "arena/runtime.py": "a1422e40ad5d021572b08e172a0191e8af42cc0ee55caff7c221df4fb2ec808b",
+      "arena/corpus_import.py": "436f7de4401c9c0fc38cf8be59225bc5b75da9a856352e81a09c7fd4c0ecb367",
+      "main.py": "c4d14533fa9c73ebb4bf25601eb6de47813458664c4dbd7e35f66245a2bd63c9",
+      "data/corpus_review.json": "08e19197d53925fe1db48c14695eae8988eb27442283dfbd011240f7046290cc",
+      "data/dialogue.sqlite3": "29737d8c30adb6df9e4c551cae52a883f55fac8347e20da48081f017ceee5f6a",
+      "scripts/evaluate_reviewed.py": "7e8cd71916a871fd1857ae2ea5810ad775e56a7b0d556cb229e08dec74bfcae9"
+    },
+    "manual": [
+      {
+        "question": "Переведи I forgot «my keys»",
+        "reply": {
+          "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+          "intent": "unknown",
+          "topic": null,
+          "concepts": [],
+          "facts": [],
+          "fallback": true,
+          "trace": [
+            "intent=unknown; topic=None; facts="
+          ],
+          "updates": {}
+        }
+      },
+      {
+        "question": "Переведи «I forgot my» keys",
+        "reply": {
+          "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+          "intent": "unknown",
+          "topic": null,
+          "concepts": [],
+          "facts": [],
+          "fallback": true,
+          "trace": [
+            "intent=unknown; topic=None; facts="
+          ],
+          "updates": {}
+        }
+      },
+      {
+        "question": "Как по-простому перевести Let's «go»?",
+        "reply": {
+          "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+          "intent": "unknown",
+          "topic": null,
+          "concepts": [],
+          "facts": [],
+          "fallback": true,
+          "trace": [
+            "intent=unknown; topic=None; facts="
+          ],
+          "updates": {}
+        }
+      },
+      {
+        "question": "Переведи «I forgot my keys»",
+        "reply": {
+          "text": "Я забыл ключи",
+          "intent": "corpus",
+          "topic": "corpus:Язык",
+          "concepts": [],
+          "facts": [
+            "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:163"
+          ],
+          "fallback": false,
+          "trace": [
+            "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=163; score=1.0; review=accept; kind=reply"
+          ],
+          "updates": {}
+        }
+      },
+      {
+        "question": "Переведи \"I forgot my keys\"",
+        "reply": {
+          "text": "Я забыл ключи",
+          "intent": "corpus",
+          "topic": "corpus:Язык",
+          "concepts": [],
+          "facts": [
+            "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:163"
+          ],
+          "fallback": false,
+          "trace": [
+            "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=163; score=1.0; review=accept; kind=reply"
+          ],
+          "updates": {}
+        }
+      },
+      {
+        "question": "Переведи «I forgot my keys?",
+        "reply": {
+          "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+          "intent": "unknown",
+          "topic": null,
+          "concepts": [],
+          "facts": [],
+          "fallback": true,
+          "trace": [
+            "intent=unknown; topic=None; facts="
+          ],
+          "updates": {}
+        }
+      },
+      {
+        "question": "У меня три задания на завтра, не знаю за что взяться",
+        "reply": {
+          "text": "А какое быстрее всего сделать?",
+          "intent": "corpus",
+          "topic": "corpus:Учёба",
+          "concepts": [],
+          "facts": [
+            "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:68"
+          ],
+          "fallback": false,
+          "trace": [
+            "corpus=Turing-Arena-утверждено.xlsx; row=68; score=1.0; review=accept; kind=reply"
+          ],
+          "updates": {}
+        }
+      },
+      {
+        "question": "Я не знаю, за что взяться",
+        "reply": {
+          "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+          "intent": "unknown",
+          "topic": null,
+          "concepts": [],
+          "facts": [],
+          "fallback": true,
+          "trace": [
+            "intent=unknown; topic=None; facts="
+          ],
+          "updates": {}
+        }
+      },
+      {
+        "question": "Что сейчас слушаешь?",
+        "reply": {
+          "text": "Сейчас ничего. А что предложишь?",
+          "intent": "corpus",
+          "topic": "corpus:Интересы",
+          "concepts": [],
+          "facts": [
+            "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:59"
+          ],
+          "fallback": false,
+          "trace": [
+            "corpus=Turing-Arena-утверждено.xlsx; row=59; score=1.0; review=accept; kind=reply"
+          ],
+          "updates": {}
+        }
+      },
+      {
+        "dialogue": [
+          {
+            "question": "Надя принесёт настолку? Илья принесёт еду?",
+            "reply": {
+              "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+              "intent": "unknown",
+              "topic": null,
+              "concepts": [
+                "food",
+                "travel"
+              ],
+              "facts": [],
+              "fallback": true,
+              "trace": [
+                "intent=unknown; topic=None; facts="
+              ],
+              "updates": {}
+            }
+          },
+          {
+            "question": "Кто игру приносит, напомни?",
+            "reply": {
+              "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+              "intent": "unknown",
+              "topic": null,
+              "concepts": [],
+              "facts": [],
+              "fallback": true,
+              "trace": [
+                "intent=unknown; topic=None; facts="
+              ],
+              "updates": {}
+            }
+          }
+        ]
+      },
+      {
+        "dialogue": [
+          {
+            "question": "Надя принесёт настолку, Илья принесёт еду",
+            "reply": {
+              "text": "Оке, всё распределили",
+              "intent": "corpus",
+              "topic": "corpus:Память о вещах",
+              "concepts": [
+                "food",
+                "travel"
+              ],
+              "facts": [
+                "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:196:context:0"
+              ],
+              "fallback": false,
+              "trace": [
+                "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=196; score=1.0; review=rewrite; kind=context"
+              ],
+              "updates": {}
+            }
+          },
+          {
+            "question": "Кто игру приносит, напомни?",
+            "reply": {
+              "text": "Надя",
+              "intent": "corpus",
+              "topic": "corpus:Память о вещах",
+              "concepts": [],
+              "facts": [
+                "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:196"
+              ],
+              "fallback": false,
+              "trace": [
+                "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=196; score=1.01; review=rewrite; kind=reply"
+              ],
+              "updates": {}
+            }
+          }
+        ]
+      },
+      {
+        "dialogue": [
+          {
+            "question": "Жду автобус, пешком идти далеко",
+            "reply": {
+              "text": "Давно стоишь?",
+              "intent": "corpus",
+              "topic": "corpus:Контекст поездки",
+              "concepts": [],
+              "facts": [
+                "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:177:context:0"
+              ],
+              "fallback": false,
+              "trace": [
+                "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=177; score=1.0; review=rewrite; kind=context"
+              ],
+              "updates": {}
+            }
+          },
+          {
+            "question": "О, как раз подъехал",
+            "reply": {
+              "text": "О, дождался",
+              "intent": "corpus",
+              "topic": "corpus:Контекст поездки",
+              "concepts": [
+                "newcomer"
+              ],
+              "facts": [
+                "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:177"
+              ],
+              "fallback": false,
+              "trace": [
+                "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=177; score=1.01; review=rewrite; kind=reply"
+              ],
+              "updates": {}
+            }
+          }
+        ]
+      },
+      {
+        "dialogue": [
+          {
+            "question": "Жду автобус, пешком идти далеко",
+            "reply": {
+              "text": "Давно стоишь?",
+              "intent": "corpus",
+              "topic": "corpus:Контекст поездки",
+              "concepts": [],
+              "facts": [
+                "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c:177:context:0"
+              ],
+              "fallback": false,
+              "trace": [
+                "corpus=Turing-Arena-ещё-200-реплик.xlsx; row=177; score=1.0; review=rewrite; kind=context"
+              ],
+              "updates": {}
+            }
+          },
+          {
+            "question": "Совсем другая тема",
+            "reply": {
+              "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+              "intent": "unknown",
+              "topic": null,
+              "concepts": [],
+              "facts": [],
+              "fallback": true,
+              "trace": [
+                "intent=unknown; topic=None; facts="
+              ],
+              "updates": {}
+            }
+          },
+          {
+            "question": "О, как раз подъехал",
+            "reply": {
+              "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+              "intent": "unknown",
+              "topic": null,
+              "concepts": [
+                "newcomer"
+              ],
+              "facts": [],
+              "fallback": true,
+              "trace": [
+                "intent=unknown; topic=None; facts="
+              ],
+              "updates": {}
+            }
+          }
+        ]
+      }
+    ],
+    "cli": [
+      {
+        "argv": [
+          "--ask",
+          "Переведи I forgot «my keys»",
+          "--json"
+        ],
+        "stdin": null,
+        "exit_code": 0,
+        "stdout": "{\"text\": \"Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?\", \"intent\": \"unknown\", \"topic\": null, \"fallback\": true, \"concepts\": [], \"facts\": [], \"trace\": [\"intent=unknown; topic=None; facts=\"], \"updates\": {}, \"status\": \"ok\", \"target_seconds\": 0, \"duplicate\": false, \"elapsed\": 0.31299999996554106}\n",
+        "stderr": "Время до выдачи: 0.313 с; символов: 73; статус: ok\n",
+        "wall_seconds": 1.4977
+      },
+      {
+        "argv": [
+          "--ask",
+          "У меня три задания на завтра, не знаю за что взяться",
+          "--json"
+        ],
+        "stdin": null,
+        "exit_code": 0,
+        "stdout": "{\"text\": \"А какое быстрее всего сделать?\", \"intent\": \"corpus\", \"topic\": \"corpus:Учёба\", \"fallback\": false, \"concepts\": [], \"facts\": [\"070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:68\"], \"trace\": [\"corpus=Turing-Arena-утверждено.xlsx; row=68; score=1.0; review=accept; kind=reply\"], \"updates\": {}, \"status\": \"ok\", \"target_seconds\": 0, \"duplicate\": false, \"elapsed\": 0.28100000001722947}\n",
+        "stderr": "Время до выдачи: 0.281 с; символов: 30; статус: ok\n",
+        "wall_seconds": 1.3945
+      },
+      {
+        "argv": [
+          "--chat",
+          "--json"
+        ],
+        "stdin": "Надя принесёт настолку? Илья принесёт еду?\nКто игру приносит, напомни?\n",
+        "exit_code": 0,
+        "stdout": "{\"text\": \"Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?\", \"intent\": \"unknown\", \"topic\": null, \"fallback\": true, \"concepts\": [\"food\", \"travel\"], \"facts\": [], \"trace\": [\"intent=unknown; topic=None; facts=\"], \"updates\": {}, \"status\": \"ok\", \"target_seconds\": 0, \"duplicate\": false, \"elapsed\": 0.2970000000204891}\n{\"text\": \"Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?\", \"intent\": \"unknown\", \"topic\": null, \"fallback\": true, \"concepts\": [], \"facts\": [], \"trace\": [\"intent=unknown; topic=None; facts=\"], \"updates\": {}, \"status\": \"ok\", \"target_seconds\": 0, \"duplicate\": false, \"elapsed\": 1.125}\n",
+        "stderr": "Вопрос: Время до выдачи: 0.297 с; символов: 73; статус: ok\nВопрос: Время до выдачи: 1.125 с; символов: 73; статус: ok\nВопрос: ",
+        "wall_seconds": 2.5708
+      }
+    ],
+    "unittest": {
+      "command": "python -X utf8 -m unittest discover -s tests -v",
+      "exit_code": 0,
+      "tests": 71,
+      "seconds": 21.403
+    },
+    "evaluate_reviewed": {
+      "command": "python -X utf8 scripts/evaluate_reviewed.py",
+      "exit_code": 0,
+      "records": 350,
+      "errors": [],
+      "routes": {
+        "corpus": 294,
+        "choice": 1,
+        "identity": 1,
+        "recall": 2,
+        "unknown": 45,
+        "preference": 2,
+        "math": 4,
+        "text": 1
+      },
+      "max_prepare_ms": 26.207,
+      "actual_dialogues": 28,
+      "matching_targets": 28,
+      "cli_wall_seconds": [
+        0.5191,
+        1.3407,
+        1.3643,
+        1.4029
+      ]
+    },
+    "additional_family_regression": [
+      {
+        "id": "E1",
+        "reply": {
+          "text": "Солнечный свет попадает в капли воды, преломляется и отражается внутри них. При этом свет разделяется на разные цвета.",
+          "intent": "explanation",
+          "topic": "rainbow",
+          "concepts": [
+            "rainbow",
+            "rain",
+            "sunlight"
+          ],
+          "facts": [
+            "rainbow_cause"
+          ],
+          "fallback": false,
+          "trace": [
+            "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+            "intent=explanation; topic=rainbow; facts=rainbow_cause"
+          ],
+          "updates": {}
+        },
+        "matches": true
+      },
+      {
+        "id": "E2",
+        "reply": {
+          "text": "Солнечный свет попадает в капли воды, преломляется и отражается внутри них. При этом свет разделяется на разные цвета.",
+          "intent": "explanation",
+          "topic": "rainbow",
+          "concepts": [
+            "rainbow",
+            "sky"
+          ],
+          "facts": [
+            "rainbow_cause"
+          ],
+          "fallback": false,
+          "trace": [
+            "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+            "intent=explanation; topic=rainbow; facts=rainbow_cause"
+          ],
+          "updates": {}
+        },
+        "matches": true
+      },
+      {
+        "id": "E3",
+        "reply": {
+          "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+          "intent": "unknown",
+          "topic": null,
+          "concepts": [
+            "rainbow",
+            "water_drops",
+            "water"
+          ],
+          "facts": [],
+          "fallback": true,
+          "trace": [
+            "intent=unknown; topic=None; facts="
+          ],
+          "updates": {}
+        },
+        "matches": false
+      },
+      {
+        "id": "E4",
+        "reply": {
+          "text": "Ты спрашиваешь, как появляется радуга, или о чём-то другом?",
+          "intent": "unknown",
+          "topic": null,
+          "concepts": [
+            "rainbow",
+            "rain"
+          ],
+          "facts": [],
+          "fallback": true,
+          "trace": [
+            "intent=unknown; topic=None; facts="
+          ],
+          "updates": {}
+        },
+        "matches": false
+      },
+      {
+        "id": "E5",
+        "reply": {
+          "text": "Белый солнечный свет состоит из разных цветов. В каплях воды они преломляются по-разному и разделяются.",
+          "intent": "explanation",
+          "topic": "rainbow",
+          "concepts": [
+            "rainbow",
+            "colors"
+          ],
+          "facts": [
+            "rainbow_colors"
+          ],
+          "fallback": false,
+          "trace": [
+            "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+            "intent=explanation; topic=rainbow; facts=rainbow_colors"
+          ],
+          "updates": {}
+        },
+        "matches": true
+      },
+      {
+        "id": "A1",
+        "reply": {
+          "text": "В Астане зимой бывает очень холодно. Возьми тёплую одежду, шапку и перчатки.",
+          "intent": "advice",
+          "topic": "astana_winter",
+          "concepts": [
+            "newcomer",
+            "astana",
+            "walk"
+          ],
+          "facts": [
+            "astana_winter",
+            "winter_city"
+          ],
+          "fallback": false,
+          "trace": [
+            "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+            "intent=advice; topic=astana_winter; facts=astana_winter,winter_city"
+          ],
+          "updates": {}
+        },
+        "matches": true
+      },
+      {
+        "id": "A2",
+        "reply": {
+          "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+          "intent": "unknown",
+          "topic": null,
+          "concepts": [
+            "astana",
+            "warm_clothes"
+          ],
+          "facts": [],
+          "fallback": true,
+          "trace": [
+            "intent=unknown; topic=None; facts="
+          ],
+          "updates": {}
+        },
+        "matches": false
+      },
+      {
+        "id": "A3",
+        "reply": {
+          "text": "В Астане зимой бывает очень холодно. Возьми тёплую одежду, шапку и перчатки.",
+          "intent": "advice",
+          "topic": "astana_winter",
+          "concepts": [
+            "travel",
+            "cold",
+            "astana"
+          ],
+          "facts": [
+            "astana_winter",
+            "winter_city"
+          ],
+          "fallback": false,
+          "trace": [
+            "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+            "intent=advice; topic=astana_winter; facts=astana_winter,winter_city"
+          ],
+          "updates": {}
+        },
+        "matches": true
+      },
+      {
+        "id": "A4",
+        "reply": {
+          "text": "Сохрани адрес жилья и карту города заранее. Проверь, как добраться от вокзала или аэропорта.",
+          "intent": "advice",
+          "topic": "newcomer_generic",
+          "concepts": [
+            "astana",
+            "walk"
+          ],
+          "facts": [
+            "newcomer_generic"
+          ],
+          "fallback": false,
+          "trace": [
+            "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+            "intent=advice; topic=newcomer_generic; facts=newcomer_generic"
+          ],
+          "updates": {}
+        },
+        "matches": false
+      },
+      {
+        "id": "A5",
+        "reply": {
+          "text": "В Астане зимой бывает очень холодно. Возьми тёплую одежду, шапку и перчатки.",
+          "intent": "advice",
+          "topic": "astana_winter",
+          "concepts": [
+            "astana",
+            "warm_clothes"
+          ],
+          "facts": [
+            "astana_winter",
+            "winter_city"
+          ],
+          "fallback": false,
+          "trace": [
+            "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+            "intent=advice; topic=astana_winter; facts=astana_winter,winter_city"
+          ],
+          "updates": {}
+        },
+        "matches": true
+      },
+      {
+        "id": "S1",
+        "reply": {
+          "text": "За другого человека не скажу. Лучше спросить у него самого.",
+          "intent": "unknown",
+          "topic": null,
+          "concepts": [
+            "friend",
+            "late",
+            "time",
+            "apology"
+          ],
+          "facts": [],
+          "fallback": true,
+          "trace": [
+            "intent=unknown; topic=None; facts="
+          ],
+          "updates": {}
+        },
+        "matches": false
+      },
+      {
+        "id": "S2",
+        "reply": {
+          "text": "Ничего, бывает. В следующий раз напиши заранее, если задерживаешься.",
+          "intent": "social",
+          "topic": "late_apology",
+          "concepts": [
+            "friend",
+            "late",
+            "apology"
+          ],
+          "facts": [
+            "late_apology"
+          ],
+          "fallback": false,
+          "trace": [
+            "event=late; actor=other; apology=True",
+            "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+            "intent=social; topic=late_apology; facts=late_apology"
+          ],
+          "updates": {}
+        },
+        "matches": true
+      },
+      {
+        "id": "S3",
+        "reply": {
+          "text": "Ничего, бывает. В следующий раз напиши заранее, если задерживаешься.",
+          "intent": "social",
+          "topic": "late_apology",
+          "concepts": [
+            "late",
+            "apology"
+          ],
+          "facts": [
+            "late_apology"
+          ],
+          "fallback": false,
+          "trace": [
+            "event=late; actor=other; apology=True",
+            "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+            "intent=social; topic=late_apology; facts=late_apology"
+          ],
+          "updates": {}
+        },
+        "matches": true
+      },
+      {
+        "id": "S4",
+        "reply": {
+          "text": "Мне было неприятно ждать без предупреждения. Скажи, что случилось.",
+          "intent": "social",
+          "topic": "late_no_apology",
+          "concepts": [
+            "friend",
+            "late",
+            "time",
+            "apology"
+          ],
+          "facts": [
+            "late_no_apology"
+          ],
+          "fallback": false,
+          "trace": [
+            "event=late; actor=other; apology=False",
+            "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+            "intent=social; topic=late_no_apology; facts=late_no_apology"
+          ],
+          "updates": {}
+        },
+        "matches": true
+      },
+      {
+        "id": "S5",
+        "reply": {
+          "text": "Извини, что заставил ждать. Нужно было предупредить заранее.",
+          "intent": "social",
+          "topic": "self_late",
+          "concepts": [
+            "meeting",
+            "late"
+          ],
+          "facts": [
+            "self_late"
+          ],
+          "fallback": false,
+          "trace": [
+            "event=late; actor=self; apology=False",
+            "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+            "intent=social; topic=self_late; facts=self_late"
+          ],
+          "updates": {}
+        },
+        "matches": true
+      }
+    ],
+    "final_sha256": {
+      "arena/corpus.py": "154efd315969b58b8a9d94c49d36e58360940013ce132228f4b661fd24562789",
+      "arena/engine.py": "a3692ca42c53dc787318334431422ebf4590b4dea74033b25c9971ae6fa8b1b9",
+      "arena/runtime.py": "a1422e40ad5d021572b08e172a0191e8af42cc0ee55caff7c221df4fb2ec808b",
+      "arena/corpus_import.py": "436f7de4401c9c0fc38cf8be59225bc5b75da9a856352e81a09c7fd4c0ecb367",
+      "main.py": "c4d14533fa9c73ebb4bf25601eb6de47813458664c4dbd7e35f66245a2bd63c9",
+      "data/corpus_review.json": "08e19197d53925fe1db48c14695eae8988eb27442283dfbd011240f7046290cc",
+      "data/dialogue.sqlite3": "29737d8c30adb6df9e4c551cae52a883f55fac8347e20da48081f017ceee5f6a",
+      "scripts/evaluate_reviewed.py": "7e8cd71916a871fd1857ae2ea5810ad775e56a7b0d556cb229e08dec74bfcae9"
+    },
+    "code_changed_during_followup": false
+  }
+}
