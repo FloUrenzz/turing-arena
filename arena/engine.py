@@ -85,7 +85,21 @@ def calculate(expression):
     return format(value, "f").rstrip("0").rstrip(".") if value != value.to_integral() else str(int(value))
 
 
-def generate(question, state, db_path, seed=None):
+def generate(question, state, db_path, seed=None, *, corpus_path=None):
+    reply = _generate_rules(question, state, db_path, seed)
+    if corpus_path is None or reply["intent"] not in ("unknown", "greeting") or reply["updates"]:
+        return reply
+    from .corpus import Corpus
+    match = Corpus(corpus_path).match(question, state.get("history", []))
+    if match is None:
+        return reply
+    # Data is text, never executable instructions. Runtime validates final output.
+    return {"text": match["text"], "intent": "corpus", "topic": "corpus:" + match["topic"],
+            "concepts": reply["concepts"], "facts": [match["id"]], "fallback": False,
+            "trace": [f"corpus={match['source']}; row={match['row']}; score={match['score']}"], "updates": {}}
+
+
+def _generate_rules(question, state, db_path, seed=None):
     if not isinstance(question, str):
         raise ValueError("Question must be text")
     lexicon = Lexicon(db_path)

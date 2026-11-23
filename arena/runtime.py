@@ -10,12 +10,14 @@ import uuid
 from arena.models import initial_state, apply_reply
 
 
-def _worker_entry(connection, worker, question, state, db_path, seed):
+def _worker_entry(connection, worker, question, state, db_path, seed, corpus_path):
     try:
         if worker is None:
             from arena.engine import generate
-            worker = generate
-        connection.send((True, worker(question, state, db_path, seed)))
+            reply = generate(question, state, db_path, seed, corpus_path=corpus_path)
+        else:
+            reply = worker(question, state, db_path, seed)
+        connection.send((True, reply))
     except BaseException:
         connection.send((False, None))
     finally:
@@ -67,8 +69,9 @@ def _validated(reply):
 
 
 class Runtime:
-    def __init__(self, db_path, *, timed=True, worker_timeout=2.0, seed=None, worker=None):
+    def __init__(self, db_path, *, timed=True, worker_timeout=2.0, seed=None, worker=None, corpus_path=None):
         self.db_path = str(db_path)
+        self.corpus_path = str(corpus_path) if corpus_path is not None else None
         self.timed = timed
         self.worker_timeout = max(0.01, min(float(worker_timeout), 2.0))
         self.seed = seed
@@ -87,7 +90,7 @@ class Runtime:
         if budget > 0:
             reader, writer = self._context.Pipe(duplex=False)
             process = self._context.Process(target=_worker_entry,
-                args=(writer, self.worker, question, deepcopy(self.state), self.db_path, self.seed), daemon=True)
+                args=(writer, self.worker, question, deepcopy(self.state), self.db_path, self.seed, self.corpus_path), daemon=True)
             try:
                 process.start()
                 writer.close()
