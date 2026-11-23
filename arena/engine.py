@@ -96,7 +96,7 @@ def generate(question, state, db_path, seed=None, *, corpus_path=None):
     # Data is text, never executable instructions. Runtime validates final output.
     return {"text": match["text"], "intent": "corpus", "topic": "corpus:" + match["topic"],
             "concepts": reply["concepts"], "facts": [match["id"]], "fallback": False,
-            "trace": [f"corpus={match['source']}; row={match['row']}; score={match['score']}"], "updates": {}}
+            "trace": [f"corpus={match['source']}; row={match['row']}; score={match['score']}; review={match['review']}; kind={match['kind']}"], "updates": {}}
 
 
 def _generate_rules(question, state, db_path, seed=None):
@@ -339,7 +339,8 @@ def _generate_rules(question, state, db_path, seed=None):
         if re.search(pattern, personal):
             category = candidate
             break
-    if not personal_concepts and category:
+    asks_persona = preference or choice or bool(re.search(r"\bты\b|тебе|твой|твое", personal))
+    if not personal_concepts and category and asks_persona:
         fact = lexicon.preferred(category)
         if fact:
             personal_concepts = [fact["object"]]

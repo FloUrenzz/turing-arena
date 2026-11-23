@@ -1,5 +1,6 @@
 """Conservative, local retrieval from the team's reviewed dialogue examples."""
 from collections import Counter
+import json
 import math
 from pathlib import Path
 import re
@@ -40,26 +41,31 @@ def signature(text):
     return people, addressee, numbers, time, negative, question
 
 
-def context_fits(context, history):
-    if not context:
+def context_fits(context, history, turns=None):
+    if turns is not None:
+        expected = [("question" if turn["role"] == "user" else "text", key(turn["text"])) for turn in turns]
+        if not expected:
+            return True
+    elif not context:
         return True
-    # Unstructured summaries and memory examples cannot safely supply live facts.
-    chunks = list(re.finditer(r"«([^»]+)»", context))
-    if not chunks or len(chunks) > 4:
-        return False
-    expected = []
-    role = None
-    end = 0
-    for chunk in chunks:
-        prefix = normalize(context[end:chunk.start()])
-        if "бот" in prefix:
-            role = "text"
-        elif "человек" in prefix or "вопрос" in prefix:
-            role = "question"
-        if role is None:
+    else:
+        # Legacy contexts: only explicit quotes with an identifiable speaker.
+        chunks = list(re.finditer(r"«([^»]+)»", context))
+        if not chunks or len(chunks) > 4:
             return False
-        expected.append((role, key(chunk[1])))
-        end = chunk.end()
+        expected = []
+        role = None
+        end = 0
+        for chunk in chunks:
+            prefix = normalize(context[end:chunk.start()])
+            if "бот" in prefix:
+                role = "text"
+            elif "человек" in prefix or "вопрос" in prefix:
+                role = "question"
+            if role is None:
+                return False
+            expected.append((role, key(chunk[1])))
+            end = chunk.end()
     observed = [(role, key(turn.get(role, ""))) for turn in history[-2:]
                 for role in ("question", "text")]
     if not history or len(expected) > len(observed):
@@ -82,9 +88,31 @@ class Corpus:
                 raise ValueError("Неподдерживаемая версия корпуса")
             self.rows = [dict(row) for row in db.execute(
                 "SELECT r.*, s.filename FROM corpus_replies r JOIN corpus_sources s ON s.id=r.source_id WHERE r.approved=1")]
+            reviewed = db.execute("SELECT value FROM corpus_metadata WHERE key='review_schema'").fetchone()
+            if reviewed is not None and reviewed[0] != "1":
+                raise ValueError("Неподдерживаемая версия проверки корпуса")
+            reviews = {row["reply_id"]: dict(row) for row in db.execute("SELECT * FROM corpus_reviews")} if reviewed else {}
         finally:
             db.close()
-        self.rows = [row for row in self.rows if row["topic"] not in BLOCKED_TOPICS]
+        self.rows = [row for row in self.rows if row["id"] in reviews or row["topic"] not in BLOCKED_TOPICS]
+        starters = []
+        for row in self.rows:
+            review = reviews.get(row["id"])
+            row["review"] = review["decision"] if review else None
+            row["context_turns"] = json.loads(review["context_turns_json"]) if review else None
+            row["kind"] = "reply"
+            # Reviewed dialogue examples contain both the antecedent and follow-up.
+            # An explicit user/bot pair can also supply the preceding response;
+            # it is still conditional on any turns before that pair.
+            turns = row["context_turns"] or []
+            for index in range(len(turns) - 1):
+                user, bot = turns[index:index + 2]
+                if user["role"] == "user" and bot["role"] == "bot" and len(bot["text"].encode("utf-16-le")) // 2 <= 300:
+                    starter = dict(row)
+                    starter.update(id=row["id"] + ":context:" + str(index), prompt=user["text"],
+                                   answer=bot["text"], context="", context_turns=turns[:index], kind="context")
+                    starters.append(starter)
+        self.rows.extend(starters)
         documents = [set(tokens(row["prompt"])) - STOP for row in self.rows]
         frequencies = Counter(word for document in documents for word in document)
         self.idf = {word: 1 + math.log((len(documents) + 1) / (count + 1)) for word, count in frequencies.items()}
@@ -95,15 +123,18 @@ class Corpus:
             row["signature"] = signature(row["prompt"])
 
     def match(self, question, history=()):
-        if len(question) > 4000 or re.search(r"[«»\"\n]", question):
+        if len(question) > 4000 or "\n" in question:
             return None
+        quoted = bool(re.search(r"[«»\"]", question))
         query = key(question)
         words = set(tokens(question)) - STOP
         ordered = [word for word in tokens(question) if word not in STOP]
         query_signature = signature(question)
         matches = []
         for row in self.rows:
-            if not context_fits(row["context"], history) or query_signature != row["signature"]:
+            if not context_fits(row["context"], history, row["context_turns"]) or query_signature != row["signature"]:
+                continue
+            if quoted and (not re.search(r"[«»\"]", row["prompt"]) or query != row["key"]):
                 continue
             # A small corpus does not establish that an unseen qualifier is harmless.
             # Preserve content words AND their order, including causal/event order.
@@ -125,14 +156,15 @@ class Corpus:
                 score = 2 * weight(common) / (weight(words) + weight(row["words"]))
                 if score < .84:
                     continue
-            if row["context"]:
+            if row["context"] or row["context_turns"]:
                 score += .01
             matches.append((score, row))
         matches.sort(key=lambda item: (-item[0], item[1]["id"]))
         if not matches:
             return None
         score, row = matches[0]
-        if len(matches) > 1 and score - matches[1][0] < .08 and row["answer"] != matches[1][1]["answer"]:
+        if any(score - other_score < .08 and row["answer"] != other["answer"] for other_score, other in matches[1:]):
             return None
         return {"text": row["answer"], "id": row["id"], "topic": row["topic"],
-                "source": row["filename"], "row": row["row_number"], "score": round(score, 4)}
+                "source": row["filename"], "row": row["row_number"], "score": round(score, 4),
+                "review": row["review"], "kind": row["kind"]}

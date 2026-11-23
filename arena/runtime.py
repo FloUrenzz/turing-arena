@@ -69,7 +69,7 @@ def _validated(reply):
 
 
 class Runtime:
-    def __init__(self, db_path, *, timed=True, worker_timeout=2.0, seed=None, worker=None, corpus_path=None):
+    def __init__(self, db_path, *, timed=False, worker_timeout=2.0, seed=None, worker=None, corpus_path=None):
         self.db_path = str(db_path)
         self.corpus_path = str(corpus_path) if corpus_path is not None else None
         self.timed = timed
