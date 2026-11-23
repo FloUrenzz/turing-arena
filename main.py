@@ -12,6 +12,9 @@ def run(argv=None):
     mode.add_argument("--ask", help="один вопрос")
     mode.add_argument("--chat", action="store_true", help="диалог")
     parser.add_argument("--db", type=Path)
+    corpus_mode = parser.add_mutually_exclusive_group()
+    corpus_mode.add_argument("--corpus", type=Path, help="подготовленный SQLite-корпус реплик")
+    corpus_mode.add_argument("--no-corpus", action="store_true", help="только смысловые правила, без корпуса")
     parser.add_argument("--fast", action="store_true", help="только разработка: без искусственной задержки")
     parser.add_argument("--json", action="store_true", help="диагностика вместо сценического текста")
     parser.add_argument("--seed", type=int)
@@ -23,7 +26,20 @@ def run(argv=None):
         db_path = args.db
         if not db_path.is_file():
             parser.error("Указанная локальная БД не найдена; она не будет пересоздана автоматически")
-    runtime = Runtime(db_path, timed=not args.fast, seed=args.seed)
+    corpus_path = None if args.no_corpus else args.corpus or Path(__file__).resolve().parent / "data" / "dialogue.sqlite3"
+    if corpus_path is not None:
+        if not corpus_path.is_file():
+            if args.corpus:
+                parser.error("Указанный корпус не найден. Сначала выполните scripts/import_corpus.py")
+            corpus_path = None
+        else:
+            from arena.corpus import Corpus
+            import sqlite3
+            try:
+                Corpus(corpus_path)
+            except (ValueError, sqlite3.Error, KeyError) as error:
+                parser.error("Невалидный корпус: " + str(error))
+    runtime = Runtime(db_path, timed=not args.fast, seed=args.seed, corpus_path=corpus_path)
     if args.fast or args.json:
         print("Исследовательский режим; для сценического вывода запускайте без --fast/--json.", file=sys.stderr)
 
