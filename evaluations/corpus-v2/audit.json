@@ -1,0 +1,1953 @@
+{
+  "date": "2026-11-23",
+  "scope": "T-06 independent corpus integration audit; no production edits",
+  "environment": {
+    "python": "3.11.6 (tags/v3.11.6:8b6ee5b, Oct  2 2023, 14:57:12) [MSC v.1935 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.26200-SP0"
+  },
+  "unit_tests": {
+    "command": "python -X utf8 -m unittest discover -s tests -v",
+    "exit_code": 0,
+    "tests": 50,
+    "elapsed_runner_s": 7.411,
+    "result": "OK; actually executed during this audit"
+  },
+  "inventory": {
+    "rows": 350,
+    "approved": 150,
+    "pending": 200,
+    "eligible": 115,
+    "context_rows": 5,
+    "sources": [
+      {
+        "id": "e98532ff60d04287c949cdd6d6d4474c1a0a0d2b2731c6582116e415e0aa029c",
+        "filename": "Turing-Arena-ещё-200-реплик.xlsx",
+        "sha256": "d5faf0bac65db0f5e48e5b1f03d7a91c476770fea66c5a1d22a8fcd1c65a2356",
+        "sheet": "Новые реплики"
+      },
+      {
+        "id": "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92",
+        "filename": "Turing-Arena-утверждено.xlsx",
+        "sha256": "ebdcc57e6b3cce4e755b1bd8dff57d0a0f65f18036748064453fe99087343b2a",
+        "sheet": "Реплики"
+      }
+    ],
+    "source_file_hashes": {
+      "C:\\Users\\Asus\\Documents\\Codex\\2026-11-17\\new-chat\\work\\turing-arena\\datasets\\Turing-Arena-ещё-200-реплик.xlsx": "d5faf0bac65db0f5e48e5b1f03d7a91c476770fea66c5a1d22a8fcd1c65a2356",
+      "C:\\Users\\Asus\\Documents\\Codex\\2026-11-17\\new-chat\\work\\turing-arena\\datasets\\Turing-Arena-утверждено.xlsx": "ebdcc57e6b3cce4e755b1bd8dff57d0a0f65f18036748064453fe99087343b2a"
+    }
+  },
+  "offline_all_approved": {
+    "count": 150,
+    "socket_connect_and_getaddrinfo": "forbidden via unittest.mock",
+    "nonempty": true,
+    "max_codepoints": 92,
+    "max_utf16_units": 92,
+    "limitation": "OS adapter was not physically disabled; actual spawn CLI checked separately"
+  },
+  "pending": {
+    "checked_prompts": 200,
+    "pending_id_returned": 0,
+    "active_matches": 0,
+    "quarantine_example20": null
+  },
+  "contexts": [
+    {
+      "case": "absent",
+      "history": [],
+      "match": null
+    },
+    {
+      "case": "correct_speaker",
+      "history": [
+        {
+          "question": "Я сегодня сдал экзамен.",
+          "text": "Ого"
+        }
+      ],
+      "match": {
+        "text": "О, имба. Что за предметы были?",
+        "id": "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:15",
+        "topic": "Учёба",
+        "source": "Turing-Arena-утверждено.xlsx",
+        "row": 15,
+        "score": 1.01
+      }
+    },
+    {
+      "case": "wrong_speaker",
+      "history": [
+        {
+          "question": "Ого",
+          "text": "Я сегодня сдал экзамен."
+        }
+      ],
+      "match": null
+    },
+    {
+      "case": "stale",
+      "history": [
+        {
+          "question": "Я сегодня сдал экзамен.",
+          "text": "Ого"
+        },
+        {
+          "question": "А теперь о фильмах",
+          "text": "Да"
+        }
+      ],
+      "match": null
+    }
+  ],
+  "dialogue": [
+    {
+      "question": "Меня зовут Марат.",
+      "reply": {
+        "text": "Приятно познакомиться, Марат.",
+        "intent": "acknowledgment",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": false,
+        "trace": [
+          "intent=acknowledgment; topic=None; facts="
+        ],
+        "updates": {
+          "user_name": "Марат"
+        }
+      }
+    },
+    {
+      "question": "Нет, меня зовут Тимур.",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      }
+    },
+    {
+      "question": "Как меня зовут?",
+      "reply": {
+        "text": "Ты представился как Марат.",
+        "intent": "recall",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": false,
+        "trace": [
+          "intent=recall; topic=None; facts="
+        ],
+        "updates": {}
+      }
+    },
+    {
+      "question": "Я люблю кофе.",
+      "reply": {
+        "text": "Запомню, это твои предпочтения.",
+        "intent": "acknowledgment",
+        "topic": null,
+        "concepts": [
+          "coffee"
+        ],
+        "facts": [],
+        "fallback": false,
+        "trace": [
+          "intent=acknowledgment; topic=None; facts="
+        ],
+        "updates": {
+          "user_preferences": {
+            "coffee": 1
+          }
+        }
+      }
+    },
+    {
+      "question": "Ты предпочитаешь чай или кофе?",
+      "reply": {
+        "text": "Я бы выбрал чай.",
+        "intent": "choice",
+        "topic": "tea",
+        "concepts": [
+          "tea",
+          "coffee"
+        ],
+        "facts": [
+          "likes_tea"
+        ],
+        "fallback": false,
+        "trace": [
+          "intent=choice; topic=tea; facts=likes_tea"
+        ],
+        "updates": {}
+      }
+    },
+    {
+      "question": "Что я люблю пить?",
+      "reply": {
+        "text": "Ты говорил, что любишь кофе.",
+        "intent": "recall",
+        "topic": "coffee",
+        "concepts": [],
+        "facts": [],
+        "fallback": false,
+        "trace": [
+          "intent=recall; topic=coffee; facts="
+        ],
+        "updates": {}
+      }
+    }
+  ],
+  "cli": [
+    {
+      "args": [
+        "--ask",
+        "Привет, как дела?",
+        "--fast",
+        "--json"
+      ],
+      "input": null,
+      "exit_code": 0,
+      "wall_s": 1.9605738000245765,
+      "stdout": "{\"text\": \"Привет, норм, сам как?\", \"intent\": \"corpus\", \"topic\": \"corpus:Приветствие\", \"fallback\": false, \"concepts\": [], \"facts\": [\"070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:7\"], \"trace\": [\"corpus=Turing-Arena-утверждено.xlsx; row=7; score=1.0\"], \"updates\": {}, \"status\": \"ok\", \"target_seconds\": 0, \"duplicate\": false, \"elapsed\": 0.9369999999762513}\n",
+      "stderr": "Исследовательский режим; для сценического вывода запускайте без --fast/--json.\nВремя до выдачи: 0.937 с; символов: 22; статус: ok\n"
+    },
+    {
+      "args": [
+        "--ask",
+        "Почему летом на улице телефон быстрее садится?",
+        "--fast",
+        "--json"
+      ],
+      "input": null,
+      "exit_code": 0,
+      "wall_s": 1.9637120999977924,
+      "stdout": "{\"text\": \"Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?\", \"intent\": \"unknown\", \"topic\": null, \"fallback\": true, \"concepts\": [\"summer\"], \"facts\": [], \"trace\": [\"intent=unknown; topic=None; facts=\"], \"updates\": {}, \"status\": \"ok\", \"target_seconds\": 0, \"duplicate\": false, \"elapsed\": 1.0939999999827705}\n",
+      "stderr": "Исследовательский режим; для сценического вывода запускайте без --fast/--json.\nВремя до выдачи: 1.094 с; символов: 73; статус: ok\n"
+    },
+    {
+      "args": [
+        "--ask",
+        "Завтра не экзамен, а я почти не готовился",
+        "--fast",
+        "--json"
+      ],
+      "input": null,
+      "exit_code": 0,
+      "wall_s": 1.9614359000115655,
+      "stdout": "{\"text\": \"Ты пока не рассказывал об этом, поэтому угадывать не буду.\", \"intent\": \"unknown\", \"topic\": null, \"fallback\": true, \"concepts\": [\"exam_failure\"], \"facts\": [], \"trace\": [\"intent=unknown; topic=None; facts=\"], \"updates\": {}, \"status\": \"ok\", \"target_seconds\": 0, \"duplicate\": false, \"elapsed\": 1.0320000000065193}\n",
+      "stderr": "Исследовательский режим; для сценического вывода запускайте без --fast/--json.\nВремя до выдачи: 1.032 с; символов: 58; статус: ok\n"
+    },
+    {
+      "args": [
+        "--ask",
+        "Друг помог мне с проектом, я хочу отблагодарить маму",
+        "--fast",
+        "--json"
+      ],
+      "input": null,
+      "exit_code": 0,
+      "wall_s": 4.012969299976248,
+      "stdout": "{\"text\": \"Ты пока не рассказывал об этом, поэтому угадывать не буду.\", \"intent\": \"unknown\", \"topic\": null, \"fallback\": true, \"concepts\": [\"friend\"], \"facts\": [], \"trace\": [\"intent=unknown; topic=None; facts=\"], \"updates\": {}, \"status\": \"ok\", \"target_seconds\": 0, \"duplicate\": false, \"elapsed\": 1.202999999979511}\n",
+      "stderr": "Исследовательский режим; для сценического вывода запускайте без --fast/--json.\nВремя до выдачи: 1.203 с; символов: 58; статус: ok\n"
+    },
+    {
+      "args": [
+        "--ask",
+        "Привет, как дела?",
+        "--no-corpus",
+        "--fast",
+        "--json"
+      ],
+      "input": null,
+      "exit_code": 0,
+      "wall_s": 3.0669689999776892,
+      "stdout": "{\"text\": \"Привет! Что обсудим?\", \"intent\": \"greeting\", \"topic\": null, \"fallback\": false, \"concepts\": [], \"facts\": [], \"trace\": [\"intent=greeting; topic=None; facts=\"], \"updates\": {}, \"status\": \"ok\", \"target_seconds\": 0, \"duplicate\": false, \"elapsed\": 1.047000000020489}\n",
+      "stderr": "Исследовательский режим; для сценического вывода запускайте без --fast/--json.\nВремя до выдачи: 1.047 с; символов: 20; статус: ok\n"
+    },
+    {
+      "args": [
+        "--ask",
+        "Привет",
+        "--corpus",
+        "data/does-not-exist.audit.sqlite3",
+        "--fast"
+      ],
+      "input": null,
+      "exit_code": 2,
+      "wall_s": 3.065026999975089,
+      "stdout": "",
+      "stderr": "usage: main.py [-h] (--ask ASK | --chat) [--db DB]\n               [--corpus CORPUS | --no-corpus] [--fast] [--json] [--seed SEED]\nmain.py: error: Указанный корпус не найден. Сначала выполните scripts/import_corpus.py\n"
+    },
+    {
+      "args": [
+        "--ask",
+        "Привет",
+        "--corpus",
+        "README.md",
+        "--fast"
+      ],
+      "input": null,
+      "exit_code": 2,
+      "wall_s": 3.0630231000250205,
+      "stdout": "",
+      "stderr": "usage: main.py [-h] (--ask ASK | --chat) [--db DB]\n               [--corpus CORPUS | --no-corpus] [--fast] [--json] [--seed SEED]\nmain.py: error: Невалидный корпус: file is not a database\n"
+    },
+    {
+      "args": [
+        "--chat",
+        "--fast",
+        "--json"
+      ],
+      "input": "Я сегодня сдал экзамен.\nВроде нормально\n",
+      "exit_code": 0,
+      "wall_s": 3.901428000011947,
+      "stdout": "{\"text\": \"Ты пока не рассказывал об этом, поэтому угадывать не буду.\", \"intent\": \"unknown\", \"topic\": null, \"fallback\": true, \"concepts\": [\"success\", \"exam_failure\"], \"facts\": [], \"trace\": [\"intent=unknown; topic=None; facts=\"], \"updates\": {}, \"status\": \"ok\", \"target_seconds\": 0, \"duplicate\": false, \"elapsed\": 1.062999999965541}\n{\"text\": \"О, имба. Что за предметы были?\", \"intent\": \"corpus\", \"topic\": \"corpus:Учёба\", \"fallback\": false, \"concepts\": [], \"facts\": [\"070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:15\"], \"trace\": [\"corpus=Turing-Arena-утверждено.xlsx; row=15; score=1.01\"], \"updates\": {}, \"status\": \"ok\", \"target_seconds\": 0, \"duplicate\": false, \"elapsed\": 0.7179999999934807}\n",
+      "stderr": "Исследовательский режим; для сценического вывода запускайте без --fast/--json.\nВопрос: Время до выдачи: 1.063 с; символов: 58; статус: ok\nВопрос: Время до выдачи: 0.718 с; символов: 30; статус: ok\nВопрос: "
+    },
+    {
+      "args": [
+        "--ask",
+        "Привет, как дела?",
+        "--seed",
+        "21",
+        "--json"
+      ],
+      "input": null,
+      "exit_code": 0,
+      "wall_s": 6.115363100019749,
+      "stdout": "{\"text\": \"Привет, норм, сам как?\", \"intent\": \"corpus\", \"topic\": \"corpus:Приветствие\", \"fallback\": false, \"concepts\": [], \"facts\": [\"070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:7\"], \"trace\": [\"corpus=Turing-Arena-утверждено.xlsx; row=7; score=1.0\"], \"updates\": {}, \"status\": \"ok\", \"target_seconds\": 4.969898959666396, \"duplicate\": false, \"elapsed\": 4.969000000040978}\n",
+      "stderr": "Исследовательский режим; для сценического вывода запускайте без --fast/--json.\nВремя до выдачи: 4.969 с; символов: 22; статус: ok\n"
+    },
+    {
+      "args": [
+        "--ask",
+        "Почему после дождя иногда появляется радуга? Объясни простыми словами.",
+        "--seed",
+        "21",
+        "--json"
+      ],
+      "input": null,
+      "exit_code": 0,
+      "wall_s": 17.6440050000092,
+      "stdout": "{\"text\": \"Солнечный свет попадает в капли воды, преломляется и отражается внутри них. При этом свет разделяется на разные цвета.\", \"intent\": \"explanation\", \"topic\": \"rainbow\", \"fallback\": false, \"concepts\": [\"rain\", \"rainbow\"], \"facts\": [\"rainbow_cause\"], \"trace\": [\"Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.\", \"intent=explanation; topic=rainbow; facts=rainbow_cause\"], \"updates\": {}, \"status\": \"ok\", \"target_seconds\": 16.489898959666395, \"duplicate\": false, \"elapsed\": 16.5}\n",
+      "stderr": "Исследовательский режим; для сценического вывода запускайте без --fast/--json.\nВремя до выдачи: 16.500 с; символов: 118; статус: ok\n"
+    },
+    {
+      "args": [
+        "--ask",
+        "Что бы ты посоветовал человеку, который впервые приехал в Астану зимой?",
+        "--seed",
+        "21",
+        "--json"
+      ],
+      "input": null,
+      "exit_code": 0,
+      "wall_s": 12.604552000004333,
+      "stdout": "{\"text\": \"В Астане зимой бывает очень холодно. Возьми тёплую одежду, шапку и перчатки.\", \"intent\": \"advice\", \"topic\": \"astana_winter\", \"fallback\": false, \"concepts\": [\"newcomer\", \"travel\", \"astana\", \"winter\"], \"facts\": [\"astana_winter\", \"winter_city\"], \"trace\": [\"Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.\", \"intent=advice; topic=astana_winter; facts=astana_winter,winter_city\"], \"updates\": {}, \"status\": \"ok\", \"target_seconds\": 11.449898959666395, \"duplicate\": false, \"elapsed\": 11.453000000037719}\n",
+      "stderr": "Исследовательский режим; для сценического вывода запускайте без --fast/--json.\nВремя до выдачи: 11.453 с; символов: 76; статус: ok\n"
+    },
+    {
+      "args": [
+        "--ask",
+        "Друг опоздал на встречу на полчаса и извинился. Что бы ты ему ответил?",
+        "--seed",
+        "21",
+        "--json"
+      ],
+      "input": null,
+      "exit_code": 0,
+      "wall_s": 10.588814399961848,
+      "stdout": "{\"text\": \"Ничего, бывает. В следующий раз напиши заранее, если задерживаешься.\", \"intent\": \"social\", \"topic\": \"late_apology\", \"fallback\": false, \"concepts\": [\"friend\", \"late\", \"meeting\", \"time\", \"apology\"], \"facts\": [\"late_apology\"], \"trace\": [\"event=late; actor=other; apology=True\", \"Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.\", \"intent=social; topic=late_apology; facts=late_apology\"], \"updates\": {}, \"status\": \"ok\", \"target_seconds\": 10.489898959666396, \"duplicate\": false, \"elapsed\": 10.5}\n",
+      "stderr": "Исследовательский режим; для сценического вывода запускайте без --fast/--json.\nВремя до выдачи: 10.500 с; символов: 68; статус: ok\n"
+    }
+  ],
+  "scale": {
+    "rows": 10000,
+    "searchable": 9765,
+    "construction_s": 0.1207295999629423,
+    "generate_s": 0.13176690001273528,
+    "reply": {
+      "text": "Привет, норм, сам как?",
+      "intent": "corpus",
+      "topic": "corpus:Приветствие",
+      "concepts": [],
+      "facts": [
+        "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:7"
+      ],
+      "fallback": false,
+      "trace": [
+        "corpus=Turing-Arena-утверждено.xlsx; row=7; score=1.0"
+      ],
+      "updates": {}
+    },
+    "limitation": "Synthetic duplicates of approved greeting, tests volume and allocation; not quality or diversity of 10000 real prompts; no spawn timing for synthetic corpus"
+  },
+  "baseline": {
+    "git_ref": "86c2488",
+    "corpus_sha256_git_blob": "07e1d2a0114535abf9f993906a836e2a27a28e9ccff584b3c61f4ef15b7f568a",
+    "note": "Baseline re-executed from git blob in memory; no source files replaced. Eight FP previously observed independently before developer fix."
+  },
+  "followup_manual_challenges": [
+    {
+      "id": "FP01",
+      "question": "Почему сначала слышен гром, а потом видна молния?",
+      "expectation": "Reject reversed event sequence; correct premise or clarify",
+      "assessment": "critical",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": null,
+      "prepare_s": 0.019973799993749708
+    },
+    {
+      "id": "FP02",
+      "question": "Почему летом на улице телефон быстрее садится?",
+      "expectation": "Do not explain summer heat using winter cold",
+      "assessment": "critical",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "summer"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "summer"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": null,
+      "prepare_s": 0.0073782000108622015
+    },
+    {
+      "id": "FP03",
+      "question": "Почему зимой на улице телефон медленнее садится?",
+      "expectation": "Do not explain slower discharge using faster discharge answer",
+      "assessment": "critical",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "winter"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "winter"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": null,
+      "prepare_s": 0.007642999989911914
+    },
+    {
+      "id": "FP04",
+      "question": "Почему чай в узкой чашке быстрее остывает?",
+      "expectation": "Do not explain narrow cup as large exposed surface",
+      "assessment": "critical",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "tea"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "tea"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": null,
+      "prepare_s": 0.007816599973011762
+    },
+    {
+      "id": "FP05",
+      "question": "Почему чай в широкой чашке медленнее остывает?",
+      "expectation": "Do not reuse faster cooling cause for slower cooling",
+      "assessment": "critical",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "tea"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "tea"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": null,
+      "prepare_s": 0.0073450999916531146
+    },
+    {
+      "id": "FP06",
+      "question": "Завтра не экзамен, а я почти не готовился",
+      "expectation": "Do not assume tomorrow exam after explicit negation",
+      "assessment": "critical",
+      "reply": {
+        "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "exam_failure"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "exam_failure"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": null,
+      "prepare_s": 0.006942400010302663
+    },
+    {
+      "id": "FP07",
+      "question": "Друг помог мне с проектом, я хочу отблагодарить маму",
+      "expectation": "Keep recipient mother distinct from male helper",
+      "assessment": "critical",
+      "reply": {
+        "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "friend"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "friend"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": null,
+      "prepare_s": 0.006959099962841719
+    },
+    {
+      "id": "FP08",
+      "question": "Друг помог мне с проектом, хочу оскорбить",
+      "expectation": "Do not interpret insult intent as gratitude",
+      "assessment": "critical",
+      "reply": {
+        "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "friend"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "friend"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": null,
+      "prepare_s": 0.006743700010702014
+    },
+    {
+      "id": "P01",
+      "question": "Друг мне помог с проектом, хочу отблагодарить",
+      "expectation": "May give gratitude suggestion",
+      "assessment": "pass",
+      "reply": {
+        "text": "Можешь позвать его куда-нибудь поесть",
+        "intent": "corpus",
+        "topic": "corpus:Друзья",
+        "concepts": [
+          "friend"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:76"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=76; score=1.0"
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "friend"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": {
+        "text": "Можешь позвать его куда-нибудь поесть",
+        "id": "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:76",
+        "topic": "Друзья",
+        "source": "Turing-Arena-утверждено.xlsx",
+        "row": 76,
+        "score": 1.0
+      },
+      "prepare_s": 0.006811800005380064
+    },
+    {
+      "id": "P02",
+      "question": "Почему после душа запотевает зеркало?",
+      "expectation": "May answer using water vapor",
+      "assessment": "pass",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": null,
+      "prepare_s": 0.006920500018168241
+    },
+    {
+      "id": "P03",
+      "question": "Давай встретимся в девять",
+      "expectation": "Do not use static seven oclock plan",
+      "assessment": "pass",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": null,
+      "prepare_s": 0.006757199997082353
+    },
+    {
+      "id": "P04",
+      "question": "Сегодня у коллеги выходной",
+      "expectation": "Do not infer speaker has day off",
+      "assessment": "pass",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": null,
+      "prepare_s": 0.006492699962109327
+    },
+    {
+      "id": "P05",
+      "question": "Почему до душа запотевает зеркало?",
+      "expectation": "Reject transfer of after shower context",
+      "assessment": "pass",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": null,
+      "prepare_s": 0.006830600032117218
+    },
+    {
+      "id": "P06",
+      "question": "Сколько будет 31 умножить на 8?",
+      "expectation": "248; arithmetic rule",
+      "assessment": "pass",
+      "reply": {
+        "text": "248.",
+        "intent": "math",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": false,
+        "trace": [
+          "intent=math; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "248.",
+        "intent": "math",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": false,
+        "trace": [
+          "intent=math; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": null,
+      "prepare_s": 0.002859200001694262
+    },
+    {
+      "id": "P07",
+      "question": "Сколько будет 9 плюс 4 умножить на 6?",
+      "expectation": "33; arithmetic rule",
+      "assessment": "pass",
+      "reply": {
+        "text": "33.",
+        "intent": "math",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": false,
+        "trace": [
+          "intent=math; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "33.",
+        "intent": "math",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": false,
+        "trace": [
+          "intent=math; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": null,
+      "prepare_s": 0.002808599965646863
+    },
+    {
+      "id": "P08",
+      "question": "Ты чай или кофе предпочитаешь?",
+      "expectation": "Tea persona; no water corpus answer",
+      "assessment": "pass",
+      "reply": {
+        "text": "Скорее чай.",
+        "intent": "choice",
+        "topic": "tea",
+        "concepts": [
+          "tea",
+          "coffee"
+        ],
+        "facts": [
+          "likes_tea"
+        ],
+        "fallback": false,
+        "trace": [
+          "intent=choice; topic=tea; facts=likes_tea"
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Скорее чай.",
+        "intent": "choice",
+        "topic": "tea",
+        "concepts": [
+          "tea",
+          "coffee"
+        ],
+        "facts": [
+          "likes_tea"
+        ],
+        "fallback": false,
+        "trace": [
+          "intent=choice; topic=tea; facts=likes_tea"
+        ],
+        "updates": {}
+      },
+      "direct_match": null,
+      "prepare_s": 0.0037811999791301787
+    },
+    {
+      "id": "P09",
+      "question": "",
+      "expectation": "Nonempty Russian clarification",
+      "assessment": "pass",
+      "reply": {
+        "text": "Кажется, вопрос не дошёл. Повторишь?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Кажется, вопрос не дошёл. Повторишь?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": null,
+      "prepare_s": 0.006817099987529218
+    },
+    {
+      "id": "P10",
+      "question": "что-то совершенно неизвестное",
+      "expectation": "Clarification instead of unrelated answer",
+      "assessment": "pass",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": null,
+      "prepare_s": 0.007020699966233224
+    },
+    {
+      "id": "P11",
+      "question": "Нет никакого экзамена, просто привет",
+      "expectation": "Do not congratulate exam success",
+      "assessment": "pass",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "exam_failure"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "exam_failure"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": null,
+      "prepare_s": 0.006747299979906529
+    },
+    {
+      "id": "O01",
+      "question": "Я наконец-то сдал экзамен?",
+      "expectation": "Question mark is not represented in signature; interpretation ambiguous",
+      "assessment": "observation",
+      "reply": {
+        "text": "О имба, поздравляю",
+        "intent": "corpus",
+        "topic": "corpus:Учёба",
+        "concepts": [
+          "success",
+          "exam_failure"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:63"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=63; score=1.0"
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "success",
+          "exam_failure"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": {
+        "text": "О имба, поздравляю",
+        "id": "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:63",
+        "topic": "Учёба",
+        "source": "Turing-Arena-утверждено.xlsx",
+        "row": 63,
+        "score": 1.0
+      },
+      "prepare_s": 0.006672499992419034
+    }
+  ],
+  "manual_challenges": [
+    {
+      "id": "FP01",
+      "question": "Почему сначала слышен гром, а потом видна молния?",
+      "expectation": "Reject reversed event sequence; correct premise or clarify",
+      "assessment": "critical",
+      "reply": {
+        "text": "Свет доходит быстрее чем звук",
+        "intent": "corpus",
+        "topic": "corpus:Объяснение",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:148"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=148; score=1.0"
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": {
+        "text": "Свет доходит быстрее чем звук",
+        "id": "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:148",
+        "topic": "Объяснение",
+        "source": "Turing-Arena-утверждено.xlsx",
+        "row": 148,
+        "score": 1.0
+      }
+    },
+    {
+      "id": "FP02",
+      "question": "Почему летом на улице телефон быстрее садится?",
+      "expectation": "Do not explain summer heat using winter cold",
+      "assessment": "critical",
+      "reply": {
+        "text": "На холоде аккумулятор хуже отдает энергию, поэтому заряд может садится быстрее",
+        "intent": "corpus",
+        "topic": "corpus:Объяснение",
+        "concepts": [
+          "summer"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:143"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=143; score=0.8419"
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "summer"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": {
+        "text": "На холоде аккумулятор хуже отдает энергию, поэтому заряд может садится быстрее",
+        "id": "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:143",
+        "topic": "Объяснение",
+        "source": "Turing-Arena-утверждено.xlsx",
+        "row": 143,
+        "score": 0.8419
+      }
+    },
+    {
+      "id": "FP03",
+      "question": "Почему зимой на улице телефон медленнее садится?",
+      "expectation": "Do not explain slower discharge using faster discharge answer",
+      "assessment": "critical",
+      "reply": {
+        "text": "На холоде аккумулятор хуже отдает энергию, поэтому заряд может садится быстрее",
+        "intent": "corpus",
+        "topic": "corpus:Объяснение",
+        "concepts": [
+          "winter"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:143"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=143; score=0.8505"
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "winter"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": {
+        "text": "На холоде аккумулятор хуже отдает энергию, поэтому заряд может садится быстрее",
+        "id": "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:143",
+        "topic": "Объяснение",
+        "source": "Turing-Arena-утверждено.xlsx",
+        "row": 143,
+        "score": 0.8505
+      }
+    },
+    {
+      "id": "FP04",
+      "question": "Почему чай в узкой чашке быстрее остывает?",
+      "expectation": "Do not explain narrow cup as large exposed surface",
+      "assessment": "critical",
+      "reply": {
+        "text": "Походу из за большой поверхности контакта с воздухом",
+        "intent": "corpus",
+        "topic": "corpus:Объяснение",
+        "concepts": [
+          "tea"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:154"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=154; score=0.8442"
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "tea"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": {
+        "text": "Походу из за большой поверхности контакта с воздухом",
+        "id": "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:154",
+        "topic": "Объяснение",
+        "source": "Turing-Arena-утверждено.xlsx",
+        "row": 154,
+        "score": 0.8442
+      }
+    },
+    {
+      "id": "FP05",
+      "question": "Почему чай в широкой чашке медленнее остывает?",
+      "expectation": "Do not reuse faster cooling cause for slower cooling",
+      "assessment": "critical",
+      "reply": {
+        "text": "Походу из за большой поверхности контакта с воздухом",
+        "intent": "corpus",
+        "topic": "corpus:Объяснение",
+        "concepts": [
+          "tea"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:154"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=154; score=0.8527"
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "tea"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": {
+        "text": "Походу из за большой поверхности контакта с воздухом",
+        "id": "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:154",
+        "topic": "Объяснение",
+        "source": "Turing-Arena-утверждено.xlsx",
+        "row": 154,
+        "score": 0.8527
+      }
+    },
+    {
+      "id": "FP06",
+      "question": "Завтра не экзамен, а я почти не готовился",
+      "expectation": "Do not assume tomorrow exam after explicit negation",
+      "assessment": "critical",
+      "reply": {
+        "text": "Сколько часов осталось? Или спишешь?",
+        "intent": "corpus",
+        "topic": "corpus:Учёба",
+        "concepts": [
+          "exam_failure"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:65"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=65; score=1.0"
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "exam_failure"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": {
+        "text": "Сколько часов осталось? Или спишешь?",
+        "id": "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:65",
+        "topic": "Учёба",
+        "source": "Turing-Arena-утверждено.xlsx",
+        "row": 65,
+        "score": 1.0
+      }
+    },
+    {
+      "id": "FP07",
+      "question": "Друг помог мне с проектом, я хочу отблагодарить маму",
+      "expectation": "Keep recipient mother distinct from male helper",
+      "assessment": "critical",
+      "reply": {
+        "text": "Можешь позвать его куда-нибудь поесть",
+        "intent": "corpus",
+        "topic": "corpus:Друзья",
+        "concepts": [
+          "friend"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:76"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=76; score=0.9411"
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "friend"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": {
+        "text": "Можешь позвать его куда-нибудь поесть",
+        "id": "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:76",
+        "topic": "Друзья",
+        "source": "Turing-Arena-утверждено.xlsx",
+        "row": 76,
+        "score": 0.9411
+      }
+    },
+    {
+      "id": "FP08",
+      "question": "Друг помог мне с проектом, хочу оскорбить",
+      "expectation": "Do not interpret insult intent as gratitude",
+      "assessment": "critical",
+      "reply": {
+        "text": "Можешь позвать его куда-нибудь поесть",
+        "intent": "corpus",
+        "topic": "corpus:Друзья",
+        "concepts": [
+          "friend"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:76"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=76; score=0.8424"
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "friend"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": {
+        "text": "Можешь позвать его куда-нибудь поесть",
+        "id": "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:76",
+        "topic": "Друзья",
+        "source": "Turing-Arena-утверждено.xlsx",
+        "row": 76,
+        "score": 0.8424
+      }
+    },
+    {
+      "id": "P01",
+      "question": "Друг мне помог с проектом, хочу отблагодарить",
+      "expectation": "May give gratitude suggestion",
+      "assessment": "pass",
+      "reply": {
+        "text": "Можешь позвать его куда-нибудь поесть",
+        "intent": "corpus",
+        "topic": "corpus:Друзья",
+        "concepts": [
+          "friend"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:76"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=76; score=1.0"
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "friend"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": {
+        "text": "Можешь позвать его куда-нибудь поесть",
+        "id": "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:76",
+        "topic": "Друзья",
+        "source": "Turing-Arena-утверждено.xlsx",
+        "row": 76,
+        "score": 1.0
+      }
+    },
+    {
+      "id": "P02",
+      "question": "Почему после душа запотевает зеркало?",
+      "expectation": "May answer using water vapor",
+      "assessment": "pass",
+      "reply": {
+        "text": "Из-за водяного пара",
+        "intent": "corpus",
+        "topic": "corpus:Объяснение",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:155"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=155; score=1.0"
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": {
+        "text": "Из-за водяного пара",
+        "id": "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:155",
+        "topic": "Объяснение",
+        "source": "Turing-Arena-утверждено.xlsx",
+        "row": 155,
+        "score": 1.0
+      }
+    },
+    {
+      "id": "P03",
+      "question": "Давай встретимся в девять",
+      "expectation": "Do not use static seven oclock plan",
+      "assessment": "pass",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": null
+    },
+    {
+      "id": "P04",
+      "question": "Сегодня у коллеги выходной",
+      "expectation": "Do not infer speaker has day off",
+      "assessment": "pass",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": null
+    },
+    {
+      "id": "P05",
+      "question": "Почему до душа запотевает зеркало?",
+      "expectation": "Reject transfer of after shower context",
+      "assessment": "pass",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": null
+    },
+    {
+      "id": "P06",
+      "question": "Сколько будет 31 умножить на 8?",
+      "expectation": "248; arithmetic rule",
+      "assessment": "pass",
+      "reply": {
+        "text": "248.",
+        "intent": "math",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": false,
+        "trace": [
+          "intent=math; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "248.",
+        "intent": "math",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": false,
+        "trace": [
+          "intent=math; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": null
+    },
+    {
+      "id": "P07",
+      "question": "Сколько будет 9 плюс 4 умножить на 6?",
+      "expectation": "33; arithmetic rule",
+      "assessment": "pass",
+      "reply": {
+        "text": "33.",
+        "intent": "math",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": false,
+        "trace": [
+          "intent=math; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "33.",
+        "intent": "math",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": false,
+        "trace": [
+          "intent=math; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": null
+    },
+    {
+      "id": "P08",
+      "question": "Ты чай или кофе предпочитаешь?",
+      "expectation": "Tea persona; no water corpus answer",
+      "assessment": "pass",
+      "reply": {
+        "text": "Скорее чай.",
+        "intent": "choice",
+        "topic": "tea",
+        "concepts": [
+          "tea",
+          "coffee"
+        ],
+        "facts": [
+          "likes_tea"
+        ],
+        "fallback": false,
+        "trace": [
+          "intent=choice; topic=tea; facts=likes_tea"
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Скорее чай.",
+        "intent": "choice",
+        "topic": "tea",
+        "concepts": [
+          "tea",
+          "coffee"
+        ],
+        "facts": [
+          "likes_tea"
+        ],
+        "fallback": false,
+        "trace": [
+          "intent=choice; topic=tea; facts=likes_tea"
+        ],
+        "updates": {}
+      },
+      "direct_match": null
+    },
+    {
+      "id": "P09",
+      "question": "",
+      "expectation": "Nonempty Russian clarification",
+      "assessment": "pass",
+      "reply": {
+        "text": "Кажется, вопрос не дошёл. Повторишь?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Кажется, вопрос не дошёл. Повторишь?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": null
+    },
+    {
+      "id": "P10",
+      "question": "что-то совершенно неизвестное",
+      "expectation": "Clarification instead of unrelated answer",
+      "assessment": "pass",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": null
+    },
+    {
+      "id": "P11",
+      "question": "Нет никакого экзамена, просто привет",
+      "expectation": "Do not congratulate exam success",
+      "assessment": "pass",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "exam_failure"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "exam_failure"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": null
+    },
+    {
+      "id": "O01",
+      "question": "Я наконец-то сдал экзамен?",
+      "expectation": "Question mark is not represented in signature; interpretation ambiguous",
+      "assessment": "observation",
+      "reply": {
+        "text": "О имба, поздравляю",
+        "intent": "corpus",
+        "topic": "corpus:Учёба",
+        "concepts": [
+          "success",
+          "exam_failure"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:63"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=63; score=1.0"
+        ],
+        "updates": {}
+      },
+      "without_corpus": {
+        "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "success",
+          "exam_failure"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "direct_match": {
+        "text": "О имба, поздравляю",
+        "id": "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:63",
+        "topic": "Учёба",
+        "source": "Turing-Arena-утверждено.xlsx",
+        "row": 63,
+        "score": 1.0
+      }
+    }
+  ],
+  "followup": {
+    "corpus_sha256_disk": "c6c76e789bea6f290cfdb4bf47028c38f36faa92ce91850298e03577eae9b5f9",
+    "note": "Followup manual and CLI ran after parent changed corpus.py. Original unit_tests=50 applies before fix; followup_unit_tests will record current run."
+  },
+  "cli_phase": "Followup: CLI subprocesses imported edited current source; direct baseline reproduced separately above",
+  "baseline_name_correction_without_corpus": [
+    {
+      "question": "Меня зовут Марат.",
+      "reply": {
+        "text": "Приятно познакомиться, Марат.",
+        "intent": "acknowledgment",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": false,
+        "trace": [
+          "intent=acknowledgment; topic=None; facts="
+        ],
+        "updates": {
+          "user_name": "Марат"
+        }
+      }
+    },
+    {
+      "question": "Нет, меня зовут Тимур.",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      }
+    },
+    {
+      "question": "Как меня зовут?",
+      "reply": {
+        "text": "Ты представился как Марат.",
+        "intent": "recall",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": false,
+        "trace": [
+          "intent=recall; topic=None; facts="
+        ],
+        "updates": {}
+      }
+    }
+  ],
+  "followup_unit_tests": {
+    "command": "python -X utf8 -m unittest discover -s tests -v",
+    "tests": 51,
+    "elapsed_runner_s": 7.752,
+    "exit_code": 0,
+    "result": "OK"
+  },
+  "followup_benchmark": {
+    "command": "python -X utf8 scripts/benchmark.py --count 1000 --corpus data/dialogue.sqlite3",
+    "count": 1000,
+    "errors": [],
+    "history_size": 32,
+    "p50_prepare_ms": 3.048,
+    "p95_prepare_ms": 7.337,
+    "max_prepare_ms": 19.034,
+    "limitation": "Direct engine; not spawn, final laptop or OS-offline end-to-end"
+  }
+}

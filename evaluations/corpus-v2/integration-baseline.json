@@ -1,0 +1,3232 @@
+{
+  "label": "Known workbook routing regression, not holdout or human-likeness score",
+  "corpus_sha256": "917da7c22b88312f9664e2c647e9f1a2ce215c5654b4d4a596543e90a69e5cd9",
+  "routes": {
+    "corpus": 106,
+    "choice": 1,
+    "identity": 1,
+    "unknown": 32,
+    "recall": 2,
+    "preference": 3,
+    "advice": 1,
+    "math": 4
+  },
+  "fallbacks": 34,
+  "max_prepare_ms": 6.742,
+  "rows": [
+    {
+      "example_id": "1",
+      "prompt": "Привет, как дела?",
+      "base_intent": "greeting",
+      "reply": {
+        "text": "Привет, норм, сам как?",
+        "intent": "corpus",
+        "topic": "corpus:Приветствие",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:7"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=7; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.742
+    },
+    {
+      "example_id": "2",
+      "prompt": "Салам, как ты?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Салам, всё чётко, сам как?",
+        "intent": "corpus",
+        "topic": "corpus:Приветствие",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:8"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=8; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.016
+    },
+    {
+      "example_id": "3",
+      "prompt": "Ку, как сам?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Ку, норм, ты как?",
+        "intent": "corpus",
+        "topic": "corpus:Приветствие",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:9"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=9; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.894
+    },
+    {
+      "example_id": "4",
+      "prompt": "Чё делаешь?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Да ничё особенного. А ты?",
+        "intent": "corpus",
+        "topic": "corpus:Разговор",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:10"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=10; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.889
+    },
+    {
+      "example_id": "5",
+      "prompt": "Чё молчишь?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Тут я",
+        "intent": "corpus",
+        "topic": "corpus:Разговор",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:11"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=11; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.885
+    },
+    {
+      "example_id": "6",
+      "prompt": "Ты чё так долго отвечаешь?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Я новые стартапы придумываю, подожди",
+        "intent": "corpus",
+        "topic": "corpus:Разговор",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:12"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=12; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.177
+    },
+    {
+      "example_id": "7",
+      "prompt": "Ты чай или кофе больше любишь?",
+      "base_intent": "choice",
+      "reply": {
+        "text": "Скорее чай.",
+        "intent": "choice",
+        "topic": "tea",
+        "concepts": [
+          "tea",
+          "coffee"
+        ],
+        "facts": [
+          "likes_tea"
+        ],
+        "fallback": false,
+        "trace": [
+          "intent=choice; topic=tea; facts=likes_tea"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 3.753
+    },
+    {
+      "example_id": "8",
+      "prompt": "Ты бот, что ли?",
+      "base_intent": "identity",
+      "reply": {
+        "text": "Чувствую, тут любое оправдание будет подозрительным.",
+        "intent": "identity",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": false,
+        "trace": [
+          "intent=identity; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 2.677
+    },
+    {
+      "example_id": "9",
+      "prompt": "Вроде нормально.",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.574
+    },
+    {
+      "example_id": "10",
+      "prompt": "Походу, завалил экзамен.",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Обидненько. А результаты уже вышли?",
+        "intent": "corpus",
+        "topic": "corpus:Учёба",
+        "concepts": [
+          "exam_failure"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:16"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=16; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.221
+    },
+    {
+      "example_id": "11",
+      "prompt": "Как думаешь, я сдам экзамен?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Честно, не знаю. Смотря как готовился",
+        "intent": "corpus",
+        "topic": "corpus:Учёба",
+        "concepts": [
+          "exam_failure"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:17"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=17; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.517
+    },
+    {
+      "example_id": "12",
+      "prompt": "Я завтра выступаю, уже очкую.",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Понимаю. Ничего страшного, это пройдёт",
+        "intent": "corpus",
+        "topic": "corpus:Поддержка",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:18"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=18; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.263
+    },
+    {
+      "example_id": "13",
+      "prompt": "Я опять проспал.",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "А будильник ставил?",
+        "intent": "corpus",
+        "topic": "corpus:Повседневное",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:19"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=19; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.121
+    },
+    {
+      "example_id": "14",
+      "prompt": "Я передумал, погнали лучше завтра.",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Жалко, я завтра не смогу. Давай сегодня?",
+        "intent": "corpus",
+        "topic": "corpus:Планы",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:20"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=20; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.249
+    },
+    {
+      "example_id": "15",
+      "prompt": "Сорян, задержался.",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Да ладно, нормально всё",
+        "intent": "corpus",
+        "topic": "corpus:Опоздание",
+        "concepts": [
+          "late"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:21"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=21; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.011
+    },
+    {
+      "example_id": "16",
+      "prompt": "Ещё пять минут.",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "time"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.099
+    },
+    {
+      "example_id": "17",
+      "prompt": "Меня друг уже полчаса ждёт. Чё ему написать?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Хз, просто расскажи как есть",
+        "intent": "corpus",
+        "topic": "corpus:Совет",
+        "concepts": [
+          "friend",
+          "time"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:23"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=23; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.218
+    },
+    {
+      "example_id": "18",
+      "prompt": "Помнишь, как меня зовут?",
+      "base_intent": "recall",
+      "reply": {
+        "text": "Ты пока не представлялся.",
+        "intent": "recall",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=recall; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 2.519
+    },
+    {
+      "example_id": "19",
+      "prompt": "Помнишь, куда я завтра еду?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "food",
+          "travel"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.152
+    },
+    {
+      "example_id": "20",
+      "prompt": "Тайвань это город Китая.",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.098
+    },
+    {
+      "example_id": "21",
+      "prompt": "Алматы же столица Казахстана?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Раньше была. Сейчас Астана",
+        "intent": "corpus",
+        "topic": "corpus:География",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:27"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=27; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.196
+    },
+    {
+      "example_id": "22",
+      "prompt": "Столица Турции Стамбул?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Столица Турции Анкара",
+        "intent": "corpus",
+        "topic": "corpus:География",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:28"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=28; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.062
+    },
+    {
+      "example_id": "23",
+      "prompt": "Байкал это море?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Это очень большое озеро",
+        "intent": "corpus",
+        "topic": "corpus:География",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:29"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=29; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.146
+    },
+    {
+      "example_id": "24",
+      "prompt": "Дубай же столица ОАЭ?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Столица ОАЭ Абу-Даби",
+        "intent": "corpus",
+        "topic": "corpus:География",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:30"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=30; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.603
+    },
+    {
+      "example_id": "25",
+      "prompt": "Антарктида на севере?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "В Южном полушарии",
+        "intent": "corpus",
+        "topic": "corpus:География",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:31"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=31; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.526
+    },
+    {
+      "example_id": "26",
+      "prompt": "Какая завтра погода?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Хз, прогноз не смотрю",
+        "intent": "corpus",
+        "topic": "corpus:Погода",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:32"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=32; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.203
+    },
+    {
+      "example_id": "27",
+      "prompt": "Ну хоть предположи, какая завтра погода.",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.479
+    },
+    {
+      "example_id": "28",
+      "prompt": "Сколько будет семнадцать плюс шесть?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.575
+    },
+    {
+      "example_id": "29",
+      "prompt": "Давно не общались",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Да, давно. Как ты вообще?",
+        "intent": "corpus",
+        "topic": "corpus:Начало разговора",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:35"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=35; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.068
+    },
+    {
+      "example_id": "30",
+      "prompt": "Можно кое-что спросить?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Кнш, спрашивай",
+        "intent": "corpus",
+        "topic": "corpus:Начало разговора",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:36"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=36; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.179
+    },
+    {
+      "example_id": "31",
+      "prompt": "Есть минутка?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Да, слушаю",
+        "intent": "corpus",
+        "topic": "corpus:Начало разговора",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:37"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=37; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.141
+    },
+    {
+      "example_id": "32",
+      "prompt": "Я сейчас не могу нормально писать",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Оке, напишешь как освободишься",
+        "intent": "corpus",
+        "topic": "corpus:Начало разговора",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:38"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=38; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.198
+    },
+    {
+      "example_id": "33",
+      "prompt": "Секунду, мне звонят",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Оке",
+        "intent": "corpus",
+        "topic": "corpus:Начало разговора",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:39"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=39; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.993
+    },
+    {
+      "example_id": "34",
+      "prompt": "Всё, я вернулся",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "О уже? Давай продолжим",
+        "intent": "corpus",
+        "topic": "corpus:Начало разговора",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:40"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=40; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.988
+    },
+    {
+      "example_id": "35",
+      "prompt": "Я наконец-то дома",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Завидую тебе",
+        "intent": "corpus",
+        "topic": "corpus:Повседневное",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:41"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=41; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.128
+    },
+    {
+      "example_id": "36",
+      "prompt": "Только проснулся",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "как поспал?",
+        "intent": "corpus",
+        "topic": "corpus:Повседневное",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:42"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=42; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.943
+    },
+    {
+      "example_id": "37",
+      "prompt": "Я ещё вообще не ложился",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Новые стартапы придумывал?",
+        "intent": "corpus",
+        "topic": "corpus:Повседневное",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:43"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=43; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.051
+    },
+    {
+      "example_id": "38",
+      "prompt": "У меня сегодня выходной",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Эх, завидую тебе",
+        "intent": "corpus",
+        "topic": "corpus:Повседневное",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:44"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=44; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.107
+    },
+    {
+      "example_id": "39",
+      "prompt": "Стою в очереди уже минут сорок",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Что за очередь там",
+        "intent": "corpus",
+        "topic": "corpus:Повседневное",
+        "concepts": [
+          "time"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:45"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=45; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.378
+    },
+    {
+      "example_id": "40",
+      "prompt": "Автобус ушёл прямо передо мной",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "эх настоящая боль, понимаю тебя",
+        "intent": "corpus",
+        "topic": "corpus:Повседневное",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:46"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=46; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.13
+    },
+    {
+      "example_id": "41",
+      "prompt": "Телефон почти сел",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Оке, напишешь потом",
+        "intent": "corpus",
+        "topic": "corpus:Повседневное",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:47"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=47; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.991
+    },
+    {
+      "example_id": "42",
+      "prompt": "Интернет сегодня постоянно пропадает",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Оке, допишешь как наладится",
+        "intent": "corpus",
+        "topic": "corpus:Повседневное",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:48"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=48; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.196
+    },
+    {
+      "example_id": "43",
+      "prompt": "Я наконец-то прибрался в комнате",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Ай молодец",
+        "intent": "corpus",
+        "topic": "corpus:Повседневное",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:49"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=49; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.465
+    },
+    {
+      "example_id": "44",
+      "prompt": "Сегодня весь день по делам бегаю",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Че все дела закончил?",
+        "intent": "corpus",
+        "topic": "corpus:Повседневное",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:50"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=50; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.118
+    },
+    {
+      "example_id": "45",
+      "prompt": "Я сегодня ещё не ел",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Если есть время и деньги покушай сейчас",
+        "intent": "corpus",
+        "topic": "corpus:Еда и привычки",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:51"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=51; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.04
+    },
+    {
+      "example_id": "46",
+      "prompt": "Не знаю, что приготовить",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "А что из продуктов есть?",
+        "intent": "corpus",
+        "topic": "corpus:Еда и привычки",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:52"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=52; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.131
+    },
+    {
+      "example_id": "47",
+      "prompt": "У меня есть яйца и хлеб",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Можно яичницу с тостами сделать",
+        "intent": "corpus",
+        "topic": "corpus:Еда и привычки",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:53"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=53; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.014
+    },
+    {
+      "example_id": "48",
+      "prompt": "Ты умеешь готовить?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Кнш, я же шев повар",
+        "intent": "corpus",
+        "topic": "corpus:Еда и привычки",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:54"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=54; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.001
+    },
+    {
+      "example_id": "49",
+      "prompt": "Сладкое или солёное?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "лично я кушаю сладкое когда грущу",
+        "intent": "corpus",
+        "topic": "corpus:Еда и привычки",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:55"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=55; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.474
+    },
+    {
+      "example_id": "50",
+      "prompt": "Ты воду с газом пьёшь?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Да, иногда. Но чаще обычную",
+        "intent": "corpus",
+        "topic": "corpus:Еда и привычки",
+        "concepts": [
+          "water"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:56"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=56; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.067
+    },
+    {
+      "example_id": "51",
+      "prompt": "Чем любишь заниматься в свободное время?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Всякие идеи обдумывать. Иногда что-нибудь пробую сделать",
+        "intent": "corpus",
+        "topic": "corpus:Интересы",
+        "concepts": [
+          "time"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:57"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=57; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.738
+    },
+    {
+      "example_id": "52",
+      "prompt": "Какую музыку слушаешь?",
+      "base_intent": "preference",
+      "reply": {
+        "text": "Мне нравится музыка.",
+        "intent": "preference",
+        "topic": "music",
+        "concepts": [
+          "music"
+        ],
+        "facts": [
+          "likes_music"
+        ],
+        "fallback": false,
+        "trace": [
+          "intent=preference; topic=music; facts=likes_music"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 3.041
+    },
+    {
+      "example_id": "53",
+      "prompt": "Что сейчас слушаешь?",
+      "base_intent": "preference",
+      "reply": {
+        "text": "Мне нравится музыка.",
+        "intent": "preference",
+        "topic": "music",
+        "concepts": [],
+        "facts": [
+          "likes_music"
+        ],
+        "fallback": false,
+        "trace": [
+          "intent=preference; topic=music; facts=likes_music"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 3.053
+    },
+    {
+      "example_id": "54",
+      "prompt": "Есть любимая игра?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Одной любимой нет. А ты во что играешь?",
+        "intent": "corpus",
+        "topic": "corpus:Интересы",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:60"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=60; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.996
+    },
+    {
+      "example_id": "55",
+      "prompt": "Любишь гулять один?",
+      "base_intent": "preference",
+      "reply": {
+        "text": "Мне нравится прогулка.",
+        "intent": "preference",
+        "topic": "walk",
+        "concepts": [
+          "walk"
+        ],
+        "facts": [
+          "likes_walk"
+        ],
+        "fallback": false,
+        "trace": [
+          "intent=preference; topic=walk; facts=likes_walk"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 2.976
+    },
+    {
+      "example_id": "56",
+      "prompt": "Книги читаешь?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Иногда. Последнее время мало",
+        "intent": "corpus",
+        "topic": "corpus:Интересы",
+        "concepts": [
+          "book"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:62"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=62; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.887
+    },
+    {
+      "example_id": "57",
+      "prompt": "Я наконец-то сдал экзамен",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "О имба, поздравляю",
+        "intent": "corpus",
+        "topic": "corpus:Учёба",
+        "concepts": [
+          "success",
+          "exam_failure"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:63"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=63; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.25
+    },
+    {
+      "example_id": "58",
+      "prompt": "Получил результат, всё-таки не сдал",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Эх жалко, пересдача будет?",
+        "intent": "corpus",
+        "topic": "corpus:Учёба",
+        "concepts": [
+          "exam_failure",
+          "success"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:64"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=64; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.151
+    },
+    {
+      "example_id": "59",
+      "prompt": "Завтра экзамен, а я почти не готовился",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Сколько часов осталось? Или спишешь?",
+        "intent": "corpus",
+        "topic": "corpus:Учёба",
+        "concepts": [
+          "exam_failure"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:65"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=65; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.254
+    },
+    {
+      "example_id": "60",
+      "prompt": "Не могу заставить себя начать учиться",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Лучше с одной задачой начни, а дальше как пойдет",
+        "intent": "corpus",
+        "topic": "corpus:Учёба",
+        "concepts": [
+          "study"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:66"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=66; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.216
+    },
+    {
+      "example_id": "61",
+      "prompt": "Я прочитал тему, но ничего не понял",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Какую именно?",
+        "intent": "corpus",
+        "topic": "corpus:Учёба",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:67"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=67; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.212
+    },
+    {
+      "example_id": "62",
+      "prompt": "У меня три задания на завтра, не знаю за что взяться",
+      "base_intent": "advice",
+      "reply": {
+        "text": "Сохрани адрес жилья и карту города заранее. Проверь, как добраться от вокзала или аэропорта.",
+        "intent": "advice",
+        "topic": "newcomer_generic",
+        "concepts": [],
+        "facts": [
+          "newcomer_generic"
+        ],
+        "fallback": false,
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=advice; topic=newcomer_generic; facts=newcomer_generic"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 3.047
+    },
+    {
+      "example_id": "63",
+      "prompt": "Осталось одно задание, но уже сил нет",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Оно большое?",
+        "intent": "corpus",
+        "topic": "corpus:Учёба",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:69"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=69; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.212
+    },
+    {
+      "example_id": "64",
+      "prompt": "Я всё выучил, но всё равно волнуюсь",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Понимаю, ты уже сделал что мог",
+        "intent": "corpus",
+        "topic": "corpus:Учёба",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:70"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=70; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.34
+    },
+    {
+      "example_id": "65",
+      "prompt": "Мне сказали, что выступление перенесли",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "На когда перенесли?",
+        "intent": "corpus",
+        "topic": "corpus:Учёба",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:71"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=71; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.331
+    },
+    {
+      "example_id": "66",
+      "prompt": "Я выступил, вроде нормально прошло",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Ай тигр, ты сам доволен собой?",
+        "intent": "corpus",
+        "topic": "corpus:Учёба",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:72"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=72; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.129
+    },
+    {
+      "example_id": "67",
+      "prompt": "Друг обиделся, а я не понимаю почему",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Он что-нибудь сказал или просто замолчал?",
+        "intent": "corpus",
+        "topic": "corpus:Друзья",
+        "concepts": [
+          "friend"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:73"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=73; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.151
+    },
+    {
+      "example_id": "68",
+      "prompt": "Я наговорил лишнего и теперь жалею",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Может просто извиниться?",
+        "intent": "corpus",
+        "topic": "corpus:Друзья",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:74"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=74; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.185
+    },
+    {
+      "example_id": "69",
+      "prompt": "Мне неудобно просить друга о помощи",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Вы же общаетесь,можно просто спросить",
+        "intent": "corpus",
+        "topic": "corpus:Друзья",
+        "concepts": [
+          "friend"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:75"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=75; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.153
+    },
+    {
+      "example_id": "70",
+      "prompt": "Друг помог мне с проектом, хочу отблагодарить",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Можешь позвать его куда-нибудь поесть",
+        "intent": "corpus",
+        "topic": "corpus:Друзья",
+        "concepts": [
+          "friend"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:76"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=76; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.268
+    },
+    {
+      "example_id": "71",
+      "prompt": "Меня позвали гулять, а я хочу побыть дома",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Скажи типо у тебя важные дела есть",
+        "intent": "corpus",
+        "topic": "corpus:Друзья",
+        "concepts": [
+          "walk"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:77"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=77; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.386
+    },
+    {
+      "example_id": "72",
+      "prompt": "Человек долго не отвечает, я уже переживаю",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Может занят, ты когда нписал?",
+        "intent": "corpus",
+        "topic": "corpus:Друзья",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:78"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=78; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.296
+    },
+    {
+      "example_id": "73",
+      "prompt": "Мне нужен совет, но я не знаю как объяснить",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Расскажи, дальше разберусь",
+        "intent": "corpus",
+        "topic": "corpus:Друзья",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:79"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=79; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.234
+    },
+    {
+      "example_id": "74",
+      "prompt": "Пойдём сегодня гулять?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "А во сколько хочешь?",
+        "intent": "corpus",
+        "topic": "corpus:Планы",
+        "concepts": [
+          "walk"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:80"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=80; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.049
+    },
+    {
+      "example_id": "75",
+      "prompt": "Давай встретимся в семь",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Оке, а где?",
+        "intent": "corpus",
+        "topic": "corpus:Планы",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:81"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=81; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.27
+    },
+    {
+      "example_id": "76",
+      "prompt": "Давай у входа в парк",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.119
+    },
+    {
+      "example_id": "77",
+      "prompt": "Я задержусь минут на десять",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "ок, жду",
+        "intent": "corpus",
+        "topic": "corpus:Планы",
+        "concepts": [
+          "time"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:83"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=83; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.276
+    },
+    {
+      "example_id": "78",
+      "prompt": "Всё отменяется, сегодня не получится",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Эхх",
+        "intent": "corpus",
+        "topic": "corpus:Планы",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:84"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=84; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.21
+    },
+    {
+      "example_id": "79",
+      "prompt": "Я освободился раньше, можем начать сейчас",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Да, давай",
+        "intent": "corpus",
+        "topic": "corpus:Планы",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:85"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=85; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.292
+    },
+    {
+      "example_id": "80",
+      "prompt": "На выходных хочу куда-нибудь выбраться",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "О каеф, какие варианты есть?",
+        "intent": "corpus",
+        "topic": "corpus:Планы",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:86"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=86; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.422
+    },
+    {
+      "example_id": "81",
+      "prompt": "Я сегодня вообще без сил",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Понимаю, че делал сегодня?",
+        "intent": "corpus",
+        "topic": "corpus:Самочувствие и эмоции",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:87"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=87; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.015
+    },
+    {
+      "example_id": "82",
+      "prompt": "Вроде ничего не случилось, а настроение плохое",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Бывает, расскажешь че в душе твориться",
+        "intent": "corpus",
+        "topic": "corpus:Самочувствие и эмоции",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:88"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=88; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.411
+    },
+    {
+      "example_id": "83",
+      "prompt": "Я просто хочу выговориться",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Я слушаю",
+        "intent": "corpus",
+        "topic": "corpus:Самочувствие и эмоции",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:89"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=89; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.068
+    },
+    {
+      "example_id": "84",
+      "prompt": "Советы сейчас не нужны, просто послушай",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Оке, рассказывай",
+        "intent": "corpus",
+        "topic": "corpus:Самочувствие и эмоции",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:90"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=90; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.489
+    },
+    {
+      "example_id": "85",
+      "prompt": "У меня сегодня всё получилось",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "О, имба, рад за тебя",
+        "intent": "corpus",
+        "topic": "corpus:Самочувствие и эмоции",
+        "concepts": [
+          "success"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:91"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=91; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.242
+    },
+    {
+      "example_id": "86",
+      "prompt": "Я наконец-то закончил проект",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "О круто, что за проект?",
+        "intent": "corpus",
+        "topic": "corpus:Самочувствие и эмоции",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:92"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=92; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.3
+    },
+    {
+      "example_id": "87",
+      "prompt": "Спасибо, что выслушал",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Да без проблем",
+        "intent": "corpus",
+        "topic": "corpus:Завершение разговора",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:93"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=93; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.037
+    },
+    {
+      "example_id": "88",
+      "prompt": "Ладно, я погнал. Напишу потом",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "давай, на связи",
+        "intent": "corpus",
+        "topic": "corpus:Завершение разговора",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:94"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=94; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.051
+    },
+    {
+      "example_id": "89",
+      "prompt": "Помнишь, с чего мы начали разговор?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.362
+    },
+    {
+      "example_id": "90",
+      "prompt": "Так куда я завтра еду?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "food",
+          "travel"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.883
+    },
+    {
+      "example_id": "91",
+      "prompt": "А как меня зовут?",
+      "base_intent": "recall",
+      "reply": {
+        "text": "Ты пока не представлялся.",
+        "intent": "recall",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=recall; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 2.5
+    },
+    {
+      "example_id": "92",
+      "prompt": "А что я люблю пить?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Ты пока не говорил, что тебе нравится.",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.327
+    },
+    {
+      "example_id": "93",
+      "prompt": "Когда я выступаю?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.916
+    },
+    {
+      "example_id": "94",
+      "prompt": "Во сколько договорились?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Не все варианты понял. Можешь уточнить, что сравниваем?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.541
+    },
+    {
+      "example_id": "95",
+      "prompt": "Какой спорт мне нравится?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "sport"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.989
+    },
+    {
+      "example_id": "96",
+      "prompt": "У кого завтра экзамен?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "exam_failure"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.92
+    },
+    {
+      "example_id": "97",
+      "prompt": "Что было вторым в списке?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.278
+    },
+    {
+      "example_id": "98",
+      "prompt": "Что я сейчас чаще пью?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.039
+    },
+    {
+      "example_id": "99",
+      "prompt": "Пока никакой",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.889
+    },
+    {
+      "example_id": "100",
+      "prompt": "Кто извинился?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "apology"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.821
+    },
+    {
+      "example_id": "101",
+      "prompt": "Сестру как зовут, помнишь?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.023
+    },
+    {
+      "example_id": "102",
+      "prompt": "Какую я выбрал?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.879
+    },
+    {
+      "example_id": "103",
+      "prompt": "Когда у меня выходной?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.934
+    },
+    {
+      "example_id": "104",
+      "prompt": "Повтори мой прошлый вопрос",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.072
+    },
+    {
+      "example_id": "105",
+      "prompt": "Как думаешь, стоит ему написать?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "А кому?",
+        "intent": "corpus",
+        "topic": "corpus:Уточнение",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:111"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=111; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.16
+    },
+    {
+      "example_id": "106",
+      "prompt": "Это вообще нормально?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "а чо случилось?",
+        "intent": "corpus",
+        "topic": "corpus:Уточнение",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:112"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=112; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.971
+    },
+    {
+      "example_id": "107",
+      "prompt": "Помоги выбрать",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Скинь варианты",
+        "intent": "corpus",
+        "topic": "corpus:Уточнение",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:113"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=113; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.842
+    },
+    {
+      "example_id": "108",
+      "prompt": "Он мне не отвечает",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Давно написал?",
+        "intent": "corpus",
+        "topic": "corpus:Уточнение",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:114"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=114; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.992
+    },
+    {
+      "example_id": "109",
+      "prompt": "Сколько это стоит?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Ты про что?",
+        "intent": "corpus",
+        "topic": "corpus:Уточнение",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:115"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=115; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.928
+    },
+    {
+      "example_id": "110",
+      "prompt": "А почему?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Ты про что именно?",
+        "intent": "corpus",
+        "topic": "corpus:Уточнение",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:116"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=116; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.028
+    },
+    {
+      "example_id": "111",
+      "prompt": "Погнали туда",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "А куда именно?",
+        "intent": "corpus",
+        "topic": "corpus:Уточнение",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:117"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=117; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.859
+    },
+    {
+      "example_id": "112",
+      "prompt": "Сделай как раньше",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Напомни, что именно?",
+        "intent": "corpus",
+        "topic": "corpus:Уточнение",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:118"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=118; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.918
+    },
+    {
+      "example_id": "113",
+      "prompt": "Понял, что я прошу?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Ты пока не рассказывал об этом, поэтому угадывать не буду.",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.942
+    },
+    {
+      "example_id": "114",
+      "prompt": "Перенеси это на завтра",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Что именно перенести?",
+        "intent": "corpus",
+        "topic": "corpus:Уточнение",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:120"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=120; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.146
+    },
+    {
+      "example_id": "115",
+      "prompt": "Прив какдил",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "прив, норм а у тебя какдил?",
+        "intent": "corpus",
+        "topic": "corpus:Опечатки",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:121"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=121; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.818
+    },
+    {
+      "example_id": "116",
+      "prompt": "Реши задачу",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Скинь условие",
+        "intent": "corpus",
+        "topic": "corpus:Уточнение",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:122"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=122; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.871
+    },
+    {
+      "example_id": "117",
+      "prompt": "Что я сегодня ел на завтрак?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Ты не рассказывал",
+        "intent": "corpus",
+        "topic": "corpus:Неизвестное",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:123"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=123; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.279
+    },
+    {
+      "example_id": "118",
+      "prompt": "Сколько процентов зарядки у меня сейчас?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Хз, твой экран я не вижу",
+        "intent": "corpus",
+        "topic": "corpus:Неизвестное",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:124"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=124; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.51
+    },
+    {
+      "example_id": "119",
+      "prompt": "Кто сейчас стоит у меня за спиной?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Не могу найти тебя",
+        "intent": "corpus",
+        "topic": "corpus:Неизвестное",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:125"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=125; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.363
+    },
+    {
+      "example_id": "120",
+      "prompt": "Угадай, какое число я загадал",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "пусть будет 67",
+        "intent": "corpus",
+        "topic": "corpus:Неизвестное",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:126"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=126; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.129
+    },
+    {
+      "example_id": "121",
+      "prompt": "Как зовут моего лучшего друга?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Я незнаю, ты не говорил",
+        "intent": "corpus",
+        "topic": "corpus:Неизвестное",
+        "concepts": [
+          "friend"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:127"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=127; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.14
+    },
+    {
+      "example_id": "122",
+      "prompt": "Сколько людей сейчас в комнате?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Мне лень считать",
+        "intent": "corpus",
+        "topic": "corpus:Неизвестное",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:128"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=128; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.35
+    },
+    {
+      "example_id": "123",
+      "prompt": "Помнишь, о чём мы вчера говорили?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Забыл, напомни",
+        "intent": "corpus",
+        "topic": "corpus:Неизвестное",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:129"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=129; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.43
+    },
+    {
+      "example_id": "124",
+      "prompt": "Какой у меня любимый фильм?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Пока незнаю,какой?",
+        "intent": "corpus",
+        "topic": "corpus:Неизвестное",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:130"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=130; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.051
+    },
+    {
+      "example_id": "125",
+      "prompt": "Сколько будет 17 умножить на 6?",
+      "base_intent": "math",
+      "reply": {
+        "text": "102.",
+        "intent": "math",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": false,
+        "trace": [
+          "intent=math; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 2.586
+    },
+    {
+      "example_id": "126",
+      "prompt": "Сколько будет 100 минус 37?",
+      "base_intent": "math",
+      "reply": {
+        "text": "63.",
+        "intent": "math",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": false,
+        "trace": [
+          "intent=math; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 2.473
+    },
+    {
+      "example_id": "127",
+      "prompt": "Сколько будет 144 разделить на 12?",
+      "base_intent": "math",
+      "reply": {
+        "text": "12.",
+        "intent": "math",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": false,
+        "trace": [
+          "intent=math; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 2.511
+    },
+    {
+      "example_id": "128",
+      "prompt": "Сколько будет 2 плюс 3 умножить на 4?",
+      "base_intent": "math",
+      "reply": {
+        "text": "14.",
+        "intent": "math",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": false,
+        "trace": [
+          "intent=math; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 2.601
+    },
+    {
+      "example_id": "129",
+      "prompt": "Сколько будет половина от 86?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.121
+    },
+    {
+      "example_id": "130",
+      "prompt": "Сколько будет десять процентов от двухсот?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.177
+    },
+    {
+      "example_id": "131",
+      "prompt": "Напиши слово кот наоборот",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "cat"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.005
+    },
+    {
+      "example_id": "132",
+      "prompt": "Напиши слово привет заглавными буквами",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.121
+    },
+    {
+      "example_id": "133",
+      "prompt": "Какое слово лишнее: яблоко, груша, стул, банан?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.267
+    },
+    {
+      "example_id": "134",
+      "prompt": "Перечисли эти числа по возрастанию: 9, 2, 5",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.2
+    },
+    {
+      "example_id": "135",
+      "prompt": "Назови три цвета, просто через запятую",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [
+          "colors"
+        ],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.228
+    },
+    {
+      "example_id": "136",
+      "prompt": "Ответь одним словом: понял?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.051
+    },
+    {
+      "example_id": "137",
+      "prompt": "Почему зимой на улице телефон быстрее садится?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "На холоде аккумулятор хуже отдает энергию, поэтому заряд может садится быстрее",
+        "intent": "corpus",
+        "topic": "corpus:Объяснение",
+        "concepts": [
+          "winter"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:143"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=143; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.459
+    },
+    {
+      "example_id": "138",
+      "prompt": "Можешь объяснить попроще?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "concepts": [],
+        "facts": [],
+        "fallback": true,
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.993
+    },
+    {
+      "example_id": "139",
+      "prompt": "Почему лёд плавает в воде?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Он менее плотный, чем вода, поэтому остаётся сверху",
+        "intent": "corpus",
+        "topic": "corpus:Объяснение",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:145"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=145; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.242
+    },
+    {
+      "example_id": "140",
+      "prompt": "Почему после дождя пахнет землёй?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Честно незнаю",
+        "intent": "corpus",
+        "topic": "corpus:Объяснение",
+        "concepts": [
+          "rain"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:146"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=146; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.091
+    },
+    {
+      "example_id": "141",
+      "prompt": "Почему эхо повторяет голос?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Я не физик, не знаю",
+        "intent": "corpus",
+        "topic": "corpus:Объяснение",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:147"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=147; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.911
+    },
+    {
+      "example_id": "142",
+      "prompt": "Почему сначала видна молния, а потом слышен гром?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Свет доходит быстрее чем звук",
+        "intent": "corpus",
+        "topic": "corpus:Объяснение",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:148"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=148; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.311
+    },
+    {
+      "example_id": "143",
+      "prompt": "Зачем в пароле разные буквы и цифры?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Так его сложнее угадать,длина пароля тоже важна",
+        "intent": "corpus",
+        "topic": "corpus:Объяснение",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:149"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=149; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.313
+    },
+    {
+      "example_id": "144",
+      "prompt": "Что такое алгоритм простыми словами?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Порядок действий, чтобы решить задачу",
+        "intent": "corpus",
+        "topic": "corpus:Объяснение",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:150"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=150; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.741
+    },
+    {
+      "example_id": "145",
+      "prompt": "А пример алгоритма можешь?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Рецепт блюда, делаешь шаги по порядку и получаешь результат",
+        "intent": "corpus",
+        "topic": "corpus:Объяснение",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:151"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=151; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.304
+    },
+    {
+      "example_id": "146",
+      "prompt": "Что такое база данных?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Место, где данные хранят так, чтобы их было удобно искать и менять",
+        "intent": "corpus",
+        "topic": "corpus:Объяснение",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:152"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=152; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 5.665
+    },
+    {
+      "example_id": "147",
+      "prompt": "Зачем сохранять файл, если я уже всё написал?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Чтобы изменения остались после закрытия программы",
+        "intent": "corpus",
+        "topic": "corpus:Объяснение",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:153"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=153; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.25
+    },
+    {
+      "example_id": "148",
+      "prompt": "Почему чай в широкой чашке быстрее остывает?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Походу из за большой поверхности контакта с воздухом",
+        "intent": "corpus",
+        "topic": "corpus:Объяснение",
+        "concepts": [
+          "tea"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:154"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=154; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.479
+    },
+    {
+      "example_id": "149",
+      "prompt": "Почему зеркало запотевает после душа?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Из-за водяного пара",
+        "intent": "corpus",
+        "topic": "corpus:Объяснение",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:155"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=155; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.062
+    },
+    {
+      "example_id": "150",
+      "prompt": "Почему днём звёзд почти не видно?",
+      "base_intent": "unknown",
+      "reply": {
+        "text": "Из за солнца, оно так ярко светит что звезды теряются",
+        "intent": "corpus",
+        "topic": "corpus:Объяснение",
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:156"
+        ],
+        "fallback": false,
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=156; score=1.0"
+        ],
+        "updates": {}
+      },
+      "prepare_ms": 6.13
+    }
+  ],
+  "real_workers": [
+    {
+      "question": "Почему после дождя иногда появляется радуга? Объясни простыми словами.",
+      "reply": {
+        "text": "Солнечный свет попадает в капли воды, преломляется и отражается внутри них. При этом свет разделяется на разные цвета.",
+        "intent": "explanation",
+        "topic": "rainbow",
+        "fallback": false,
+        "concepts": [
+          "rain",
+          "rainbow"
+        ],
+        "facts": [
+          "rainbow_cause"
+        ],
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=explanation; topic=rainbow; facts=rainbow_cause"
+        ],
+        "updates": {},
+        "status": "ok",
+        "target_seconds": 0,
+        "duplicate": false,
+        "elapsed": 0.2809999999590218
+      }
+    },
+    {
+      "question": "Что бы ты посоветовал человеку, который впервые приехал в Астану зимой?",
+      "reply": {
+        "text": "В Астане зимой бывает очень холодно. Возьми тёплую одежду, шапку и перчатки.",
+        "intent": "advice",
+        "topic": "astana_winter",
+        "fallback": false,
+        "concepts": [
+          "newcomer",
+          "travel",
+          "astana",
+          "winter"
+        ],
+        "facts": [
+          "astana_winter",
+          "winter_city"
+        ],
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=advice; topic=astana_winter; facts=astana_winter,winter_city"
+        ],
+        "updates": {},
+        "status": "ok",
+        "target_seconds": 0,
+        "duplicate": false,
+        "elapsed": 1.172000000020489
+      }
+    },
+    {
+      "question": "Друг опоздал на встречу на полчаса и извинился. Что бы ты ему ответил?",
+      "reply": {
+        "text": "Ничего, бывает. В следующий раз напиши заранее, если задерживаешься.",
+        "intent": "social",
+        "topic": "late_apology",
+        "fallback": false,
+        "concepts": [
+          "friend",
+          "late",
+          "meeting",
+          "time",
+          "apology"
+        ],
+        "facts": [
+          "late_apology"
+        ],
+        "trace": [
+          "event=late; actor=other; apology=True",
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=social; topic=late_apology; facts=late_apology"
+        ],
+        "updates": {},
+        "status": "ok",
+        "target_seconds": 0,
+        "duplicate": false,
+        "elapsed": 0.28200000000651926
+      }
+    },
+    {
+      "question": "Привет, как дела?",
+      "reply": {
+        "text": "Привет, норм, сам как?",
+        "intent": "corpus",
+        "topic": "corpus:Приветствие",
+        "fallback": false,
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:7"
+        ],
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=7; score=1.0"
+        ],
+        "updates": {},
+        "status": "ok",
+        "target_seconds": 0,
+        "duplicate": false,
+        "elapsed": 0.3279999999795109
+      }
+    },
+    {
+      "question": "Что делаешь?",
+      "reply": {
+        "text": "Да ничё особенного. А ты?",
+        "intent": "corpus",
+        "topic": "corpus:Разговор",
+        "fallback": false,
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:10"
+        ],
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=10; score=1.0"
+        ],
+        "updates": {},
+        "status": "ok",
+        "target_seconds": 0,
+        "duplicate": false,
+        "elapsed": 0.32800000003771856
+      }
+    },
+    {
+      "question": "Я наконец-то сдал экзамен",
+      "reply": {
+        "text": "О имба, поздравляю",
+        "intent": "corpus",
+        "topic": "corpus:Учёба",
+        "fallback": false,
+        "concepts": [
+          "success",
+          "exam_failure"
+        ],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:63"
+        ],
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=63; score=1.0"
+        ],
+        "updates": {},
+        "status": "ok",
+        "target_seconds": 0,
+        "duplicate": false,
+        "elapsed": 0.35899999999674037
+      }
+    },
+    {
+      "question": "Вроде нормально",
+      "reply": {
+        "text": "Сходу не знаю, что ответить. Можешь уточнить, что именно тебя интересует?",
+        "intent": "unknown",
+        "topic": null,
+        "fallback": true,
+        "concepts": [],
+        "facts": [],
+        "trace": [
+          "intent=unknown; topic=None; facts="
+        ],
+        "updates": {},
+        "status": "ok",
+        "target_seconds": 0,
+        "duplicate": false,
+        "elapsed": 0.34399999998277053
+      }
+    }
+  ],
+  "real_timed_delivery": [
+    {
+      "question": "Привет, как дела?",
+      "reply": {
+        "text": "Привет, норм, сам как?",
+        "intent": "corpus",
+        "topic": "corpus:Приветствие",
+        "fallback": false,
+        "concepts": [],
+        "facts": [
+          "070a07e4fc2038b8f56010ba781c6f76882011600daaaacfee30566f03ea9f92:7"
+        ],
+        "trace": [
+          "corpus=Turing-Arena-утверждено.xlsx; row=7; score=1.0"
+        ],
+        "updates": {},
+        "status": "ok",
+        "target_seconds": 5.918853596915767,
+        "duplicate": false,
+        "elapsed": 5.922000000020489
+      }
+    },
+    {
+      "question": "Почему после дождя иногда появляется радуга? Объясни простыми словами.",
+      "reply": {
+        "text": "Солнечный свет попадает в капли воды, преломляется и отражается внутри них. При этом свет разделяется на разные цвета.",
+        "intent": "explanation",
+        "topic": "rainbow",
+        "fallback": false,
+        "concepts": [
+          "rain",
+          "rainbow"
+        ],
+        "facts": [
+          "rainbow_cause"
+        ],
+        "trace": [
+          "Содержание выбрано по событиям и условиям; полная строка вопроса не сравнивается.",
+          "intent=explanation; topic=rainbow; facts=rainbow_cause"
+        ],
+        "updates": {},
+        "status": "ok",
+        "target_seconds": 16.210021510445333,
+        "duplicate": false,
+        "elapsed": 16.21899999998277
+      }
+    }
+  ]
+}
