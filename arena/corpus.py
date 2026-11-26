@@ -8,6 +8,7 @@ import sqlite3
 
 from .lexicon import normalize, stem
 from .paraphrases import phrase_features, equivalent
+from .expansion_corpus import expansion_uri, find_expansion_reply
 
 
 BLOCKED_TOPICS = {"Память", "Контекст", "Счёт", "Инструкция", "Предпочтения", "Игра"}
@@ -104,6 +105,7 @@ def context_fits(context, history, turns=None):
 
 class Corpus:
     def __init__(self, path):
+        self._expansion_uri = expansion_uri(path)
         db = sqlite3.connect(Path(path).resolve().as_uri() + "?mode=ro", uri=True)
         db.row_factory = sqlite3.Row
         try:
@@ -216,6 +218,9 @@ class Corpus:
         if self._approximate_index is None:
             self._approximate_index = ApproximateIndex(self.rows)
         return self._approximate_index
+
+    def match_expansion(self, question, *, keywords=False):
+        return find_expansion_reply(self._expansion_uri, question, keywords=keywords)
 
     def match_approximate(self, question, history=()):
         """Search nearby phrasings only after exact rules and dialogue handling."""

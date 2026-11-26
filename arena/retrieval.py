@@ -254,6 +254,29 @@ def _ordered_common(left, right):
     return len(pairs_left & pairs_right) / max(1, min(len(pairs_left), len(pairs_right)))
 
 
+def keyword_features(text):
+    """Prepare the same keyword terms and meaning checks as the fuzzy matcher."""
+    return _prepare(text)
+
+
+def keyword_score(query, document, query_weight, document_weight, overlap):
+    if query['guards'] != document['guards'] or len(query['terms'] & document['terms']) < 2:
+        return None
+    if overlap / query_weight < .90 or overlap / document_weight < .72:
+        return None
+    # A word match must not move one event before another.
+    shared_verbs = set(query['verbs']) & set(document['verbs'])
+    if len(shared_verbs) > 1:
+        left = tuple(word for word in query['verbs'] if word in shared_verbs)
+        right = tuple(word for word in document['verbs'] if word in shared_verbs)
+        if left != right:
+            return None
+    dice = 2 * overlap / (query_weight + document_weight)
+    order = _ordered_common(query['sequence'], document['sequence'])
+    score = .98 * dice + .02 * order
+    return score if score >= .84 else None
+
+
 class ApproximateIndex:
     def __init__(self, rows):
         self.documents = []
@@ -302,31 +325,15 @@ class ApproximateIndex:
         matches = []
         for index in candidates:
             row, document = self.documents[index]
-            if query['guards'] != document['guards']:
+            score = keyword_score(query, document, query_weight, self.document_weights[index], overlap[index])
+            if score is None:
                 continue
-            common = query['terms'] & document['terms']
-            if len(common) < 2:
-                continue
-            query_coverage = overlap[index] / query_weight
-            document_coverage = overlap[index] / self.document_weights[index]
-            if query_coverage < .90 or document_coverage < .72:
-                continue
-            # Preserve event sequence when multiple recognizable predicates occur.
-            shared_verbs = set(query['verbs']) & set(document['verbs'])
-            if len(shared_verbs) > 1:
-                left = tuple(word for word in query['verbs'] if word in shared_verbs)
-                right = tuple(word for word in document['verbs'] if word in shared_verbs)
-                if left != right:
-                    continue
             if context_check is not None:
                 if not context_check(row, history):
                     continue
             elif row.get('context') or row.get('context_turns'):
                 continue
-            dice = 2 * overlap[index] / (query_weight + self.document_weights[index])
-            score = .98 * dice + .02 * _ordered_common(query['sequence'], document['sequence'])
-            if score >= .84:
-                matches.append((score, row))
+            matches.append((score, row))
         matches.sort(key=lambda item: (-item[0], str(item[1].get('id', ''))))
         if not matches:
             return None

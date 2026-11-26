@@ -1,0 +1,90 @@
+"""Keyword retrieval over the scenario prompts of the larger local corpus."""
+
+from collections import Counter
+import math
+import re
+
+from .retrieval import keyword_features, keyword_score
+
+
+_OPENING = re.compile(r'^(?:слушай|кстати|смотри|короче|ну вот|в общем)[,:]?\s+', re.I)
+_MAX_CANDIDATES = 80
+
+
+def build_keyword_index(db):
+    """Index scenario prompts, with all changes inside the caller's transaction."""
+    documents = []
+    frequencies = Counter()
+    for identifier, prompt in db.execute('SELECT id, prompt FROM scenarios'):
+        features = keyword_features(prompt)
+        if features is not None:
+            terms = features['terms']
+            documents.append((identifier, terms))
+            frequencies.update(terms)
+
+    weights = {term: 1 + math.log((len(documents) + 1) / (count + 1))
+               for term, count in frequencies.items()}
+    db.execute('DROP TABLE IF EXISTS keyword_postings')
+    db.execute('DROP TABLE IF EXISTS keyword_weights')
+    db.execute('DROP TABLE IF EXISTS keyword_documents')
+    db.execute('''CREATE TABLE keyword_postings (
+        term TEXT, scenario_id INTEGER, PRIMARY KEY (term, scenario_id)
+    ) WITHOUT ROWID''')
+    db.execute('CREATE TABLE keyword_weights (term TEXT PRIMARY KEY, weight REAL) WITHOUT ROWID')
+    db.execute('CREATE TABLE keyword_documents (scenario_id INTEGER PRIMARY KEY, weight REAL)')
+    db.executemany('INSERT INTO keyword_weights VALUES (?, ?)', sorted(weights.items()))
+    db.executemany('INSERT INTO keyword_documents VALUES (?, ?)',
+                   ((identifier, sum(weights[term] for term in sorted(terms))) for identifier, terms in documents))
+    db.executemany('INSERT INTO keyword_postings VALUES (?, ?)',
+                   sorted((term, identifier) for identifier, terms in documents for term in terms))
+    return len(documents), len(weights)
+
+
+def find_keyword_reply(db, question):
+    """Return the best guarded match, or ask the ordinary pipeline to continue."""
+    core = _OPENING.sub('', question.strip(), count=1)
+    if re.search(r'[.!?;]\s+\w', core):
+        return None
+    query = keyword_features(core)
+    if query is None:
+        return None
+    terms = sorted(query['terms'])
+    placeholders = ','.join('?' for _ in terms)
+    weights = dict(db.execute(f'SELECT term, weight FROM keyword_weights WHERE term IN ({placeholders})', terms))
+    if len(weights) != len(terms):
+        return None
+
+    query_weight = sum(weights[term] for term in terms)
+    candidates = db.execute(f'''
+        SELECT s.id, s.topic, s.prompt, s.answer, d.weight, hits.overlap
+        FROM (
+            SELECT p.scenario_id, SUM(w.weight) AS overlap
+            FROM keyword_postings p JOIN keyword_weights w ON w.term = p.term
+            WHERE p.term IN ({placeholders})
+            GROUP BY p.scenario_id
+            HAVING COUNT(*) >= 2 AND SUM(w.weight) >= ?
+            ORDER BY overlap DESC, p.scenario_id
+            LIMIT ?
+        ) AS hits
+        JOIN scenarios s ON s.id = hits.scenario_id
+        JOIN keyword_documents d ON d.scenario_id = hits.scenario_id
+    ''', (*terms, .90 * query_weight - 1e-9, _MAX_CANDIDATES + 1)).fetchall()
+    if len(candidates) > _MAX_CANDIDATES:
+        # The query is too broad to check every potentially competing answer.
+        return None
+    matches = []
+    for identifier, topic, prompt, answer, weight, overlap in candidates:
+        document = keyword_features(prompt)
+        if document is None:
+            continue
+        score = keyword_score(query, document, query_weight, weight, overlap)
+        if score is not None:
+            matches.append((score, identifier, topic, answer))
+    if not matches:
+        return None
+    matches.sort(key=lambda item: (-item[0], item[1]))
+    score, identifier, topic, answer = matches[0]
+    if any(score - other_score < .07 and (topic != other_topic or answer != other_answer)
+           for other_score, _, other_topic, other_answer in matches[1:]):
+        return None
+    return identifier, topic, answer, round(score, 4)

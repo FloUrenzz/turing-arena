@@ -1,6 +1,7 @@
 # Preserve exact artifact bytes used by the SQLite and release checksums.
 *.xlsx binary
 *.sqlite3 binary
+*.zip binary
 data/corpus_review_combined_5350_v2.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 exports/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 

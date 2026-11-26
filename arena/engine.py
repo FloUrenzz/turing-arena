@@ -108,15 +108,19 @@ def generate(question, state, db_path, seed=None, *, corpus_path=None, corpus_sn
                 "concepts": [], "facts": [], "fallback": False, "updates": {},
                 "trace": [f"gibberish: {noise.kind}; script={noise.script}"]}
     reply = _generate_rules(question, state, db_path, seed)
-    if reply["intent"] in ("unknown", "greeting") and not reply["updates"]:
+    generic_travel_advice = reply["topic"] == "newcomer_generic"
+    if (reply["intent"] in ("unknown", "greeting") or generic_travel_advice) and not reply["updates"]:
         match = None
         corpus = corpus_snapshot
         if corpus is None and corpus_path is not None:
             from .corpus import Corpus
             corpus = Corpus(corpus_path)
         if corpus is not None:
-            match = corpus.match(question, state.get("history", []))
-        if match is None:
+            # The generic advice trigger also fires on requests such as
+            # "что взять на зачёт?". An exact situation is more specific.
+            match = (corpus.match_expansion(question) if generic_travel_advice
+                     else corpus.match(question, state.get("history", [])))
+        if match is None and not generic_travel_advice:
             casual = conversational_reply(question, state)
             if casual is not None:
                 reply = {"text": casual["text"], "intent": "conversation", "topic": casual["topic"],
@@ -124,6 +128,8 @@ def generate(question, state, db_path, seed=None, *, corpus_path=None, corpus_sn
                          "trace": ["conversation: current turn and previous reply"], "updates": {}}
             elif corpus is not None:
                 match = corpus.match_approximate(question, state.get("history", []))
+                if match is None:
+                    match = corpus.match_expansion(question, keywords=True)
         if match is not None:
             # Data is text, never executable instructions. Runtime validates output.
             method = match.get('method', 'exact-or-paraphrase')
