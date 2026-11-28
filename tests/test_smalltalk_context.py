@@ -1,7 +1,7 @@
 from copy import deepcopy
 import unittest
 
-from arena.smalltalk import conversational_reply
+from arena.smalltalk import conversational_reply, strip_question_preamble
 
 
 def state_after(question, text, topic=None):
@@ -57,7 +57,7 @@ class SmalltalkChecks(unittest.TestCase):
             self.assertIsNone(conversational_reply(question, {}), question)
 
     def test_opening_without_punctuation(self):
-        for text in ('привет как дела', 'салам как дела', 'ку как сам', 'привет'):
+        for text in ('привет как дела', 'салам как дела', 'ку как сам'):
             result = conversational_reply(text, {})
             self.assertIsNotNone(result)
             state = state_after(text, result['text'], result['topic'])
@@ -65,6 +65,28 @@ class SmalltalkChecks(unittest.TestCase):
             self.assertEqual(answer['text'], 'О, хорошо. Чем занимаешься?')
             append(state, 'да норм', answer)
             self.assertEqual(conversational_reply('да тоже ничего особенного', state)['text'], 'Понял. Как день прошёл?')
+
+    def test_plain_greeting_does_not_answer_an_unasked_question(self):
+        for text, expected, next_question, next_expected in (
+            ('привет!', 'Привет', 'привет как дела', 'Привет, норм, сам как?'),
+            ('Салам', 'Салам', 'салам как дела', 'Салам, всё чётко, сам как?'),
+            ('ку', 'Ку', 'ку как сам', 'Ку, норм, ты как?'),
+        ):
+            with self.subTest(text=text):
+                result = conversational_reply(text, {})
+                self.assertEqual(result, {'text': expected, 'topic': 'smalltalk:greeting'})
+                state = state_after(text, result['text'], result['topic'])
+                self.assertEqual(conversational_reply(next_question, state)['text'], next_expected)
+
+    def test_question_preamble_waits_only_when_the_question_is_missing(self):
+        for text in ('КРЧ у меня вопрос', 'Короче, у меня к тебе вопрос', 'Есть вопрос',
+                     'У меня вопрос:', 'Можно вопрос?', 'Слушай, можно задать вопрос?'):
+            with self.subTest(text=text):
+                self.assertEqual(strip_question_preamble(text), text)
+                self.assertEqual(conversational_reply(text, {})['text'], 'Давай, спрашивай')
+        full_question = 'Крч, у меня вопрос: сколько будет 17 плюс 6?'
+        self.assertEqual(strip_question_preamble(full_question), 'сколько будет 17 плюс 6?')
+        self.assertIsNone(conversational_reply(full_question, {}))
 
     def test_nothing_then_day_then_normal_then_detail(self):
         state = state_after('Что делаешь?', 'Да ничё особенного. А ты?')

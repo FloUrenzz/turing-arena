@@ -7,7 +7,7 @@ import unicodedata
 from .lexicon import Lexicon, normalize
 from .introductions import parse_introduction
 from .arithmetic import parse_arithmetic, is_arithmetic_request
-from .smalltalk import conversational_reply
+from .smalltalk import conversational_reply, strip_question_preamble
 from .geography import geography_reply
 from .gibberish import classify_gibberish
 from .topic_fallbacks import topic_fallback
@@ -101,6 +101,8 @@ def calculate(expression):
 
 
 def generate(question, state, db_path, seed=None, *, corpus_path=None, corpus_snapshot=None):
+    if isinstance(question, str):
+        question = strip_question_preamble(question)
     noise = classify_gibberish(question)
     if noise is not None:
         text = "это ты случайно набрал?"

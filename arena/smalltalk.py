@@ -10,6 +10,17 @@ _EXAM_SUCCESS = {phrase_features(prefix + 'сдал экзамен')
 _EXAM_FAILURE = {phrase_features(prefix + action + ' экзамен')
                  for prefix in ('', 'я ', 'сегодня ', 'я сегодня ', 'вчера ')
                  for action in ('не сдал', 'завалил')}
+_QUESTION_PREAMBLE = (
+    r'(?:(?:крч|короче|слушай|кстати)(?:\s*[,.:!]\s*|\s+))?'
+    r'(?:у\s+меня\s+(?:(?:один|такой|к\s+тебе)\s+)?вопрос(?:\s+есть)?'
+    r'|есть\s+вопрос|можно\s+(?:(?:задать\s+)?вопрос|спросить))'
+)
+
+
+def strip_question_preamble(question):
+    match = re.fullmatch(rf'\s*{_QUESTION_PREAMBLE}\s*[,.:!?]+\s*([^\s,.!?;:].*)',
+                         question, flags=re.IGNORECASE)
+    return match[1] if match else question
 
 
 def _normalize(text):
@@ -150,11 +161,18 @@ def conversational_reply(question, state):
     if '?' not in question and _startup_activity(text):
         return reply('startup', 'Есть уже какая-нибудь идея?', 'О, а что за идея?')
 
-    # Common opening questions are useful even without a matching corpus row.
-    if matches(r'(?:привет|приветик|салам|салем|ку|хай)(?: (?:как (?:дела|ты|сам)|что как))?'):
-        if text.startswith(('салам', 'салем')):
+    if re.fullmatch(_QUESTION_PREAMBLE, text.rstrip(' :')):
+        return reply('question_invitation', 'Давай, спрашивай')
+
+    # A plain greeting and a question about how things are going are separate turns.
+    greeting = re.fullmatch(r'(привет|приветик|салам|салем|ку|хай)(?: (как (?:дела|ты|сам)|что как))?', text)
+    if greeting:
+        opening, wellbeing_question = greeting.groups()
+        if wellbeing_question is None:
+            return reply('greeting', opening.capitalize())
+        if opening in ('салам', 'салем'):
             return reply('mood', 'Салам, всё чётко, сам как?', 'Салам, я тут')
-        if text.startswith('ку'):
+        if opening == 'ку':
             return reply('mood', 'Ку, норм, ты как?', 'Ку, я тут')
         return reply('mood', 'Привет, норм, сам как?', 'Привет, я тут')
     if matches(r'(?:а )?(?:что (?:сейчас )?делаешь|чем (?:сейчас )?(?:занят|занимаешься))'):
