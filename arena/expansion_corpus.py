@@ -58,3 +58,14 @@ def find_expansion_reply(uri, question, *, keywords=False):
             'source': EXPANSION_NAME, 'row': identifier, 'score': score,
             'review': 'generated', 'kind': 'scenario' if method == 'expansion-keywords' else 'reply',
             'method': method}
+
+
+def find_expansion_topic(uri, question):
+    if not uri:
+        return None
+    from .expansion_keywords import find_keyword_topic
+    try:
+        with closing(sqlite3.connect(uri, uri=True)) as db:
+            return find_keyword_topic(db, question)
+    except sqlite3.Error:
+        return None

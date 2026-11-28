@@ -259,6 +259,15 @@ def keyword_features(text):
     return _prepare(text)
 
 
+def keyword_topic_terms(text):
+    """Recognize topic terms even when they do not identify a specific reply."""
+    if len(text) > 400 or any(char in text for char in _QUOTES) or re.search(r'[\r\n+*/%=<>]|[.!?;]\s+\w', text):
+        return frozenset()
+    words = _semantic_tokens(tuple(normalize_fuzzy(text)))
+    return frozenset(_content_key(word) for word in words
+                     if word.isalpha() and word not in _STOP and word not in _NEGATIVE)
+
+
 def keyword_score(query, document, query_weight, document_weight, overlap):
     if query['guards'] != document['guards'] or len(query['terms'] & document['terms']) < 2:
         return None

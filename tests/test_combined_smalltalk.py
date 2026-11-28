@@ -28,6 +28,20 @@ class CombinedSmalltalkChecks(unittest.TestCase):
         result = self.assert_reciprocal_answer('да ничем сам чем занимаешься', self.activity, 'activity')
         self.assertEqual(result['text'], 'Да тоже ничего особенного, с тобой общаюсь')
 
+    def test_activity_and_day_questions_in_one_message(self):
+        for question in ('что делаешь как день прошел', 'чё делаешь? Как день прошёл?',
+                         'Как у тебя день прошёл, и чем занимаешься?'):
+            with self.subTest(question=question):
+                result = conversational_reply(question, {})
+                self.assertEqual(result['text'], 'Да ничё особенного. День прошёл нормально. А у тебя?')
+                self.assertEqual(result['topic'], 'smalltalk:day')
+        self.assertEqual(conversational_reply('Как день прошёл?', {})['text'],
+                         'День прошёл нормально. А у тебя?')
+        for question in ('что делаешь как день прошёл у друга?', 'что не делаешь как день прошёл?',
+                         'что делаешь завтра как день прошёл?', 'что делаешь как день прошёл и кто ты?'):
+            with self.subTest(question=question):
+                self.assertIsNone(conversational_reply(question, {}))
+
     def test_activity_reply_composes_with_reciprocal_question(self):
         for question in ('ничем, а ты?', 'да ничем, сам чем занимаешься?',
                          'ничего. А ты?', 'да тоже ничего особенного а ты?',

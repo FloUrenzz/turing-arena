@@ -15,6 +15,9 @@ _QUESTION_PREAMBLE = (
     r'(?:у\s+меня\s+(?:(?:один|такой|к\s+тебе)\s+)?вопрос(?:\s+есть)?'
     r'|есть\s+вопрос|можно\s+(?:(?:задать\s+)?вопрос|спросить))'
 )
+_ACTIVITY_QUESTION = r'(?:что (?:сейчас )?делаешь|чем (?:ты )?(?:сейчас )?(?:занят|занята|занимаешься))'
+_DAY_QUESTION = r'как (?:(?:у тебя )?(?:день прошел|прошел день)|твой день прошел|прошел твой день)'
+_QUESTION_JOIN = r'(?:\s+|[.!?;:]+\s*)(?:(?:и|а) )?'
 
 
 def strip_question_preamble(question):
@@ -79,7 +82,7 @@ def _reciprocal_kind(text):
     """Classify a whole follow-up question, preserving qualifiers and negation."""
     core = re.sub(r'^(?:(?:а|ну|и|ты|сам|сама)\s+){0,4}', '', text)
     core = _normalize(core)
-    if re.fullmatch(r'что (?:сейчас )?делаешь|чем (?:ты )?(?:сейчас )?(?:занят|занята|занимаешься)', core):
+    if re.fullmatch(_ACTIVITY_QUESTION, core):
         return 'activity'
     if re.fullmatch(r'как (?:у тебя )?(?:дела|настроение)|как (?:ты|сам|сама)|'
                     r'как у тебя|у тебя как(?: дела| настроение)?', core):
@@ -175,6 +178,12 @@ def conversational_reply(question, state):
         if opening == 'ку':
             return reply('mood', 'Ку, норм, ты как?', 'Ку, я тут')
         return reply('mood', 'Привет, норм, сам как?', 'Привет, я тут')
+    if matches(rf'(?:а )?(?:{_ACTIVITY_QUESTION}{_QUESTION_JOIN}{_DAY_QUESTION}|'
+               rf'{_DAY_QUESTION}{_QUESTION_JOIN}{_ACTIVITY_QUESTION})'):
+        return reply('day', 'Да ничё особенного. День прошёл нормально. А у тебя?',
+                     'Сейчас просто общаюсь с тобой. День прошёл нормально')
+    if matches(rf'(?:а )?{_DAY_QUESTION}'):
+        return reply('day', 'День прошёл нормально. А у тебя?', 'День прошёл нормально')
     if matches(r'(?:а )?(?:что (?:сейчас )?делаешь|чем (?:сейчас )?(?:занят|занимаешься))'):
         return reply('activity', 'Да ничё особенного. А ты?', 'Сейчас просто общаюсь с тобой')
     if matches(r'(?:а )?(?:как (?:у тебя )?дела|как сам|ты как)'):

@@ -1,14 +1,32 @@
 """Keyword retrieval over the scenario prompts of the larger local corpus."""
 
-from collections import Counter
+from collections import Counter, defaultdict
 import math
 import re
 
-from .retrieval import keyword_features, keyword_score
+from .retrieval import keyword_features, keyword_score, keyword_topic_terms
 
 
 _OPENING = re.compile(r'^(?:слушай|кстати|смотри|короче|ну вот|в общем)[,:]?\s+', re.I)
 _MAX_CANDIDATES = 80
+_TOPIC_WORDS = {
+    'Музыка': 'музыка музыку музыкой мелодия мелодии трек песня песни альбом плейлист',
+    'Фильмы': 'фильм фильмы кино сериал сериалы мультсериал мультфильм',
+    'Компьютер и файлы': 'компьютер ноутбук драйвер драйвера флешка файлы',
+    'Программирование': 'программирование программист python javascript компилятор',
+    'Дорога и транспорт': 'автобус метро маршрутка трамвай поезд такси',
+    'Подготовка к проверкам': 'экзамен экзамены зачет контрольная',
+    'Домашние задания': 'домашка домашнее задание',
+    'Спорт': 'футбол баскетбол волейбол тренировка соревнования спорт',
+    'Книги': 'книга книги книжка чтение',
+    'Домашняя еда': 'рецепт выпечка готовка',
+    'Игры': 'видеоигра видеоигры геймплей геймпад',
+    'Погода и день': 'погода погоду прогноз снегопад ливень',
+    'Подготовка к выступлению': 'выступление презентация репетиция доклад',
+    'Одежда и вещи': 'одежда куртка кроссовки',
+}
+_TOPIC_ANCHORS = {term: topic for topic, words in _TOPIC_WORDS.items()
+                  for term in keyword_topic_terms(words)}
 
 
 def build_keyword_index(db):
@@ -88,3 +106,47 @@ def find_keyword_reply(db, question):
            for other_score, _, other_topic, other_answer in matches[1:]):
         return None
     return identifier, topic, answer, round(score, 4)
+
+
+def find_keyword_topic(db, question):
+    """Vote for topics using words concentrated in those topics across scenarios."""
+    terms = sorted(keyword_topic_terms(_OPENING.sub('', question.strip(), count=1)))
+    if not terms:
+        return None
+    anchors = {_TOPIC_ANCHORS[term] for term in terms if term in _TOPIC_ANCHORS}
+    if anchors:
+        return next(iter(anchors)) if len(anchors) == 1 else None
+
+    placeholders = ','.join('?' for _ in terms)
+    counts = defaultdict(list)
+    for term, topic, count, weight in db.execute(f'''
+        SELECT p.term, s.topic, COUNT(*), w.weight
+        FROM keyword_postings p
+        JOIN scenarios s ON s.id = p.scenario_id
+        JOIN keyword_weights w ON w.term = p.term
+        WHERE p.term IN ({placeholders})
+        GROUP BY p.term, s.topic
+    ''', terms):
+        counts[term].append((topic, count, weight))
+
+    scores = defaultdict(float)
+    support = Counter()
+    strong = set()
+    for hits in counts.values():
+        total = sum(count for _, count, _ in hits)
+        for topic, count, weight in hits:
+            share = count / total
+            if count >= 2 and share >= .6:
+                scores[topic] += weight * share
+                support[topic] += 1
+                if count >= 6 and share >= .8:
+                    strong.add(topic)
+    ranked = sorted(scores, key=lambda topic: (-scores[topic], topic))
+    if not ranked:
+        return None
+    best = ranked[0]
+    if support[best] < 2 and best not in strong:
+        return None
+    if len(ranked) > 1 and scores[best] < 1.5 * scores[ranked[1]]:
+        return None
+    return best

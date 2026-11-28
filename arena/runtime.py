@@ -9,6 +9,7 @@ import unicodedata
 import uuid
 
 from arena.models import initial_state, apply_reply
+from arena.topic_fallbacks import CASUAL_FALLBACK
 
 
 def _worker_entry(connection, worker, question, state, db_path, seed, corpus_path, corpus_snapshot=None):
@@ -27,7 +28,7 @@ def _worker_entry(connection, worker, question, state, db_path, seed, corpus_pat
 
 
 def _reserve(status):
-    return {"text": "Сходу не получилось ответить. Можешь спросить иначе?",
+    return {"text": CASUAL_FALLBACK,
             "intent": "unknown", "topic": None, "concepts": [], "facts": [],
             "fallback": True, "trace": [status], "updates": {}}
 

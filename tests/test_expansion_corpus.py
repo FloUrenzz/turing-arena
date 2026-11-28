@@ -94,3 +94,12 @@ class ExpansionCorpusChecks(unittest.TestCase):
                               'На середине серии я остановился', query + '. Как встретиться?'):
                 with self.subTest(prompt=ambiguous):
                     self.assertIsNone(corpus.match_expansion(ambiguous, keywords=True))
+
+            broad = generate('Слушаю плейлист с треками незнакомого жанра', initial_state(), knowledge,
+                             corpus_snapshot=corpus)
+            self.assertEqual(broad['text'], 'А что обычно слушаешь?')
+            self.assertIn('method=expansion-topic', broad['trace'][0])
+            self.assertTrue(broad['fallback'])
+            unknown = generate('Зигзаг будто растаял', initial_state(), knowledge,
+                               corpus_snapshot=corpus)
+            self.assertEqual(unknown['text'], 'Рассказывай, я слушаю')

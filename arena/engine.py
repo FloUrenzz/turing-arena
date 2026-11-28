@@ -10,7 +10,7 @@ from .arithmetic import parse_arithmetic, is_arithmetic_request
 from .smalltalk import conversational_reply, strip_question_preamble
 from .geography import geography_reply
 from .gibberish import classify_gibberish
-from .topic_fallbacks import topic_fallback
+from .topic_fallbacks import CASUAL_FALLBACK, TOPIC_FOLLOWUPS, topic_fallback
 
 
 def clean_text(text):
@@ -25,7 +25,7 @@ def bounded_text(parts):
         candidate = (result + " " + part).strip()
         if len(candidate) <= 300 and len(candidate.encode("utf-16-le")) // 2 <= 300:
             result = candidate
-    return result or "Не уверен, что смогу ответить по существу. Можешь уточнить вопрос?"
+    return result or CASUAL_FALLBACK
 
 
 def negated_at(text, position):
@@ -110,10 +110,10 @@ def generate(question, state, db_path, seed=None, *, corpus_path=None, corpus_sn
                 "concepts": [], "facts": [], "fallback": False, "updates": {},
                 "trace": [f"gibberish: {noise.kind}; script={noise.script}"]}
     reply = _generate_rules(question, state, db_path, seed)
+    corpus = corpus_snapshot
     generic_travel_advice = reply["topic"] == "newcomer_generic"
     if (reply["intent"] in ("unknown", "greeting") or generic_travel_advice) and not reply["updates"]:
         match = None
-        corpus = corpus_snapshot
         if corpus is None and corpus_path is not None:
             from .corpus import Corpus
             corpus = Corpus(corpus_path)
@@ -144,6 +144,11 @@ def generate(question, state, db_path, seed=None, *, corpus_path=None, corpus_sn
             reply = {"text": topical["text"], "intent": "topic_fallback", "topic": topical["topic"],
                      "concepts": [], "facts": [], "fallback": False, "updates": {},
                      "trace": ["topic: unsupported question; " + topical["topic"]]}
+        elif reply["text"] == CASUAL_FALLBACK and corpus is not None and not reply["updates"]:
+            topic = corpus.match_expansion_topic(question)
+            if topic in TOPIC_FOLLOWUPS:
+                reply = {**reply, "text": TOPIC_FOLLOWUPS[topic], "intent": "topic_fallback",
+                         "topic": "corpus:" + topic, "trace": [f"topic={topic}; method=expansion-topic"]}
     # Match the user's chat style for generated rules as well as stored replies.
     text = reply["text"].replace("—", " ").replace("–", " ").replace("--", " ")
     return {**reply, "text": " ".join(text.split()).rstrip(" .")}
@@ -174,7 +179,7 @@ def _generate_rules(question, state, db_path, seed=None):
                 "trace": trace + [f"intent={intent}; topic={topic}; facts={','.join(facts)}"],
                 "updates": updates}
 
-    def unknown(text="Не совсем понял, про что ты?"):
+    def unknown(text=CASUAL_FALLBACK):
         return out(text, fallback=True)
 
     def knowledge(keys, intent, topic):
@@ -372,6 +377,10 @@ def _generate_rules(question, state, db_path, seed=None):
         if name and role:
             return out(f"Я {name['object']}, {role['object']}.", "identity", facts=[name["id"], role["id"]])
         return unknown()
+    if re.fullmatch(r"(?:а )?ты(?: (?:это|реально|точно))?[\s—–-]+"
+                    r"(?:ии|ai|нейросеть|искусственный интеллект)(?:,? (?:что ли|или человек))?",
+                    full.strip(" .?!")):
+        return out("А сам как думаешь?", "identity")
     if re.search(r"\bты (?:бот|человек|робот)|докажи.*человек", full):
         return out(rng.choice(["А какой ответ сейчас прозвучит убедительно?", "Чувствую, тут любое оправдание будет подозрительным."]), "identity")
     if re.match(r"^(?:привет|здравствуй|добрый день|добрый вечер)\b", full):
@@ -387,7 +396,7 @@ def _generate_rules(question, state, db_path, seed=None):
     if re.search(r"\bя\b|\bмне\b", personal) and not re.search(r"\bты\b|тебе|любишь", personal):
         if updates and "?" not in original:
             return out("Запомню, это твои предпочтения.", "acknowledgment")
-        return unknown("Расскажи чуть подробнее")
+        return unknown()
     preference = bool(re.search(r"любишь|обожаешь|нравится|нравятся|предпоч|отношение|относишься|по душе|ненавидишь|приятнее|любим|слушаешь|заниматься", personal))
     current_activity = bool(re.search(r"(?:сейчас|в данный момент).*(?:слушаешь|делаешь)|(?:слушаешь|делаешь).*(?:сейчас|в данный момент)", personal))
     reason = bool(re.search(r"почему|зачем|отчего|из-за чего|по какой причине|за что|чем.*нравится", personal))
@@ -397,7 +406,7 @@ def _generate_rules(question, state, db_path, seed=None):
     if "или" in personal:
         alternatives = re.split(r"\bили\b", personal)
         if any(not lexicon.find(part) for part in alternatives):
-            return unknown("Не все варианты понял. Можешь уточнить, что сравниваем?")
+            return unknown("Какие варианты сравниваем?")
     modifier = re.search(r"\b(?:с|со|без)\s+([а-я -]+)", personal)
     if preference and modifier:
         modifier_words = re.findall(r"[а-я]+", modifier[1])

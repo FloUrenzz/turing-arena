@@ -33,6 +33,15 @@ class InputFallbackChecks(unittest.TestCase):
             self.assertEqual(reply['intent'], intent)
             self.assertFalse(reply['fallback'])
 
+    def test_direct_ai_questions_have_a_casual_reply(self):
+        db = ensure_demo_database()
+        for question in ('ты ИИ?', 'А ты нейросеть, что ли?', 'Ты — искусственный интеллект?'):
+            with self.subTest(question=question):
+                reply = generate(question, initial_state(), db)
+                self.assertEqual(reply['intent'], 'identity')
+                self.assertEqual(reply['text'], 'А сам как думаешь?')
+        self.assertNotEqual(generate('Ты ИИ пользуешься?', initial_state(), db)['intent'], 'identity')
+
     def test_real_cli_uses_russian_for_latin_noise_and_full_corpus_by_default(self):
         command = [sys.executable, '-X', 'utf8', 'main.py', '--chat', '--json', '--no-corpus']
         inputs = 'asdkjfh89\nМеня зовут Нуркен\nПомнишь как меня зовут?\n'
