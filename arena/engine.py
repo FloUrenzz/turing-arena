@@ -120,8 +120,10 @@ def generate(question, state, db_path, seed=None, *, corpus_path=None, corpus_sn
         if corpus is not None:
             # The generic advice trigger also fires on requests such as
             # "что взять на зачёт?". An exact situation is more specific.
-            match = (corpus.match_expansion(question) if generic_travel_advice
-                     else corpus.match(question, state.get("history", [])))
+            if generic_travel_advice:
+                match = (corpus.match_expansion(question) or corpus.match_jury(question, keywords=True))
+            else:
+                match = (corpus.match(question, state.get("history", [])) or corpus.match_jury(question))
         if match is None and not generic_travel_advice:
             casual = conversational_reply(question, state)
             if casual is not None:
@@ -129,7 +131,8 @@ def generate(question, state, db_path, seed=None, *, corpus_path=None, corpus_sn
                          "concepts": reply["concepts"], "facts": [], "fallback": False,
                          "trace": ["conversation: current turn and previous reply"], "updates": {}}
             elif corpus is not None:
-                match = corpus.match_approximate(question, state.get("history", []))
+                match = (corpus.match_jury(question, keywords=True) or
+                         corpus.match_approximate(question, state.get("history", [])))
                 if match is None:
                     match = corpus.match_expansion(question, keywords=True)
         if match is not None:
@@ -275,12 +278,24 @@ def _generate_rules(question, state, db_path, seed=None):
     if geography is not None:
         return out(geography["text"], "geography", geography["topic"], [geography["rule"]])
 
-    advice = bool(re.search(r"посовет|совет|рекоменд|что (?:мне |ему |ей |бы ты )?(?:делать|взять)\b|что брать\b|как одет|как подготов|что надеть|как быть", full))
+    is_aitu = re.search(r"\b(?:аиту|aitu|astana it university)\b", full)
+    asks_registrar = re.search(r"\b(?:офис[а-я]*\s+рег(?:а|истратора|истрации)?|регистратор[а-я]*)\b", full)
+    if is_aitu and asks_registrar and re.search(r"\b(?:где|куда|этаж[а-я]*)\b", full):
+        return out("Этаж не помню. Спроси на входе, где офис регистратора", "advice", "registrar_location")
+
+    window_view = re.search(r"\b(?:(?:в|за) окн[оа]|за окном|из (?:твоего )?окна)\b", full)
+    if window_view and re.search(r"\b(?:глянь|посмотри)\b|\bчто\b[^.!?;]{0,48}\b(?:видно|видишь)\b", full):
+        return out("Я отсюда в окно не вижу. А у тебя что там видно?", "conversation", "window_view")
+
+    advice_request = r"что (?:мне |ему |ей |бы ты )?(?:стоит |лучше |нужно )?(?:делать|взять|брать|надеть)\b"
+    advice = bool(re.search(rf"посовет|совет|рекоменд|{advice_request}|как одет|как подготов|как быть", full))
     if followup and state.get("last_intent") == "advice" and any(
         cid in ("winter", "summer", "cold") for cid in concepts
     ):
         advice = True
-    response_request = bool(re.search(r"что.*(?:ответ|сказ|напис)|как.*(?:реаг|поддерж|извин|поздрав)|что.*делать", full))
+    response_request = bool(re.search(
+        r"что.*(?:ответ|сказ|напис)|как.*(?:реаг|поддерж|извин|поздрав)|что.*делать|"
+        r"как (?:мне )?(?:ему |ей |им |другу |подруге )?(?:ответить|написать|сказать)\b", full))
     late_events = [match for match in re.finditer(r"опозд[а-я]*|задержал[а-я]*", full)
                    if not negated_at(full, match.start())]
     if late_events and response_request:
@@ -340,6 +355,7 @@ def _generate_rules(question, state, db_path, seed=None):
         return knowledge(["newcomer_generic"], "advice", "newcomer_generic")
 
     explanation = bool(re.search(r"почему|отчего|из-за чего|как (?:появ|образ|возника|получ|связан)|объясни|откуда|причин|за счет чего", full))
+    asks_when = any(re.match(r"(?:а )?когда\b", part) for part in sentences)
     followup = bool(re.match(r"^(?:а |почему|отчего|зачем|и что|а без|а если)", focus))
     topic = "rainbow" if "rainbow" in concepts else previous_topic if followup else None
     personal_cause = bool(re.search(r"люб|нравится|ненавид", focus))
@@ -353,8 +369,8 @@ def _generate_rules(question, state, db_path, seed=None):
             continue
         if not set(lexicon.find(qualifier[1])) & physical_scope:
             unknown_container = True
-    if topic == "rainbow" and (explanation or followup) and not personal_cause and not unrelated_relation and not unknown_container:
-        if re.search(r"без солн|ночью|всегда|каждого дожд|любого дожд|нет солн|каких услов|когда|почему не|\bне\s+(?:появ|возник|образ)", full):
+    if topic == "rainbow" and (explanation or followup or asks_when) and not personal_cause and not unrelated_relation and not unknown_container:
+        if asks_when or re.search(r"без солн|ночью|всегда|каждого дожд|любого дожд|нет солн|каких услов|почему не|\bне\s+(?:появ|возник|образ)", full):
             return knowledge(["rainbow_conditions"], "explanation", "rainbow")
         color_query = re.sub(r"(?:разно)?цветн[а-я]*\s+дуг[а-я]*", "", full)
         if re.search(r"цвет|разноцвет|семь|спектр", color_query):

@@ -42,6 +42,24 @@ class InputFallbackChecks(unittest.TestCase):
                 self.assertEqual(reply['text'], 'А сам как думаешь?')
         self.assertNotEqual(generate('Ты ИИ пользуешься?', initial_state(), db)['intent'], 'identity')
 
+    def test_current_location_and_view_requests_do_not_guess_details(self):
+        db = ensure_demo_database()
+        inputs = (
+            ('1) Я срочно бегу в аиту, напомни на каком этаже офис рег?', 'registrar_location',
+             'Этаж не помню. Спроси на входе, где офис регистратора'),
+            ('Где у AITU офис регистратора?', 'registrar_location',
+             'Этаж не помню. Спроси на входе, где офис регистратора'),
+            ('2) Посмотри сейчас в окно, что там видно?', 'window_view',
+             'Я отсюда в окно не вижу. А у тебя что там видно?'),
+            ('Что ты за окном видишь?', 'window_view', 'Я отсюда в окно не вижу. А у тебя что там видно?'),
+        )
+        for question, topic, expected in inputs:
+            with self.subTest(question=question):
+                reply = generate(question, initial_state(), db)
+                self.assertEqual((reply['topic'], reply['text']), (topic, expected))
+        for question in ('Почему на холодном окне видно капли?', 'Почему сейчас за окном видно звёзды?'):
+            self.assertNotEqual(generate(question, initial_state(), db)['topic'], 'window_view')
+
     def test_real_cli_uses_russian_for_latin_noise_and_full_corpus_by_default(self):
         command = [sys.executable, '-X', 'utf8', 'main.py', '--chat', '--json', '--no-corpus']
         inputs = 'asdkjfh89\nМеня зовут Нуркен\nПомнишь как меня зовут?\n'

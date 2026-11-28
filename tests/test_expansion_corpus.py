@@ -7,7 +7,7 @@ import unittest
 from arena.corpus import Corpus
 from arena.data import ensure_demo_database
 from arena.engine import generate
-from arena.expansion_corpus import BASE_NAME, EXPANSION_NAME, lookup_key, utterance_key
+from arena.expansion_corpus import BASE_NAME, EXPANSION_NAME, JURY_NAME, lookup_key, utterance_key
 from arena.expansion_keywords import build_keyword_index
 from arena.models import initial_state
 
@@ -103,3 +103,36 @@ class ExpansionCorpusChecks(unittest.TestCase):
             unknown = generate('Зигзаг будто растаял', initial_state(), knowledge,
                                corpus_snapshot=corpus)
             self.assertEqual(unknown['text'], 'Рассказывай, я слушаю')
+
+    def test_jury_corpus_is_used_for_exact_and_keyword_matches(self):
+        with tempfile.TemporaryDirectory() as directory:
+            data = Path(directory)
+            base = data / BASE_NAME
+            prompt = 'Почему стекло запотевает?'
+            answer = 'Влага из воздуха собирается каплями на холодном стекле'
+            with closing(sqlite3.connect(base)) as db:
+                db.executescript('''
+                    CREATE TABLE corpus_metadata(key TEXT, value TEXT);
+                    INSERT INTO corpus_metadata VALUES ('schema_version', '1');
+                    CREATE TABLE corpus_replies(source_id INTEGER, approved INTEGER);
+                    CREATE TABLE corpus_sources(id INTEGER, filename TEXT);
+                ''')
+            with closing(sqlite3.connect(data / JURY_NAME)) as db:
+                db.executescript('''
+                    CREATE TABLE scenarios(id INTEGER PRIMARY KEY, topic TEXT, prompt TEXT, answer TEXT);
+                    CREATE TABLE utterances(lookup BLOB PRIMARY KEY, id INTEGER, scenario_id INTEGER);
+                ''')
+                db.execute('INSERT INTO scenarios VALUES (1, ?, ?, ?)', ('Объяснения для жюри', prompt, answer))
+                db.execute('INSERT INTO utterances VALUES (?, 1, 1)', (lookup_key(utterance_key(prompt)),))
+                build_keyword_index(db)
+                db.commit()
+
+            corpus = Corpus(base)
+            knowledge = ensure_demo_database()
+            for question, method in ((prompt, 'expansion'), ('Кстати, стекло почему запотевает?', 'expansion-keywords')):
+                with self.subTest(method=method):
+                    result = generate(question, initial_state(), knowledge, corpus_snapshot=corpus)
+                    self.assertEqual(result['text'], answer)
+                    self.assertIn('corpus=' + JURY_NAME, result['trace'][0])
+                    self.assertTrue(result['trace'][0].endswith('method=' + method))
+            self.assertIsNone(corpus.match_jury('Почему стекло не запотевает?', keywords=True))

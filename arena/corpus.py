@@ -8,7 +8,7 @@ import sqlite3
 
 from .lexicon import normalize, stem
 from .paraphrases import phrase_features, equivalent
-from .expansion_corpus import expansion_uri, find_expansion_reply, find_expansion_topic
+from .expansion_corpus import JURY_NAME, expansion_uri, find_expansion_reply, find_expansion_topic
 
 
 BLOCKED_TOPICS = {"Память", "Контекст", "Счёт", "Инструкция", "Предпочтения", "Игра"}
@@ -106,6 +106,7 @@ def context_fits(context, history, turns=None):
 class Corpus:
     def __init__(self, path):
         self._expansion_uri = expansion_uri(path)
+        self._jury_uri = expansion_uri(path, JURY_NAME)
         db = sqlite3.connect(Path(path).resolve().as_uri() + "?mode=ro", uri=True)
         db.row_factory = sqlite3.Row
         try:
@@ -221,6 +222,9 @@ class Corpus:
 
     def match_expansion(self, question, *, keywords=False):
         return find_expansion_reply(self._expansion_uri, question, keywords=keywords)
+
+    def match_jury(self, question, *, keywords=False):
+        return find_expansion_reply(self._jury_uri, question, keywords=keywords, source=JURY_NAME)
 
     def match_expansion_topic(self, question):
         return find_expansion_topic(self._expansion_uri, question)

@@ -203,12 +203,12 @@ def collect_scenarios():
     return scenarios, topics, seen
 
 
-def topic_rows(scenarios, identifiers, seen, quota):
+def topic_rows(scenarios, identifiers, seen, quota, *, variant_factory=variants):
     for identifier in identifiers:
         prompt = scenarios[identifier - 1][1]
         yield identifier, lookup_key(utterance_key(prompt)), prompt
     remaining = quota - len(identifiers)
-    generators = [(identifier, iter(variants(scenarios[identifier - 1][1]))) for identifier in identifiers]
+    generators = [(identifier, iter(variant_factory(scenarios[identifier - 1][1]))) for identifier in identifiers]
     while remaining and generators:
         advancing = []
         for identifier, generator in generators:

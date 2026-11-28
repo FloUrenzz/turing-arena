@@ -194,6 +194,19 @@ class EngineChecks(unittest.TestCase):
         self.assertEqual(self.reply("Приятель пришёл с опозданием и сказал: прости. Что ему ответить?")["topic"], "late_apology")
         self.assertEqual(self.reply("Друг задержался, но прощения не попросил. Как реагировать?")["topic"], "late_no_apology")
 
+    def test_competition_question_paraphrases_preserve_intent(self):
+        for question, fact in (
+            ("Как получается радуга, когда после дождя выглядывает солнце?", "rainbow_cause"),
+            ("Когда появляется радуга?", "rainbow_conditions"),
+            ("В Астане зимой впервые, что стоит взять с собой?", "astana_winter"),
+            ("В Астане не зимой, а летом. Что лучше взять?", "summer_city"),
+            ("Друг опоздал на час и даже не извинился. Как ему ответить?", "late_no_apology"),
+            ("Я опоздал на встречу. Как ответить другу?", "self_late"),
+        ):
+            with self.subTest(question=question):
+                self.assertIn(fact, self.reply(question)["facts"])
+        self.assertNotEqual(self.reply("Друг не опоздал на встречу. Как ему ответить?")["intent"], "social")
+
 
 if __name__ == "__main__":
     unittest.main()
